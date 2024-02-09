@@ -10,7 +10,6 @@ const getData = async () => {
     const res = await fetch(`${process.env.API_URL}/api/trips`, {
       method: 'GET',
       cache: 'no-store',
-      headers: headers()
     });
 
     const data = await res.json();
@@ -44,7 +43,6 @@ const getData = async () => {
 const getBags = async () => {
 
   const res = await fetch(`${process.env.API_URL}/bags`, {
-    headers: headers(),
     method: 'GET',
     cache: 'no-store'
   });
