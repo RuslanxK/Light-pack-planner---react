@@ -5,6 +5,9 @@ import { options } from '../api/auth/[...nextauth]/options';
 import { headers } from "next/headers"
 
 
+export const dynamic = 'force-dynamic'
+
+
 const getData = async (id) => {
 
   const res = await fetch(`${process.env.API_URL}/bags/${id}`, {
