@@ -6,8 +6,7 @@ import { headers } from "next/headers"
 
 
 
-export const dynamic = 'force-dynamic'
-
+export const dynamic = 'force-static'
 
 const getData = async (id) => {
   const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {

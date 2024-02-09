@@ -5,8 +5,7 @@ import { options } from '../api/auth/[...nextauth]/options';
 import { headers } from "next/headers"
 
 
-export const dynamic = 'force-dynamic'
-
+export const dynamic = 'force-static'
 
 const getData = async (id) => {
 
