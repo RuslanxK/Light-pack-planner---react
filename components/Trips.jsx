@@ -109,7 +109,7 @@ const Trips = ({trips, bags, session}) => {
          Welcome, {session?.user.name}
         </Typography>
         <Typography component="p" variant="p">
-          The journey of a thousand miles begins with a single step!
+          The journey of a thousand miles begins with a single step
         </Typography>
         <Typography component="h3" variant="span" fontWeight="500" mt={1.5} >
           My last planned trips 
