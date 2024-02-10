@@ -1,3 +1,5 @@
+"use client"
+
 import { Fragment } from 'react'
 import InnerBag from '../../components/InnerBag'
 import { getServerSession } from 'next-auth';
@@ -5,14 +7,12 @@ import { options } from '../api/auth/[...nextauth]/options';
 import { headers } from "next/headers"
 
 
-export const dynamic = 'force-static'
 
 const getData = async (id) => {
 
   const res = await fetch(`${process.env.API_URL}/bags/${id}`, {
     method: 'GET',
     cache: 'no-store',
-    headers: headers()
   });
   if(!res.ok) {
 
@@ -26,7 +26,6 @@ const getItems = async () => {
   const res = await fetch(`${process.env.API_URL}/items`,  {
     method: 'GET',
     cache: 'no-store',
-    headers: headers()
   });
 
   if (!res.ok) {
@@ -40,7 +39,6 @@ const getItems = async () => {
 const getBags = async () => {
 
   const res = await fetch(`${process.env.API_URL}/bags`, {
-    headers: headers(),
     method: 'GET',
     cache: 'no-store'
   });
