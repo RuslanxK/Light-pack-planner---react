@@ -20,9 +20,13 @@ import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { useState, useEffect} from 'react';
 import Nav from './Nav';
+import { useSession } from "next-auth/react"
 
 
-const Trips = ({trips, bags, session}) => {
+const Trips = ({trips, bags}) => {
+
+  const { data: session } = useSession()
+
 
   const router = useRouter();
 
