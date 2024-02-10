@@ -4,63 +4,63 @@ import Trips from '../components/Trips'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const getData = async () => {
+// const getData = async () => {
   
-  try {
+//   try {
 
-    const res = await fetch(`${process.env.API_URL}/api/trips`, { cache: 'no-store'});
+//     const res = await fetch(`${process.env.API_URL}/api/trips`, { cache: 'no-store'});
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    const latestBag = data.latestBag
-    const latestBagTotalWeight = data.latestBagTotalWeight
-    const totalCategories = data.totalCategories
-    const totalItems = data.totalItems
+//     const latestBag = data.latestBag
+//     const latestBagTotalWeight = data.latestBagTotalWeight
+//     const totalCategories = data.totalCategories
+//     const totalItems = data.totalItems
 
-    const picturePromises = data.trips.map(async (trip) => {
-      const getPicture = await fetch(`https://api.unsplash.com/search/photos?query=${trip.name}&${process.env.UNSPLASH_CLIENT}`);
-      const pictureData = await getPicture.json();
+//     const picturePromises = data.trips.map(async (trip) => {
+//       const getPicture = await fetch(`https://api.unsplash.com/search/photos?query=${trip.name}&${process.env.UNSPLASH_CLIENT}`);
+//       const pictureData = await getPicture.json();
 
-      const picture = pictureData.results && pictureData.results.length > 0 ? pictureData.results[0] : null;
-      const url = picture.urls.regular
+//       const picture = pictureData.results && pictureData.results.length > 0 ? pictureData.results[0] : null;
+//       const url = picture.urls.regular
     
-      return { ...trip, url };
-    });
+//       return { ...trip, url };
+//     });
 
-    const tripsWithPictures = await Promise.all(picturePromises);
+//     const tripsWithPictures = await Promise.all(picturePromises);
 
-    return { trips: tripsWithPictures, latestBag, latestBagTotalWeight, totalCategories, totalItems};
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error; 
-};
+//     return { trips: tripsWithPictures, latestBag, latestBagTotalWeight, totalCategories, totalItems};
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     throw error; 
+// };
 
-}
+// }
 
 
-const getBags = async () => {
+// const getBags = async () => {
 
-  const res = await fetch(`${process.env.API_URL}/bags`, { cache: 'no-store'});
-  if (!res.ok) {
-    throw new Error("Failed to fetch bags");
-  }
-  return res.json();
+//   const res = await fetch(`${process.env.API_URL}/bags`, { cache: 'no-store'});
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch bags");
+//   }
+//   return res.json();
 
-}
+// }
 
 
 
 const Home = async () => {
 
   
-  const data = await getData()
-  const bags = await getBags()
+  // const data = await getData()
+  // const bags = await getBags()
 
 
   return (
  
    <Fragment>
-   <Trips trips={data} bags={bags} />
+   {/* <Trips trips={data} bags={bags} /> */}
    </Fragment>
 
 
