@@ -2,7 +2,6 @@ import { Fragment } from 'react'
 import InnerBag from '../../components/InnerBag'
 
 
-
 const getData = async (id) => {
 
   const res = await fetch(`${process.env.API_URL}/bags/${id}`, { cache: 'no-store'});
