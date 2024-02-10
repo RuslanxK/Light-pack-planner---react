@@ -11,7 +11,7 @@ export const GET = async (req, res) => {
    try {
 
      await connectToDB();
-
+     
      const trips = await trip.find({})
 
      const latestBag = await getLatestBagForAllTrips();

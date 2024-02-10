@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import Trips from '../components/Trips'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 const getData = async () => {
   
