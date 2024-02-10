@@ -23,7 +23,7 @@ import Nav from './Nav';
 import { useSession } from "next-auth/react"
 
 
-const Trips = ({}) => {
+const Trips = ({trips, bags}) => {
 
   const { data: session } = useSession()
 
@@ -36,20 +36,12 @@ const Trips = ({}) => {
   const [countries, setCounties] = useState([])
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [newTripData, setNewTripData] = useState({startDate: dayjs(), endDate: dayjs() });
-  const [tripsData, setTrips] = useState([])
 
   const theme = useTheme()
 
   useEffect(() => {
 
-
      const getData = async () => {
-
-      const res = await fetch("/api/trips", { cache: 'no-store'});
-      const trips = await res.json();
-
-      setTrips(trips)
-  
 
           const { data } = await axios.get(countriesApi)
           setCounties(data)
@@ -59,7 +51,7 @@ const Trips = ({}) => {
   }, []);
 
 
-    const tripData = tripsData.trips.sort((a, b) => {
+    const tripData = trips.trips.sort((a, b) => {
       const aStartDate = new Date(a.startDate);  
       const bStartDate = new Date(b.startDate);
       const aEndDate = new Date(a.endDate);
@@ -71,7 +63,7 @@ const Trips = ({}) => {
        return 0; 
      }).map((trip) => (<Trip key={trip._id} tripData={trip}  /> ));
     
-    const itemsTotal = tripsData?.totalItems?.reduce((acc, item) => acc + item.qty, 0) 
+    const itemsTotal = trips?.totalItems?.reduce((acc, item) => acc + item.qty, 0) 
     const countriesArr = countries.map((x) => x.name)
     const countryNameArr = countriesArr.map((x) => x.common) 
 
@@ -89,7 +81,7 @@ const Trips = ({}) => {
       };
 
       const navigateToLatestBag = () => {
-           router.push(`bag?id=${tripsData.latestBag._id}`)
+           router.push(`bag?id=${trips.latestBag._id}`)
       }
 
       const openPopup = () => {
@@ -143,7 +135,7 @@ const Trips = ({}) => {
 
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center} mt={13}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
-    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{tripsData?.latestBag?.name}</Typography>
+    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{trips?.latestBag?.name}</Typography>
     </Stack>
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
 
@@ -152,13 +144,13 @@ const Trips = ({}) => {
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
           <MonitorWeightOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: tripsData.latestBagTotalWeight >tripsData?.latestBag?.goal ? "red" : "black"}}>{tripsData?.latestBagTotalWeight?.toFixed(2) || 0.00 } / {tripsData?.latestBag?.goal || 0.00 } kg</Typography>
+          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips.latestBagTotalWeight > trips?.latestBag?.goal ? "red" : "black"}}>{trips?.latestBagTotalWeight?.toFixed(2) || 0.00 } / {trips?.latestBag?.goal || 0.00 } kg</Typography>
         </LatestBagStack>
 
         <LatestBagStack>
         <Typography component="h4" variant='span' fontWeight="300">Total categories </Typography>
           <HorizontalSplitOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-         <Typography component="h3" variant='span' fontWeight="600">{ tripsData.totalCategories || 0 }</Typography>
+         <Typography component="h3" variant='span' fontWeight="600">{ trips.totalCategories || 0 }</Typography>
         </LatestBagStack>
 
         <LatestBagStack>
