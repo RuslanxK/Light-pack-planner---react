@@ -22,6 +22,8 @@ import { useState, useEffect} from 'react';
 import Nav from './Nav';
 import { useSession } from "next-auth/react"
 
+export const revalidate = 0;
+
 
 const Trips = ({trips, bags}) => {
 
@@ -36,15 +38,21 @@ const Trips = ({trips, bags}) => {
   const [countries, setCounties] = useState([])
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [newTripData, setNewTripData] = useState({startDate: dayjs(), endDate: dayjs() });
+  const [tripsData, setTripsData] = useState([])
 
   const theme = useTheme()
 
   useEffect(() => {
 
+
      const getData = async () => {
 
-          const { data } = await axios.get(countriesApi)
-          setCounties(data)
+      const response = await fetch('/api/trips', { cache: 'no-store' });
+      const data = await response.json();
+      setTripsData(data[0].props)
+
+          // const { data } = await axios.get(countriesApi)
+          // setCounties(data)
      }
         getData()
 
@@ -111,7 +119,7 @@ const Trips = ({trips, bags}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
       <Stack p={5}>
-       <Typography component="h2" variant='span' onClick={() => console.log(tripData)} > 
+       <Typography component="h2" variant='span' onClick={() => console.log(tripsData)} > 
          Welcome, {session?.user.name}
         </Typography>
         <Typography component="p" variant="p">
