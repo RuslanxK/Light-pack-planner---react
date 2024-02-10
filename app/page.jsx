@@ -1,5 +1,3 @@
-"use client"
-
 import { Fragment } from 'react';
 import Trips from '../components/Trips'
 import { getServerSession } from 'next-auth';
@@ -13,6 +11,7 @@ const getData = async () => {
     const res = await fetch(`${process.env.API_URL}/api/trips`, {
       method: 'GET',
       cache: 'no-store',
+      headers: headers()
     });
 
     const data = await res.json();
@@ -46,6 +45,7 @@ const getData = async () => {
 const getBags = async () => {
 
   const res = await fetch(`${process.env.API_URL}/bags`, {
+    headers: headers(),
     method: 'GET',
     cache: 'no-store'
   });
@@ -60,7 +60,6 @@ const getBags = async () => {
 
 const Home = async () => {
 
-  const session = await getServerSession(options)
   
   const data = await getData()
   const bags = await getBags()
@@ -69,7 +68,7 @@ const Home = async () => {
   return (
  
    <Fragment>
-   <Trips trips={data} bags={bags} session={session} />
+   <Trips trips={data} bags={bags} />
    </Fragment>
 
 

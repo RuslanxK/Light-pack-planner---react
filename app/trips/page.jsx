@@ -1,5 +1,3 @@
-"use client"
-
 import { Fragment } from 'react'
 import InnerTrip from '../../components/InnerTrip'
 import { getServerSession } from 'next-auth';
@@ -11,6 +9,7 @@ const getData = async (id) => {
   const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {
     method: 'GET',
     cache: 'no-store',
+    headers: headers()
   });
   if (!res.ok) {
     throw new Error('Failed to fetch trip');
@@ -23,6 +22,7 @@ const getAllTrips = async () => {
   const res = await fetch(`${process.env.API_URL}/api/trips`, {
       method: 'GET',
       cache: 'no-store',
+      headers: headers()
     });
     if (!res.ok) {
       throw new Error('Failed to fetch trips');
@@ -35,6 +35,7 @@ const getAllTrips = async () => {
 const getBags = async () => {
 
     const res = await fetch(`${process.env.API_URL}/bags`, {
+      headers: headers(),
       method: 'GET',
       cache: 'no-store'
     });
