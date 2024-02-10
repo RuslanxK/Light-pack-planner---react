@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import InnerTrip from '../../components/InnerTrip'
 
-export const fetchCache = 'force-no-store'
 
 const getData = async (id) => {
   const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {cache: 'no-store'});

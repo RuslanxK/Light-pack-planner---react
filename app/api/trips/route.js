@@ -41,3 +41,6 @@ export const GET = async (req, res) => {
      return new NextResponse("Failed to fetch trips", { status: 500 });
    }
  };
+
+
+ export const revalidate = 0;

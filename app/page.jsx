@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import Trips from '../components/Trips'
 
-export const fetchCache = 'force-no-store'
 
 const getData = async () => {
   
