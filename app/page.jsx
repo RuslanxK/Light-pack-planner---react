@@ -1,17 +1,12 @@
 import { Fragment } from 'react';
 import Trips from '../components/Trips'
-// import { getServerSession } from 'next-auth';
-// import { options } from './api/auth/[...nextauth]/options';
-// import { headers } from "next/headers"
+
 
 const getData = async () => {
   
   try {
 
-    const res = await fetch(`${process.env.API_URL}/api/trips`, {
-      method: 'GET',
-      cache: 'no-store',
-    });
+    const res = await fetch(`${process.env.API_URL}/api/trips`, { cache: 'no-store'});
 
     const data = await res.json();
 
@@ -43,10 +38,7 @@ const getData = async () => {
 
 const getBags = async () => {
 
-  const res = await fetch(`${process.env.API_URL}/bags`, {
-    method: 'GET',
-    cache: 'no-store'
-  });
+  const res = await fetch(`${process.env.API_URL}/bags`, { cache: 'no-store'});
   if (!res.ok) {
     throw new Error("Failed to fetch bags");
   }

@@ -3,8 +3,6 @@ import categories from "../../../models/categories"
 import items from "../../../models/item"
 import { connectToDB } from "../../../utils/database";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next"
-import { options } from "../../api/auth/[...nextauth]/options";
 
 
 export const POST = async (req, res) => {
@@ -13,19 +11,16 @@ export const POST = async (req, res) => {
 
     await connectToDB();
 
-    const session = await getServerSession(options)
-    const userId = session.user.id
-
     const { id, name, tripId, goal, description } = await req.json();
 
     // Create a new bag
-    const newBag = new bag({ creator: userId, name, tripId, goal, description });
+    const newBag = new bag({ name, tripId, goal, description });
     await newBag.save();
 
     if (id) {
 
-      const existingCategories = await categories.find({ creator: userId, bagId: id });
-      const existingItems = await items.find({ creator: userId, bagId: id });
+      const existingCategories = await categories.find({ bagId: id });
+      const existingItems = await items.find({ bagId: id });
 
       const categoryMapping = {};
 
@@ -36,7 +31,6 @@ export const POST = async (req, res) => {
           const newCategory = new categories({
             ...restCategoryData,
             bagId: newBag._id,
-            creator: userId
           });
 
           await newCategory.save();
@@ -59,7 +53,6 @@ export const POST = async (req, res) => {
               ...restItemData,
               bagId: newBag._id,
               categoryId: categoryMapping[categoryId],
-              creator: userId
             });
 
             await newItem.save();

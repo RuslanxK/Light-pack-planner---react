@@ -16,11 +16,15 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { signOut } from "next-auth/react"
 import { Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useSession } from "next-auth/react"
 
-const Nav = ({bags, session}) => {
+const Nav = ({bags}) => {
 
 const router = useRouter()
 const theme = useTheme()
+
+const { data: session } = useSession()
+
 
 const sortedBags = bags.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 const filteredBags = sortedBags.slice(0, 6)

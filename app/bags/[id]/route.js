@@ -6,24 +6,20 @@ import item from '../../../models/item'
 const { calculateTotalWeight } = require("../../../BL/totalBagKg")
 const { calculateCategoryTotalWeight } = require("../../../BL/totalCategoryKg")
 const { calculateWornItemsTotalWeight } = require("../../../BL/totalWorn")
-import { getServerSession } from "next-auth/next"
-import { options } from "../../api/auth/[...nextauth]/options";
 
 
 export const GET = async (req, { params }) => {
   try {
     await connectToDB();
 
-    const session = await getServerSession(options)
-    const userId = session.user.id
+    
+    const foundBag = await bag.findOne({_id: params.id});
 
-    const foundBag = await bag.findOne({_id: params.id, creator: userId});
-
-    const totalWorn = await calculateWornItemsTotalWeight(params.id, userId)
-    const totalWeightCategory = await calculateCategoryTotalWeight(params.id, userId)
-    const totalWeightResult = await calculateTotalWeight(params.id, userId)
-    const categoriesOfTheBag = await category.find({ bagId: params.id, creator: userId });
-    const itemsOfTheBag = await item.find({bagId: params.id, creator: userId})
+    const totalWorn = await calculateWornItemsTotalWeight(params.id)
+    const totalWeightCategory = await calculateCategoryTotalWeight(params.id)
+    const totalWeightResult = await calculateTotalWeight(params.id)
+    const categoriesOfTheBag = await category.find({ bagId: params.id });
+    const itemsOfTheBag = await item.find({bagId: params.id})
 
     if (!foundBag) {
       return new NextResponse("Bag not found", { status: 404 });
@@ -50,12 +46,10 @@ export const GET = async (req, { params }) => {
 
 export const PUT = async (req, { params }) => {
   try {
+    
     await connectToDB();
 
-    const session = await getServerSession(options)
-    const userId = session.user.id
-
-    const Bag = await bag.findOne({ _id: params.id, creator: userId });
+    const Bag = await bag.findOne({ _id: params.id });
 
     if (!Bag) {
       return new NextResponse('Bag not found', { status: 404 });

@@ -1,9 +1,9 @@
 import bag from '../models/bag'
 import items from '../models/item'
 
-const calculateWornItemsTotalWeight = async (bagId, userId) => {
+const calculateWornItemsTotalWeight = async (bagId) => {
     try {
-      const wornItemsInBag = await items.find({creator: userId, bagId, worn: true });
+      const wornItemsInBag = await items.find({bagId, worn: true });
   
       let totalWeight = 0;
   
@@ -29,9 +29,9 @@ const calculateWornItemsTotalWeight = async (bagId, userId) => {
   
       const Bag = await bag.findById(bagId);
   
-      if (!Bag || Bag.creator.toString() !== userId.toString()) {
-        throw { status: 404, message: "Bag not found" };
-      }
+      // if (!Bag || Bag.creator.toString() !== userId.toString()) {
+      //   throw { status: 404, message: "Bag not found" };
+      // }
   
       return { totalWeight: totalWeight / 1000 };
     } catch (error) {

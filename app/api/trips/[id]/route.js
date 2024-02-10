@@ -14,11 +14,9 @@ export const GET = async (req, {params}) => {
   try {
     await connectToDB();
 
-    const session = await getServerSession(options)
-    const userId = session.user.id
     
-    const foundTrip = await trip.findOne({ _id: params.id, creator: userId });;
-    const bagsOfTheTrip = await bag.find({tripId: params.id, creator: userId})
+    const foundTrip = await trip.findOne({ _id: params.id })
+    const bagsOfTheTrip = await bag.find({tripId: params.id})
 
     if (!foundTrip) {
       return new NextResponse('Trip not found', { status: 404 });
@@ -42,10 +40,8 @@ export const PUT = async (req, { params }) => {
   try {
     await connectToDB();
 
-    const session = await getServerSession(options)
-    const userId = session.user.id
 
-    const Trip = await trip.findOne({ _id: params.id, creator: userId });
+    const Trip = await trip.findOne({ _id: params.id });
 
     if (!Trip) {
       return new NextResponse('Trip not found', { status: 404 });

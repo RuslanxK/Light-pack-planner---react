@@ -1,15 +1,9 @@
 import { Fragment } from 'react'
 import InnerTrip from '../../components/InnerTrip'
-// import { getServerSession } from 'next-auth';
-// import { options } from '../api/auth/[...nextauth]/options';
-// import { headers } from "next/headers"
 
 
 const getData = async (id) => {
-  const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {
-    method: 'GET',
-    cache: 'no-store',
-  });
+  const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {cache: 'no-store'});
   if (!res.ok) {
     throw new Error('Failed to fetch trip');
   }
@@ -18,10 +12,7 @@ const getData = async (id) => {
 } 
 
 const getAllTrips = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/trips`, {
-      method: 'GET',
-      cache: 'no-store',
-    });
+  const res = await fetch(`${process.env.API_URL}/api/trips`, { cache: 'no-store'});
     if (!res.ok) {
       throw new Error('Failed to fetch trips');
     }
@@ -29,20 +20,14 @@ const getAllTrips = async () => {
 } 
 
 
-
 const getBags = async () => {
-
-    const res = await fetch(`${process.env.API_URL}/bags`, {
-      method: 'GET',
-      cache: 'no-store'
-    });
+    const res = await fetch(`${process.env.API_URL}/bags`, { cache: 'no-store'});
     if (!res.ok) {
       throw new Error("Failed to fetch bags");
     }
     return res.json();
   
 }
-
 
 
 const page = async ({searchParams}) => {

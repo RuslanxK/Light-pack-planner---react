@@ -3,14 +3,14 @@ import categories from '../models/categories'
 
 
 
-const calculateCategoryTotalWeight = async (bagId, userId) => {
+const calculateCategoryTotalWeight = async (bagId) => {
     try {
-      const categoriesInBag = await categories.find({ bagId, creator: userId});
+      const categoriesInBag = await categories.find({bagId});
   
       const categoriesTotalWeight = [];
   
       for (const category of categoriesInBag) {
-        const itemsInCategory = await items.find({ categoryId: category._id.toString(), creator: userId});
+        const itemsInCategory = await items.find({ categoryId: category._id.toString()});
   
         let totalWeight = 0;
   

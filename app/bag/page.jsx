@@ -1,17 +1,11 @@
 import { Fragment } from 'react'
 import InnerBag from '../../components/InnerBag'
-// import { getServerSession } from 'next-auth';
-// import { options } from '../api/auth/[...nextauth]/options';
-// import { headers } from "next/headers"
 
 
 
 const getData = async (id) => {
 
-  const res = await fetch(`${process.env.API_URL}/bags/${id}`, {
-    method: 'GET',
-    cache: 'no-store',
-  });
+  const res = await fetch(`${process.env.API_URL}/bags/${id}`, { cache: 'no-store'});
   if(!res.ok) {
 
       throw new Error("Failed to fetch bag")
@@ -21,25 +15,18 @@ const getData = async (id) => {
 } 
 
 const getItems = async () => {
-  const res = await fetch(`${process.env.API_URL}/items`,  {
-    method: 'GET',
-    cache: 'no-store',
-  });
+  const res = await fetch(`${process.env.API_URL}/items`,  { cache: 'no-store'});
 
   if (!res.ok) {
     throw new Error("Failed to fetch items");
   }
-
   return res.json()
 };
 
 
 const getBags = async () => {
 
-  const res = await fetch(`${process.env.API_URL}/bags`, {
-    method: 'GET',
-    cache: 'no-store'
-  });
+  const res = await fetch(`${process.env.API_URL}/bags`, { method: 'GET'});
   if (!res.ok) {
     throw new Error("Failed to fetch bags");
   }

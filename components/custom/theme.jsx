@@ -5,9 +5,6 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
 
 
-    textfield: {
-          fontFamily: "Poppins"
-    },
 
   flexBox: "flex",
   row: "row",

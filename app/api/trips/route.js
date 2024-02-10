@@ -5,9 +5,6 @@ const {calculateTotalWeight} = require("../../../BL/totalBagKg")
 import categories from "../../../models/categories"
 import item from "../../../models/item"
 import trip from '../../../models/trip'
-import { getServerSession } from "next-auth/next"
-import { options } from "../auth/[...nextauth]/options"
-
 
 export const GET = async (req, res) => {
 
@@ -15,19 +12,16 @@ export const GET = async (req, res) => {
 
      await connectToDB();
 
-     const session = await getServerSession(options)
-     const userId = session.user.id
+     const trips = await trip.find({})
 
-     const trips = await trip.find({creator: userId})
-
-     const latestBag = await getLatestBagForAllTrips(userId);
+     const latestBag = await getLatestBagForAllTrips();
  
      let latestBagData = null;
   
      if (latestBag) {
-       const totalWeightResult = await calculateTotalWeight(latestBag._id, userId);
-       const totalCategories = await categories.countDocuments({ bagId: latestBag._id, creator: userId });
-       const totalItems = await item.find({ bagId: latestBag._id, creator: userId });
+       const totalWeightResult = await calculateTotalWeight(latestBag._id);
+       const totalCategories = await categories.countDocuments({ bagId: latestBag._id});
+       const totalItems = await item.find({ bagId: latestBag._id });
        latestBagData = {
          latestBag: latestBag,
          latestBagTotalWeight: totalWeightResult ? totalWeightResult.totalWeight : null,

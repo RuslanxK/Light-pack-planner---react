@@ -5,7 +5,6 @@ const itemSchema = new Schema({
 
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
       },
     tripId: String,
     bagId: String,

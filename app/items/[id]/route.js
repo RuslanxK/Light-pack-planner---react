@@ -1,17 +1,13 @@
 import item from "../../../models/item";
 import { NextResponse } from "next/server";
 import { connectToDB } from "../../../utils/database";
-import { getServerSession } from "next-auth/next"
-import { options } from "../../api/auth/[...nextauth]/options";
-
 
 
 export const PUT = async (req, { params }) => {
   try {
     await connectToDB();
-    const session = await getServerSession(options)
-    const userId = session.user.id
-    const Item = await item.findOne({ _id: params.id, creator: userId});
+   
+    const Item = await item.findOne({ _id: params.id});
 
     if (!Item) {
       return new NextResponse('Item not found', { status: 404 });

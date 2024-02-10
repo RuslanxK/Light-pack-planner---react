@@ -6,7 +6,6 @@ const tripSchema = new Schema(
   {
     creator: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
     },
     name: { type: String, trim: true },
     about: { type: String, trim: true },

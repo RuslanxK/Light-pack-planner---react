@@ -8,7 +8,8 @@ import Providers from '../components/Providers'
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin']
+  subsets: ['latin'],
+  display: "swap"
 })
 
 import '../style.css'
