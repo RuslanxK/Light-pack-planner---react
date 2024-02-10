@@ -18,3 +18,6 @@ export const GET = async (req, res) => {
         return new NextResponse("Failed to fetch bags", {status: 500})
      }
 }
+
+
+export const revalidate = 0;

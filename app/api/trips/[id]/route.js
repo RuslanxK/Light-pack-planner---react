@@ -4,8 +4,6 @@ import category from '../../../../models/categories'
 import item from '../../../../models/item'
 import { connectToDB } from '../../../../utils/database';
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth/next"
-import { options } from '../../auth/[...nextauth]/options';
 
 
 export const GET = async (req, {params}) => {
@@ -77,3 +75,4 @@ export const DELETE = async (req, {params}) => {
 }
 
 
+export const revalidate = 0;

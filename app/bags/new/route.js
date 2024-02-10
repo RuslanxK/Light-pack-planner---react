@@ -20,3 +20,6 @@ export const POST = async (req, res) => {
     return new NextResponse("Failed to create a new bag", { status: 500 });
   }
 };
+
+
+export const revalidate = 0;
