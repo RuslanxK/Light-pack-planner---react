@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import Trips from '../components/Trips'
 
 
+
 const getData = async () => {
   
   try {
@@ -69,3 +70,6 @@ const Home = async () => {
 
 
 export default Home
+
+
+export const fetchCache = 'force-no-store'
