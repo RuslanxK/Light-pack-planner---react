@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import Trips from '../components/Trips'
-import { getServerSession } from 'next-auth';
-import { options } from './api/auth/[...nextauth]/options';
-import { headers } from "next/headers"
+// import { getServerSession } from 'next-auth';
+// import { options } from './api/auth/[...nextauth]/options';
+// import { headers } from "next/headers"
 
 const getData = async () => {
   
@@ -11,7 +11,6 @@ const getData = async () => {
     const res = await fetch(`${process.env.API_URL}/api/trips`, {
       method: 'GET',
       cache: 'no-store',
-      headers: headers()
     });
 
     const data = await res.json();
@@ -45,7 +44,6 @@ const getData = async () => {
 const getBags = async () => {
 
   const res = await fetch(`${process.env.API_URL}/bags`, {
-    headers: headers(),
     method: 'GET',
     cache: 'no-store'
   });

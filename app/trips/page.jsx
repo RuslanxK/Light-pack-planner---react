@@ -1,15 +1,14 @@
 import { Fragment } from 'react'
 import InnerTrip from '../../components/InnerTrip'
-import { getServerSession } from 'next-auth';
-import { options } from '../api/auth/[...nextauth]/options';
-import { headers } from "next/headers"
+// import { getServerSession } from 'next-auth';
+// import { options } from '../api/auth/[...nextauth]/options';
+// import { headers } from "next/headers"
 
 
 const getData = async (id) => {
   const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, {
     method: 'GET',
     cache: 'no-store',
-    headers: headers()
   });
   if (!res.ok) {
     throw new Error('Failed to fetch trip');
@@ -22,7 +21,6 @@ const getAllTrips = async () => {
   const res = await fetch(`${process.env.API_URL}/api/trips`, {
       method: 'GET',
       cache: 'no-store',
-      headers: headers()
     });
     if (!res.ok) {
       throw new Error('Failed to fetch trips');
@@ -35,7 +33,6 @@ const getAllTrips = async () => {
 const getBags = async () => {
 
     const res = await fetch(`${process.env.API_URL}/bags`, {
-      headers: headers(),
       method: 'GET',
       cache: 'no-store'
     });
@@ -59,12 +56,10 @@ const page = async ({searchParams}) => {
   
   const data = await getData(id)
 
-  const session = await getServerSession(options)
-
   return (
    <Fragment>
 
-    <InnerTrip tripData={data} trips={allTrips} bagsData={bags} session={session} />
+    <InnerTrip tripData={data} trips={allTrips} bagsData={bags}  />
 
    </Fragment>
 
