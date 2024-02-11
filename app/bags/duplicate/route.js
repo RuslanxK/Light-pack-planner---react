@@ -24,7 +24,6 @@ export const POST = async (req, res) => {
 
       const categoryMapping = {};
 
-      // Copy and associate categories with the new bag
       const createdCategories = await Promise.all(
         existingCategories.map(async (categoryData) => {
           const { _id, ...restCategoryData } = categoryData.toObject();
@@ -39,11 +38,9 @@ export const POST = async (req, res) => {
         })
       );
 
-      // Update the new bag with the copied categories
       newBag.categories = createdCategories.map(category => category._id);
       await newBag.save();
 
-      // Copy and associate items with the new bag
       if (existingItems && existingItems.length > 0) {
         const createdItems = await Promise.all(
           existingItems.map(async (itemData) => {
@@ -60,7 +57,6 @@ export const POST = async (req, res) => {
           })
         );
 
-        // Update the new bag with the copied items
         newBag.items = createdItems.map(item => item._id);
         await newBag.save();
       }
