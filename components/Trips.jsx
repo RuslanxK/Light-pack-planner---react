@@ -108,7 +108,7 @@ const Trips = ({trips, bags, session}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
       <Stack p={5}>
-       <Typography component="h2" fontWeight="500" variant='span' > 
+       <Typography component="h2" fontWeight="600" variant='span' > 
          Welcome, {session?.user?.name}
         </Typography>
         <Typography component="p" variant="p">
