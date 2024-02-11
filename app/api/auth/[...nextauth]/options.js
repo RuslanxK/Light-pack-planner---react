@@ -53,12 +53,15 @@ export const options = {
 
         async session({session}) {
 
+            await connectToDB()
             const sessionUser = await user.findOne({
                email: session.user.email
             })
 
+             if(sessionUser) {
              session.user.id = sessionUser._id.toString()
              return session
+             }
       
             },
       
