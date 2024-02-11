@@ -45,7 +45,7 @@ const Trips = ({trips, bags, session}) => {
   }, []);
 
 
-    const tripData = trips.tripsWithPictures.sort((a, b) => {
+    const tripData = trips?.tripsWithPictures.sort((a, b) => {
       const aStartDate = new Date(a.startDate);  
       const bStartDate = new Date(b.startDate);
       const aEndDate = new Date(a.endDate);
@@ -57,7 +57,7 @@ const Trips = ({trips, bags, session}) => {
        return 0; 
      }).map((trip) => (<Trip key={trip._id} tripData={trip}  /> ));
     
-    const itemsTotal = trips.totalItems.reduce((acc, item) => acc + item.qty, 0) 
+    const itemsTotal = trips?.totalItems.reduce((acc, item) => acc + item.qty, 0) 
     const countriesArr = countries.map((x) => x.name)
     const countryNameArr = countriesArr.map((x) => x.common) 
 
@@ -66,7 +66,7 @@ const Trips = ({trips, bags, session}) => {
 
         try {
 
-          const newTripDataWithUserId = { ...newTripData, userId: session.user.id};
+          const newTripDataWithUserId = { ...newTripData, userId: session?.user?.id};
           const res = await axios.post(`/api/trips/new`, newTripDataWithUserId)
           setPopupOpen(false)
           startTransition(router.refresh)

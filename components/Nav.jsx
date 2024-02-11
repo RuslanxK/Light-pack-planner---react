@@ -24,7 +24,7 @@ const theme = useTheme()
 
 
 
-const sortedBags = bags.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+const sortedBags = bags?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 const filteredBags = sortedBags.slice(0, 6)
 
 
@@ -135,13 +135,13 @@ const navigateToBag = (bag) => {
 
         <button className='premium'>Upgrade to premium</button>
         </Stack>
-        {session && session.user ? (
+        {session && session?.user ? (
   <Stack display={theme.flexBox} pb={2} alignItems={theme.center}>
     <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
       <Typography variant='span'p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
     </>
   }>
-     <IconButton sx={{marginBottom: "5px"}}><Image src={session.user.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
+     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
      </Tooltip>
       <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "15px", marginRight: "5px"}}/> Log out</button>
      </Stack>
