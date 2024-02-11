@@ -99,7 +99,7 @@ const bags = tripData?.bags?.map((bag) => <Bag key={bag._id} bagData={bag} trips
 const addBag = async (e) => {
   e.preventDefault();
   try {
-    const newTripDataWithUserId = {...newBag, tripId: tripData?.trip?._id, userId: session.user.id};
+    const newTripDataWithUserId = {...newBag, tripId: tripData?.trip?._id, userId: session?.user?.id};
     await axios.post('/bags/new', newTripDataWithUserId);
 
     startTransition(router.refresh)
