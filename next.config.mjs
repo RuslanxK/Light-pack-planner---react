@@ -6,7 +6,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
-    remotePatterns: ['images.unsplash.com', 'platform-lookaside.fbsbx.com', 'lh3.googleusercontent.com'],
+    domains: ['images.unsplash.com', 'platform-lookaside.fbsbx.com', 'lh3.googleusercontent.com'],
   },
   webpack(config) {
     config.experiments = {
