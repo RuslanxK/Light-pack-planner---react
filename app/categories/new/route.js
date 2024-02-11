@@ -6,8 +6,8 @@ export const POST = async (req, res) => {
     try {
       await connectToDB();
       
-      const { name, bagId, tripId } = await req.json();
-      const Category = new category({ name, bagId, tripId });
+      const { userId, name, bagId, tripId } = await req.json();
+      const Category = new category({ creator: userId, name, bagId, tripId });
       await Category.save();
       return new NextResponse(JSON.stringify(Category), { status: 200 });
     } catch (error) {

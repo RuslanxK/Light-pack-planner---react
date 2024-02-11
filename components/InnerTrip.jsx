@@ -23,6 +23,7 @@ import Nav from './Nav';
 
 const InnerTrip = ({tripData, trips, bagsData, session}) => {
 
+
 const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"
 
 const [isTransitionStarted, startTransition] = useTransition();
@@ -30,8 +31,8 @@ const [isPopupOpen, setPopupOpen] = useState(false);
 const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
 const [countries, setCounties] = useState([])
 const [isAddPopupOpen, setAddPopupOpen] = useState(false)
-const [editedTrip, setEditedTrip] = useState({name: tripData.trip.name, about:tripData.trip.about, distance: tripData.trip.distance, startDate: dayjs(tripData.trip.startDate), endDate: dayjs(tripData.trip.endDate) });
-const [newBag, setNewBag] = useState({tripId: tripData.trip._id})
+const [editedTrip, setEditedTrip] = useState({name: tripData?.trip?.name, about:tripData?.trip?.about, distance: tripData?.trip?.distance, startDate: dayjs(tripData?.trip?.startDate), endDate: dayjs(tripData?.trip?.endDate) });
+const [newBag, setNewBag] = useState({})
 
 
 const router = useRouter();
@@ -50,7 +51,7 @@ useEffect(() => {
 
 const calculateDuration = () => {
 
-  if (tripData && tripData.trip.startDate && tripData.trip.endDate) {
+  if (tripData && tripData?.trip?.startDate && tripData?.trip?.endDate) {
     const startDate = dayjs(tripData.trip.startDate);
     const endDate = dayjs(tripData.trip.endDate);
     const durationInHours = endDate.diff(startDate, 'hour');
@@ -92,17 +93,18 @@ const handleDateChange = (date, fieldName) => {
 };
 
 
-const bags = tripData?.bags?.map((bag) => <Bag key={bag._id} bagData={bag} trips={trips} />)
-
+const bags = tripData?.bags?.map((bag) => <Bag key={bag._id} bagData={bag} trips={trips} session={session} />)
 
 
 const addBag = async (e) => {
   e.preventDefault();
-
   try {
-    await axios.post('/bags/new', newBag);
+    const newTripDataWithUserId = {...newBag, tripId: tripData?.trip?._id, userId: session.user.id};
+    await axios.post('/bags/new', newTripDataWithUserId);
+
+    startTransition(router.refresh)
     setAddPopupOpen(false);
-    startTransition(router.refresh);
+   
   } catch (err) {
     console.log(err);
   }
@@ -113,7 +115,8 @@ const updateTrip =  async (e) => {
   e.preventDefault()
   try {
     await axios.put(`/api/trips/${tripData.trip._id}`, editedTrip);
-    startTransition(router.refresh);
+
+    startTransition(router.refresh)
     setPopupOpen(false)
     
   }
@@ -126,9 +129,9 @@ const removeTrip = async () => {
 
   try {
     await axios.delete(`/api/trips/${tripData.trip._id}`);
+    startTransition(router.refresh)
     setDeletePopupOpen(false)
     router.push('/')
-    startTransition(router.refresh);
   }
 
    catch (error) {
@@ -168,15 +171,15 @@ const countryNameArr = countriesArr.map((x) => x.common)
 
         <Stack p={5}>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
-        <Typography component="h2"variant='span' fontWeight="600" >{tripData.trip.name}</Typography>
+        <Typography onClick={() => console.log(tripData)} component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
           <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange }}} onClick={openPopup} />
           <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" }}} onClick={openRemovePopup} />
         </Stack>
-        <Typography component="p" variant="p"> {tripData.trip.about} </Typography>
+        <Typography component="p" variant="p"> {tripData?.trip?.about} </Typography>
 
        <Stack pt={2}>
        <Stack flex={1} direction="row" backgroundColor={theme.main.lightGray} pt={1.2} pb={1.2} pl={2} pr={2} borderRadius={theme.radius} width="fit-content">
-       <SportsScoreOutlinedIcon sx={{ marginRight: "5px" }} /> {tripData.trip.distance} km <MoreTimeIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
+       <SportsScoreOutlinedIcon sx={{ marginRight: "5px" }} /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
        <Typography variant="span" sx={{ color: theme.black, fontWeight: "bold" }}>Traveled </Typography> ) : ( <Typography variant='span' sx={{ color: theme.green, fontWeight: "bold" }}> Starts in {calculateDaysLeft(tripData.trip)} {calculateDaysLeft(tripData.trip) > 0 ? 'day' : 'days'} </Typography>)}
        <WbSunnyOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> Duration {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
        </Stack>

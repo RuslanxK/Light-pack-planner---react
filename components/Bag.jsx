@@ -11,15 +11,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import axios from 'axios';
 import MuiPopup from './custom/MuiPopup';
 
-const Bag = ({bagData, trips}) => {
+const Bag = ({bagData, trips, session}) => {
 
   const router = useRouter()
   const theme = useTheme()
 
   const [tripHover, setTripHover] = useState(false)
   const [isPopupOpen, setIsPopupOpen] = useState(false)
-  const [isTransitionStarted, startTransition] = useTransition();
   const [duplicatedBag, setDuplicatedBag] = useState({tripId: null, id: bagData._id, name: bagData.name, goal: bagData.goal, description: bagData.description});
+  const [isTransitionStarted, startTransition] = useTransition();
+
 
   const NavigateToInnerBag = () => {
     router.push(`/bag?id=${bagData._id}`)
@@ -39,10 +40,14 @@ const Bag = ({bagData, trips}) => {
       e.preventDefault()
 
        try {
-        await axios.post(`/bags/duplicate`, duplicatedBag);
+
+        const BagWithUserId = { ...duplicatedBag, userId: session.user.id};
+
+        await axios.post(`/bags/duplicate`, BagWithUserId);
         setIsPopupOpen(false)
-        startTransition(router.refresh);
-       } catch (err) {
+        startTransition(router.refresh)
+
+        } catch (err) {
          console.log(err);
        }
      

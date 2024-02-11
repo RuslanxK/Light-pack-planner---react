@@ -1,6 +1,6 @@
 "use client"
 
-import { Stack, Typography, Button, IconButton } from '@mui/material'
+import { Stack, Typography, IconButton } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@emotion/react';
@@ -16,26 +16,26 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { signOut } from "next-auth/react"
 import { Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useSession } from "next-auth/react"
 
-const Nav = ({bags}) => {
+const Nav = ({bags, session}) => {
 
 const router = useRouter()
 const theme = useTheme()
 
-const { data: session } = useSession()
 
 
 const sortedBags = bags.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 const filteredBags = sortedBags.slice(0, 6)
-const bagData = filteredBags.map((bag) => {
+
+
+const bagData = filteredBags?.map((bag) => {
       return <Typography onClick={() =>  navigateToBag(bag)} fontSize="14px" variant='span'component="span" mt={1} 
       sx={{ cursor: "pointer" ,"&:hover": { color: theme.green }}} key={bag._id}> <Image src="/backpack.png" alt='backpack' width={14} height={14} style={{marginRight: "3px"}} /> {bag.name.length > 10 ? `${bag.name.substring(0, 12)}...` : bag.name}</Typography>
   })
 
 
 const logOut = () => {
-  signOut({ callbackUrl: 'http://localhost:3000/login' })
+  signOut({ callbackUrl: `/login` })
 }
 
 

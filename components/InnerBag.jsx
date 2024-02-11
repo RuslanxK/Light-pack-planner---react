@@ -26,7 +26,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isTransitionStarted, startTransition] = useTransition();
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
-  const [editedBag, setEditedBag] = useState({tripId: bagData.bag.tripId, name: bagData.bag.name, goal: bagData.bag.goal, description: bagData.bag.description})
+  const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -36,33 +36,31 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
   useEffect(() => {
     
-    localStorage.setItem('bagId', bagData.bag._id);
+    localStorage.setItem('bagId', bagData?.bag?._id);
 
   }, []);
 
 
+  const allBagsItems = items.map((item) => { return <SideItem key={item._id} itemData={item} color="white" categoryData={bagData?.categories} update={() => startTransition(router.refresh)}  /> }) 
 
-  const allBagsItems = items.map((item) => { return <SideItem key={item._id} itemData={item} color="white" categoryData={bagData.categories} update={() => startTransition(router.refresh)}  /> }) 
-
-
-  const categories = bagData.categories.map((category) => <Category key={category._id} categoryData={category} items={bagData.items} />)
-  const itemsTotal = bagData.items.reduce((acc, item) => acc + item.qty, 0) 
+  const categories = bagData?.categories?.map((category) => <Category key={category._id} categoryData={category} items={bagData?.items} session={session} />)
+  const itemsTotal = bagData?.items?.reduce((acc, item) => acc + item.qty, 0) 
 
 
-  const categoryWeightsArr = bagData.totalWeightCategory 
-  const categoryPieChartData = bagData.categories.slice(0, 8).map((category) => {  
-  const categoryWeight = categoryWeightsArr.categoriesTotalWeight.find((item) => item.categoryId === category._id)
+  const categoryWeightsArr = bagData?.totalWeightCategory 
+  const categoryPieChartData = bagData?.categories?.slice(0, 8).map((category) => {  
+  const categoryWeight = categoryWeightsArr?.categoriesTotalWeight?.find((item) => item.categoryId === category._id)
 
         return {
           id: category._id,
-          value: categoryWeight.totalWeight || 0 ,
-          label: category.name.length > 12 ? `${categoryWeight.totalWeight.toFixed(2) || 0.00} kg - ${category.name.substring(0, 12)}...` : `${categoryWeight.totalWeight.toFixed(2) || 0.00} kg - ${category.name}`
+          value: categoryWeight?.totalWeight || 0 ,
+          label: category?.name?.length > 12 ? `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name?.substring(0, 12)}...` : `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name}`
         };
       })
     ;
 
 
-  const TOTAL = categoryWeightsArr.categoriesTotalWeight.map((category) => category.totalWeight).reduce((a, b) => a + b, 0) 
+  const TOTAL = categoryWeightsArr?.categoriesTotalWeight?.map((category) => category.totalWeight).reduce((a, b) => a + b, 0) 
   const getArcLabel = (params) => {
     const percent = params.value / TOTAL;
     return `${(percent * 100).toFixed(0)}%`;
@@ -73,12 +71,13 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
   const addCategory = async () => {
 
-    const newCategory = {bagId: bagData.bag._id, tripId: bagData.bag.tripId, name: 'new category' };
+    const newCategory = {userId: session?.user?.id, bagId: bagData?.bag?._id, tripId: bagData?.bag?.tripId, name: 'new category' };
 
       console.log(newCategory)
     try {
       const res = await axios.post('/categories/new', newCategory);
-      startTransition(router.refresh);
+      startTransition(router.refresh)
+
     } catch (err) {
       console.log(err);
     }
@@ -136,12 +135,12 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
         <Stack p={5} ml="210px">
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
-        <Typography component="h2" variant='span' fontWeight="600" onClick={() => console.log(bagData)}>{bagData.bag.name}</Typography>
+        <Typography component="h2" variant='span' fontWeight="600" onClick={() => console.log(bagData)}>{bagData?.bag?.name}</Typography>
         <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange } }} onClick={openPopup} />
         <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" } }} onClick={openRemovePopup} />
         </Stack>
         <Typography component="p" variant="p">
-          {bagData.bag.description}
+          {bagData?.bag?.description}
         </Typography>
 
         <Typography component="h3" variant="span" fontWeight="500" mt={2}>
@@ -155,9 +154,9 @@ const InnerBag = ({bagData, items, bags, session}) => {
         <Stack display={theme.flexBox} direction="row" alignItems={theme.contentCenter} backgroundColor={theme.main.lightGray} mt={2} pt={1.2} pb={1.2} pl={2} pr={2} width="fit-content" borderRadius={theme.radius}>
     
         <MonitorWeightOutlinedIcon sx={{  marginRight: "5px" }}/> 
-        { bagData.totalBagWeight > bagData.bag.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData.totalBagWeight.toFixed(2)} / {bagData.bag.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData.totalBagWeight.toFixed(2)} / {bagData.bag.goal} kg </Typography>  }
+        { bagData?.totalBagWeight > bagData?.bag?.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData?.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography>  }
         <NordicWalkingIcon sx={{ marginLeft: "20px", marginRight: "5px" }}/>
-        <Typography variant="span" component="span"> { bagData.worn ? "worn " + bagData.worn.toFixed(2) + " kg" : "worn 0.00 kg"}</Typography>
+        <Typography variant="span" component="span"> { bagData?.worn ? "worn " + bagData?.worn?.toFixed(2) + " kg" : "worn 0.00 kg"}</Typography>
 
         <DataSaverOffOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }}/> {itemsTotal} items 
          </Stack> 
@@ -191,7 +190,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 
-    <Stack display={theme.flexBox} pl={30} pr={items.length ? 30 : 4}>
+    <Stack display={theme.flexBox} pl={30} pr={items?.length ? 30 : 4}>
 
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} borderRadius={theme.radius} mb={2} sx={{cursor: "pointer"}} onClick={addCategory}>
@@ -201,7 +200,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
     </Stack>
     </Stack>
     
-     {items.length ? <Stack sx={{backgroundColor: theme.green}} right="0" position={theme.nav.fixed} width={theme.nav.width} display={theme.flexBox} alignItems={theme.center} height={theme.nav.height}>
+     {items?.length ? <Stack sx={{backgroundColor: theme.green}} right="0" position={theme.nav.fixed} width={theme.nav.width} display={theme.flexBox} alignItems={theme.center} height={theme.nav.height}>
 
      <Stack pt={2}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>

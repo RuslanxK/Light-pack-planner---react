@@ -14,7 +14,7 @@ const [itemToCategory, setItemToCategory] = useState({ tripId: null, bagId: null
 
 const theme = useTheme()
 
-const categoryOptions = categoryData.map((x) => ({ name: x.name, _id: x._id, key: x._id })) 
+const categoryOptions = categoryData?.map((x) => ({ name: x.name, _id: x._id, key: x._id })) 
 const isOptionEqualToValue = (option, value) => option._id === value?._id;
 
 useEffect(() => {
@@ -61,7 +61,7 @@ const addItemToCategory = async (e) => {
     <Stack onClick={openPopup}  p={0.7} mr={1} backgroundColor="white" width="20px" borderRadius="5px" sx={{cursor: "pointer", transition: "transform 0.2s ease-in-out", '&:hover': {transform: "scale(1.1)"}}}>
      <FlipCameraIosOutlinedIcon sx={{color: theme.green, fontSize: "20px"}} />
    </Stack>
-   <Typography onClick={() => console.log(itemToCategory)} component="span" variant="span" fontSize="15px" color={theme.main.lightGray}>{itemData.name.length > 10 ? itemData.name.substring(0, 10) + "..." : itemData.name}</Typography>
+   <Typography onClick={() => console.log(itemToCategory)} component="span" variant="span" fontSize="15px" color={theme.main.lightGray}>{itemData?.name?.length > 10 ? itemData?.name?.substring(0, 10) + "..." : itemData?.name}</Typography>
    </Stack>
 
  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >

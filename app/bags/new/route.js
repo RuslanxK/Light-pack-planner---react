@@ -9,9 +9,9 @@ export const POST = async (req, res) => {
   try {
     await connectToDB();
 
-    const { name, tripId, goal, description } = await req.json();
+    const { userId, name, tripId, goal, description } = await req.json();
 
-    const newBag = new bag({ name, tripId, goal, description });
+    const newBag = new bag({ creator: userId, name, tripId, goal, description });
     await newBag.save();
 
     return new NextResponse(JSON.stringify(newBag), { status: 200 });

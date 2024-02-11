@@ -11,10 +11,10 @@ export const POST = async (req, res) => {
 
     await connectToDB();
 
-    const { id, name, tripId, goal, description } = await req.json();
+    const { userId, id, name, tripId, goal, description } = await req.json();
 
     // Create a new bag
-    const newBag = new bag({ name, tripId, goal, description });
+    const newBag = new bag({ userId, name, tripId, goal, description });
     await newBag.save();
 
     if (id) {

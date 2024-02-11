@@ -20,15 +20,15 @@ const Category = (props) => {
   const [showItems, setShowItems] = useState(true);
   const [isTransitionStarted, startTransition] = useTransition();
   const [removePopupOpen ,setRemovePopupOpen] = useState(false)
-  const [updatedCategory, setUpdatedCategory] = useState({name: props.categoryData.name})
+  const [updatedCategory, setUpdatedCategory] = useState({name: props?.categoryData?.name})
 
 
-  const itemsOfCategory = props.items.filter((item) => item.categoryId === props.categoryData._id);
-  const itemData = itemsOfCategory.map((item) => <Item key={item._id} itemData={item} />);
+  const itemsOfCategory = props?.items?.filter((item) => item.categoryId === props.categoryData._id);
+  const itemData = itemsOfCategory?.map((item) => <Item key={item._id} itemData={item} />);
 
   const addItem =  async () => {
 
-    const itemObj = {tripId: props.categoryData.tripId, bagId: props.categoryData.bagId, categoryId: props.categoryData._id, name: "new item", wgtOpt: "kg", qty: 1, weight: 0.1}
+    const itemObj = { userId: props.session.user.id, tripId: props.categoryData.tripId, bagId: props.categoryData.bagId, categoryId: props.categoryData._id, name: "new item", wgtOpt: "kg", qty: 1, weight: 0.1}
      
     try {
       await axios.post('/items/new', itemObj);

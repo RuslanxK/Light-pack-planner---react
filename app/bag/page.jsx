@@ -1,50 +1,51 @@
+
 import { Fragment } from 'react'
 import InnerBag from '../../components/InnerBag'
+import { getServerSession } from 'next-auth';
+import {options} from '../api/auth/[...nextauth]/options'
 
 
-const getData = async (id) => {
 
-  const res = await fetch(`${process.env.API_URL}/bags/${id}`, { cache: 'no-store'});
-  if(!res.ok) {
+const getBags = async (session) => {
 
-      throw new Error("Failed to fetch bag")
-  }
-  return res.json()
-
-} 
-
-const getItems = async () => {
-  const res = await fetch(`${process.env.API_URL}/items`,  { cache: 'no-store'});
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch items");
-  }
-  return res.json()
-};
-
-
-const getBags = async () => {
-
-  const res = await fetch(`${process.env.API_URL}/bags`, { method: 'GET'});
+  const res = await fetch(`${process.env.API_URL}/bags/${session?.user?.id}/creator`, { cache: 'no-store'});
   if (!res.ok) {
     throw new Error("Failed to fetch bags");
   }
-  return res.json();
+     return res.json();
+}
+
+
+const getItems = async (session) => {
+  const res = await fetch(`${process.env.API_URL}/items/${session?.user?.id}/creator`,  { cache: 'no-store'});
+  if (!res.ok) {
+  console.error()
+   }
+   return res.json()
+}
+
+
+const getBag = async (id) => {
+  const res = await fetch(`${process.env.API_URL}/bags/${id}`, { cache: 'no-store'});
+  if(!res.ok) {
+    console.error()
+   }
+  return res.json()
 
 }
 
 
 const page = async ({searchParams}) => {
-
+  const session = await getServerSession(options)
   const id = searchParams.id
 
-  const data = await getData(id)
-  const items = await getItems()
-  const bags = await getBags()
+  const bag = await getBag(id)
+  const items = await getItems(session)
+  const bags = await getBags(session)
 
   return (
    <Fragment>
-    <InnerBag bagData={data} items={items} bags={bags} />
+    <InnerBag bagData={bag} items={items} bags={bags} session={session}/>
    </Fragment>
 
   )

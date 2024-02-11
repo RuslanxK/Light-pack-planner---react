@@ -1,10 +1,9 @@
 import { models, Schema, model } from "mongoose"
-import mongoose from "mongoose"
 
 const itemSchema = new Schema({
 
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String
       },
     tripId: String,
     bagId: String,

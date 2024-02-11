@@ -7,8 +7,8 @@ export const POST = async (req) => {
     try {
       await connectToDB();
 
-      const { name, about, distance, startDate, endDate} = await req.json();
-      const Trip = new trip({ name, about, distance, startDate, endDate});
+      const { userId, name, about, distance, startDate, endDate} = await req.json();
+      const Trip = new trip({ name, about, distance, startDate, endDate, creator: userId});
       await Trip.save();
       return new NextResponse(JSON.stringify(Trip), { status: 200 });
     } catch (error) {
