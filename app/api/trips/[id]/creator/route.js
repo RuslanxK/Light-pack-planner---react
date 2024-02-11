@@ -20,9 +20,9 @@ export const GET = async (req, {params}) => {
      let latestBagData = null;
   
      if (latestBag) {
-       const totalWeightResult = await calculateTotalWeight(latestBag._id);
-       const totalCategories = await categories.countDocuments({ bagId: latestBag._id});
-       const totalItems = await item.find({ bagId: latestBag._id });
+       const totalWeightResult = await calculateTotalWeight(latestBag._id, userId);
+       const totalCategories = await categories.countDocuments({ creator: userId, bagId: latestBag._id});
+       const totalItems = await item.find({ creator: userId, bagId: latestBag._id });
        latestBagData = {
          latestBag: latestBag,
          latestBagTotalWeight: totalWeightResult ? totalWeightResult.totalWeight : null,
