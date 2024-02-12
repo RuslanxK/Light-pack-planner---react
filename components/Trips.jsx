@@ -108,7 +108,7 @@ const Trips = ({trips, bags, session}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
       <Stack p={5}>
-       <Typography component="h2" fontWeight="600" variant='span' > 
+       <Typography component="h2" fontWeight="600" variant='span' onClick={() => console.log(trips)}> 
          Welcome, {session?.user?.name}
         </Typography>
         <Typography component="p" variant="p">
@@ -141,7 +141,7 @@ const Trips = ({trips, bags, session}) => {
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
           <MonitorWeightOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips.totalWeight > trips.latestBag?.goal ? "red" : "black"}}>{trips.totalWeight ? trips.totalWeight.toFixed(2) : 0.00 } / {trips.latestBag?.goal || 0.00 } kg</Typography>
+          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips.latestBagTotalWeight > trips.latestBag?.goal ? "red" : "black"}}>{trips.latestBagTotalWeight ? trips.latestBagTotalWeight.toFixed(2) : 0.00 } / {trips.latestBag?.goal || 0.00 } kg</Typography>
         </LatestBagStack>
 
         <LatestBagStack>
