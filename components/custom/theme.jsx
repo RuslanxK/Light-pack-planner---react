@@ -53,7 +53,6 @@ export const theme = createTheme({
       width: "100%",
       marginLeft: "210px",
       columns: "repeat(auto-fit, 330px);",
-      mobileColumns: "repeat(auto-fit, 300px);"
   },
 
   bags: {
