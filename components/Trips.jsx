@@ -112,7 +112,6 @@ const Trips = ({trips, bags, session}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
-      
       <Stack p={5}>
        <Typography component="h2" fontWeight="600" variant='span'> 
          Welcome, {session?.user?.name}
@@ -129,7 +128,7 @@ const Trips = ({trips, bags, session}) => {
         </Stack>
 
   
-    <Stack pl={10} display={theme.grid} gap={5} gridTemplateColumns={theme.trips.columns}>
+    <Stack pl={isMobile ? 0 : 10} display={theme.grid} gap={5} gridTemplateColumns={theme.trips.columns}>
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} backgroundColor={theme.main.lightGray} height="210px" borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
