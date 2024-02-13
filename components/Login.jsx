@@ -22,7 +22,7 @@ const Login = () => {
 
   return (
     <Stack display={theme.flexBox} direction={isMobile ? "column" : "row"} height="100vh" width="100%" style={{ backgroundImage:  isMobile ? `url('/hiking.png')` : null , backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <Stack width={isMobile ? "100vw" : "50vw"}>
+      <Stack width={isMobile ? "auto" : "50vw"}>
        { isMobile ? null : <img id="hiking-image" src="/hiking.png" alt="hiking" width="100%" style={{objectFit: "cover", height:"100vh" }} /> }
         <img id="logo" src="/logo.png" alt="logo" width={ isMobile ?  "90px" : "110px"} height={ isMobile ?  "60" : "70"} style={{ position: "absolute", marginLeft: isMobile ? "25px" : "50px", paddingTop: isMobile ? "22px" : "16px" }}/>  
       </Stack>
