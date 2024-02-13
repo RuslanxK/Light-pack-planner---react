@@ -145,7 +145,7 @@ const Trips = ({trips, bags, session}) => {
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
 
-        <Stack display={theme.grid} gridTemplateColumns={theme.trips.columns} justifyContent={theme.center} alignItems={theme.center}>
+        <Stack display={theme.grid} gridTemplateColumns={theme.trips.columns} justifyContent={theme.center} alignItems={theme.center} width="100%">
 
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
