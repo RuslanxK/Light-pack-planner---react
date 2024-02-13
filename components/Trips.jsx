@@ -113,8 +113,8 @@ const Trips = ({trips, bags, session}) => {
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
       <div class="main-info">
-       <Typography component="h2" fontWeight="600" variant='span'> 
-         Welcome, {session?.user?.name}
+       <Typography component="h2" fontWeight="600" variant='span' fontSize="20px"> 
+        Welcome, {session?.user?.name.split(' ')[0]}
         </Typography>
         <Typography component="p" variant="p">
           The journey of a thousand miles begins with a single step
