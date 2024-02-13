@@ -7,8 +7,6 @@ const LatestBagStack = styled(Stack)(({ theme }) => ({
     boxShadow: theme.latestBagBoxes.boxShadow,
     minHeight: theme.latestBagBoxes.height,
     borderRadius: theme.latestBagBoxes.borderRadius,
-    marginLeft: "15px",
-    marginRight: "15px",
     marginTop: "25px",
     padding: "25px",
     display: "flex",

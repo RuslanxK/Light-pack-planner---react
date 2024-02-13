@@ -65,7 +65,7 @@ export const theme = createTheme({
 
   latestBagBoxes: {
 
-    width: "228px",
+    width: "190px",
     height: "130px",
     boxShadow: "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;",
     hover:  "rgba(0, 172, 28, 0.05) 0px 6px 24px 0px, rgba(0, 172, 28, 1) 0px 0px 0px 1px",
