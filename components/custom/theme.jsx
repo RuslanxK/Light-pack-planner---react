@@ -10,6 +10,7 @@ export const theme = createTheme({
   row: "row",
   center: "center",
   start: "flex-start",
+  end: "flex-end",
   between: "space-between",
   grid: "grid",
   auto: "0 auto",
