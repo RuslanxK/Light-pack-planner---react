@@ -128,7 +128,7 @@ const Trips = ({trips, bags, session}) => {
         </Stack>
 
   
-    <Stack pl={isMobile ? 5 : 10} display={theme.grid} gap={5} gridTemplateColumns={theme.trips.columns}>
+    <Stack pl={isMobile ? 5 : 10} display={theme.grid} gap={5} gridTemplateColumns={ isMobile ? theme.trips.mobileColumns : theme.trips.columns}>
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} backgroundColor={theme.main.lightGray} height="210px" borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
