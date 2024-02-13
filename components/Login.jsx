@@ -21,20 +21,21 @@ const Login = () => {
 
 
   return (
-    <Stack display={theme.flexBox} direction={isMobile ? "column" : "row"} height="100vh" width="100%" style={{ backgroundImage:  isMobile ? `url('/hiking.png')` : null , backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <Stack width={isMobile ? "auto" : "50vw"}>
+    <Stack display={theme.flexBox} direction={isMobile ? "column" : "row"} justifyContent={theme.center}   height="100vh" width="100%" style={{ backgroundImage:  isMobile ? `url('/hiking.png')` : null , backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      
+      <Stack width={isMobile ? "100vh" : "50vw"}>
        { isMobile ? null : <img id="hiking-image" src="/hiking.png" alt="hiking" width="100%" style={{objectFit: "cover", height:"100vh" }} /> }
-        <img id="logo" src="/logo.png" alt="logo" width={ isMobile ?  "90px" : "110px"} height={ isMobile ?  "60" : "70"} style={{ position: "absolute", marginLeft: isMobile ? "25px" : "50px", paddingTop: isMobile ? "22px" : "16px" }}/>  
+        <img id="logo" src="/logo.png" alt="logo" width={ isMobile ?  "90px" : "110px"} height={ isMobile ?  "60" : "70"} style={{ position: "absolute", top: 0, marginLeft: isMobile ? "25px" : "50px", paddingTop: isMobile ? "22px" : "16px" }}/> 
       </Stack>
 
 
     <Stack width={ isMobile ? "100vw" : "50vw"} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
 
-    <Stack pl={ isMobile ? null : 8} pr={ isMobile ? null : 8} pt={ isMobile ? null : 10} pb={ isMobile ? null : 10} margin="0 auto" borderRadius={ isMobile ? "0px" :"10px"} backgroundColor={"#f4f4f4"}  display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
+    <Stack pl={ isMobile ? null : 8} pr={ isMobile ? null : 8} pt={ isMobile ? null : 10} pb={ isMobile ? null : 10} margin="0 auto" borderRadius={ isMobile ? "0px" :"10px"} backgroundColor={ isMobile ? null : "#f4f4f4"}  display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
     <Typography component="h1" variant='span' fontSize="2.4em" mb={4}>Log in to Planner</Typography>
 
     <button className='login-button' onClick={loginWithGoogle}> <Stack width="220px" margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/google.png" width="23px" style={{marginRight: "15px"}} alt="google" />Continue with Google </Stack></button>
-    <button className='login-button' onClick={loginWithFacebook}> <Stack width={"220px"} margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/facebook.png" width="20px" style={{marginRight: "15px"}} alt="google" />Continue with Facebook </Stack></button>
+    <button className='login-button' onClick={loginWithFacebook}> <Stack width="220px" margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/facebook.png" width="20px" style={{marginRight: "15px"}} alt="google" />Continue with Facebook </Stack></button>
 
     </Stack>
       </Stack>
