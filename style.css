@@ -75,6 +75,12 @@
 }
 
 
+.latestBag {
+
+    padding-top: 60px;
+}
+
+
 
 @media only screen and (max-width:768px) {
 
@@ -97,6 +103,11 @@
 .main-info, .trips {
 
   padding: 25px;
+}
+
+.latestBag {
+
+    padding-top: 20px;
 }
 
 
