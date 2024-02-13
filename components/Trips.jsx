@@ -140,12 +140,12 @@ const Trips = ({trips, bags, session}) => {
    <div class="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
-    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name > 10 ? `${trips.latestBag?.name.substring(0, 10)}...` : trips.latestBag?.name}</Typography>
+    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length > 10 ? `${trips.latestBag?.name.substring(0, 10)}...` : trips.latestBag?.name}</Typography>
     </Stack>
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
 
-        <Stack display={theme.grid} gridTemplateColumns={theme.trips.columns} justifyContent={theme.center} alignItems={theme.center} width="100%">
+        <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.trips.columns} justifyContent={theme.center} alignItems={theme.center} width="100%">
 
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
