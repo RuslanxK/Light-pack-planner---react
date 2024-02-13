@@ -1,6 +1,6 @@
 "use client"
 
-import {Stack, Typography, IconButton, Autocomplete, Button, Container} from '@mui/material';
+import {Stack, Typography, IconButton, Autocomplete, Button, Container, useMediaQuery} from '@mui/material';
 import Trip from './Trip'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -23,6 +23,9 @@ import Nav from './Nav';
 
 const Trips = ({trips, bags, session}) => {
 
+  const theme = useTheme()
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const router = useRouter();
   const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"
@@ -32,7 +35,6 @@ const Trips = ({trips, bags, session}) => {
   const [newTripData, setNewTripData] = useState({ startDate: dayjs(), endDate: dayjs() });
   const [isTransitionStarted, startTransition] = useTransition();
 
-  const theme = useTheme()
 
   useEffect(() => {
 
@@ -104,9 +106,9 @@ const Trips = ({trips, bags, session}) => {
 
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
       
-      <Nav session={session} bags={bags} />
+      { isMobile ? null : <Nav session={session} bags={bags} /> }
 
-    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={ isMobile ? null : theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
       <Stack p={5}>
        <Typography component="h2" fontWeight="600" variant='span' onClick={() => console.log(trips)}> 
          Welcome, {session?.user?.name}
