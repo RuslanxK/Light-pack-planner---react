@@ -133,9 +133,9 @@ const InnerBag = ({bagData, items, bags, session}) => {
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
 
-        <Stack p={5} ml="210px">
+        <Stack p={5}>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
-        <Typography component="h2" variant='span' fontWeight="600" onClick={() => console.log(bagData)}>{bagData?.bag?.name}</Typography>
+        <Typography component="h2" variant='span' fontWeight="600">{bagData?.bag?.name}</Typography>
         <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange } }} onClick={openPopup} />
         <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" } }} onClick={openRemovePopup} />
         </Stack>
@@ -190,7 +190,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 
-    <Stack display={theme.flexBox} pl={30} pr={items?.length ? 30 : 4}>
+    <Stack display={theme.flexBox} pl={4} pr={4}>
 
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} borderRadius={theme.radius} mb={2} sx={{cursor: "pointer"}} onClick={addCategory}>
@@ -200,17 +200,21 @@ const InnerBag = ({bagData, items, bags, session}) => {
     </Stack>
     </Stack>
     
-     {items?.length ? <Stack sx={{backgroundColor: theme.green}} right="0" position={theme.nav.fixed} width={theme.nav.width} display={theme.flexBox} alignItems={theme.center} height={theme.nav.height}>
+     {items?.length ? 
+     
+     <div class="recent">
 
-     <Stack pt={2}>
+     <Stack width={theme.nav.width} height={theme.nav.height}>
+     <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
      <Typography component="span" variant="span" textAlign="center" mb={3} color={theme.main.lightGray}>added to your plans</Typography>
-     <Stack sx={{overflowY: "scroll"}} height="85.5vh">
+     <Stack sx={{overflowY: "scroll"}} height="85.5vh" pl={4}>
      {allBagsItems}
      </Stack>
      </Stack>
 
-     </Stack> : null }
+     </Stack> 
+     </div> : null }
 
 
 

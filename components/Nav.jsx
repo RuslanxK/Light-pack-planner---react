@@ -19,10 +19,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const Nav = ({bags, session}) => {
 
-const router = useRouter()
 const theme = useTheme()
-
-
+const router = useRouter()
 
 const sortedBags = bags?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 const filteredBags = sortedBags.slice(0, 6)
@@ -84,8 +82,9 @@ const navigateToBag = (bag) => {
 
   return (
 
-    <Stack position={theme.nav.fixed} width={theme.nav.width} display={theme.flexBox} justifyContent={theme.between} height={theme.nav.height} borderRight="2px solid #F2F2F2" backgroundColor="white"> 
-    <Stack>
+    <div className="nav">
+    <Stack width={theme.nav.width} display={theme.flexBox} justifyContent={theme.between} height={theme.nav.height} backgroundColor="white"> 
+    <Stack position={theme.nav.fixed} height={theme.nav.height} borderRight="1px solid #F2F2F2" width={theme.nav.width}>
     <Stack margin="0 auto" pt={2} pb={2} onClick={() => router.push('/')}>
     <Image src="/logo.png" alt='Light Pack - Planner' width={110} height={70}/>
     </Stack> 
@@ -134,9 +133,9 @@ const navigateToBag = (bag) => {
         </Accordion>
 
         <button className='premium'>Upgrade to premium</button>
-        </Stack>
+
         {session && session?.user ? (
-  <Stack display={theme.flexBox} pb={2} alignItems={theme.center}>
+  <Stack display={theme.flexBox} pb={2} mt={2} alignItems={theme.center}>
     <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
       <Typography variant='span'p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
     </>
@@ -146,9 +145,12 @@ const navigateToBag = (bag) => {
       <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "15px", marginRight: "5px"}}/> Log out</button>
      </Stack>
 ) : null}
+        </Stack>
+     
 
        
     </Stack>
+    </div>
   )
 }
 

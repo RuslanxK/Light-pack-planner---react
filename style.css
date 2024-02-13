@@ -31,7 +31,7 @@
 
     margin-right: 18px;
     margin-left: 18px;
-    margin-top: 15px;
+    margin-top: 20px;
     padding: 12px;
     font-size: 13px;
     font-weight: bold;
@@ -63,4 +63,28 @@
     color: gray;
     cursor: pointer;
     
+}
+
+
+
+@media only screen and (max-width:768px) {
+
+  .login-img {
+
+    display: none;
+}
+
+.nav {
+
+   display: none;
+ 
+}
+
+.recent {
+
+   display: none;
+}
+
+
+
 }

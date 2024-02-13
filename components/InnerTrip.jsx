@@ -167,7 +167,7 @@ const countryNameArr = countriesArr.map((x) => x.common)
       
     <Nav bags={bagsData} session={session} />
 
-    <Stack ml={theme.trips.marginLeft} display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
         <Stack p={5}>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>

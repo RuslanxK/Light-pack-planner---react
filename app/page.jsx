@@ -46,8 +46,9 @@ const getData = async (session) => {
 
 
 const Home = async () => {
+
   const session = await getServerSession(options)
-  
+
   const data = await getData(session)
   const bags = await getBags(session)
 

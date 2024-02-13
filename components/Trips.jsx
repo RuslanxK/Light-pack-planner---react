@@ -27,6 +27,7 @@ const Trips = ({trips, bags, session}) => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+
   const router = useRouter();
   const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"
 
@@ -45,7 +46,8 @@ const Trips = ({trips, bags, session}) => {
         getData()
 
   }, []);
-
+  
+  
 
     const tripData = trips?.tripsWithPictures.sort((a, b) => {
       const aStartDate = new Date(a.startDate);  
@@ -106,11 +108,13 @@ const Trips = ({trips, bags, session}) => {
 
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
       
-      { isMobile ? null : <Nav session={session} bags={bags} /> }
+    <Nav session={session} bags={bags} /> 
 
-    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pl={ isMobile ? null : theme.trips.marginLeft} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+
+      
       <Stack p={5}>
-       <Typography component="h2" fontWeight="600" variant='span' onClick={() => console.log(trips)}> 
+       <Typography component="h2" fontWeight="600" variant='span'> 
          Welcome, {session?.user?.name}
         </Typography>
         <Typography component="p" variant="p">
