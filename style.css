@@ -81,6 +81,12 @@
 }
 
 
+.logo-mobile {
+
+   display: none;
+}
+
+
 
 @media only screen and (max-width:768px) {
 
@@ -110,6 +116,11 @@
     padding-top: 20px;
 }
 
+.logo-mobile {
+
+  display: block;
+  margin-bottom: 25px;
+}
 
 
 }
