@@ -30,7 +30,7 @@ const Login = () => {
 
     <Stack width={ isMobile ? "100vw" : "50vw"} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
 
-    <Stack pl={8} pr={8} pt={10} pb={10} margin="0 auto" borderRadius={ isMobile ? "0px" :"10px"} backgroundColor={"#f4f4f4"}  display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
+    <Stack pl={ isMobile ? null : 8} pr={ isMobile ? null : 8} pt={ isMobile ? null : 10} pb={ isMobile ? null : 10} margin="0 auto" borderRadius={ isMobile ? "0px" :"10px"} backgroundColor={"#f4f4f4"}  display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
     <Typography component="h1" variant='span' fontSize="2.4em" mb={4}>Log in to Planner</Typography>
 
     <button className='login-button' onClick={loginWithGoogle}> <Stack width="220px" margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/google.png" width="23px" style={{marginRight: "15px"}} alt="google" />Continue with Google </Stack></button>
