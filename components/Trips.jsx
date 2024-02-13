@@ -112,7 +112,7 @@ const Trips = ({trips, bags, session}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
-      <Stack p={5}>
+      <div class="main-info">
        <Typography component="h2" fontWeight="600" variant='span'> 
          Welcome, {session?.user?.name}
         </Typography>
@@ -125,15 +125,17 @@ const Trips = ({trips, bags, session}) => {
         <Typography component="p" variant="p">
           Seamless Trip Planning and Bag Organization Made Simple.
         </Typography>
-        </Stack>
+        </div>
 
   
-    <Stack pl={isMobile ? 5 : 10} display={theme.grid} gap={5} gridTemplateColumns={ isMobile ? theme.trips.mobileColumns : theme.trips.columns}>
+    <div class="trips">
+    <Stack display={theme.grid} gap={5} gridTemplateColumns={ isMobile ? theme.trips.mobileColumns : theme.trips.columns}>
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} backgroundColor={theme.main.lightGray} height="210px" borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
     { tripData}
     </Stack>
+    </div>
 
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center} mt={13}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>

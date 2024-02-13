@@ -67,6 +67,19 @@
 
 
 
+.main-info {
+
+  padding-left: 50px;
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
+
+.trips {
+
+  padding-left: 50px;
+}
+
+
 @media only screen and (max-width:768px) {
 
   .login-img {
@@ -83,6 +96,11 @@
 .recent {
 
    display: none;
+}
+
+.main-info, .trips {
+
+  padding: 25px;
 }
 
 
