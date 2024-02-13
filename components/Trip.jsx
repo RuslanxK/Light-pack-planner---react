@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { IconButton, Stack, Typography } from '@mui/material'
+import { IconButton, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@emotion/react';
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined';
@@ -13,6 +13,7 @@ const Trip = (props) => {
 
   const router = useRouter()
   const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   
   const calculateDaysLeft = (tripData) => {
