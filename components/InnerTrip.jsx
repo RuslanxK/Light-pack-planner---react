@@ -171,8 +171,9 @@ const countryNameArr = countriesArr.map((x) => x.common)
 
         <div class="main-info">
         <Stack>
+
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
-        <Typography onClick={() => console.log(tripData)} component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
+        <Typography component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
           <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange }}} onClick={openPopup} />
           <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" }}} onClick={openRemovePopup} />
         </Stack>
