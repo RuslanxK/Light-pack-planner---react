@@ -129,9 +129,9 @@ const removeTrip = async () => {
 
   try {
     await axios.delete(`/api/trips/${tripData.trip._id}`);
-    startTransition(router.refresh)
     setDeletePopupOpen(false)
     router.push('/')
+    startTransition(router.refresh)
   }
 
    catch (error) {
