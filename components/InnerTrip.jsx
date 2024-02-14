@@ -180,10 +180,10 @@ const countryNameArr = countriesArr.map((x) => x.common)
         <Typography component="p" variant="p"> {tripData?.trip?.about} </Typography>
 
        <Stack pt={2}>
-       <Stack flex={1} direction="row" backgroundColor={theme.main.lightGray} pt={1.2} pb={1.2} pl={2} pr={2} borderRadius={theme.radius} width="fit-content">
-       <SportsScoreOutlinedIcon sx={{ marginRight: "5px" }} /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
+       <Stack flex={1} direction="row" backgroundColor={theme.main.lightGray} pt={1} pb={1} pl={1.5} pr={1.5} borderRadius={theme.radius} width="fit-content">
+       <SportsScoreOutlinedIcon sx={{ marginRight: "5px" }} /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "15px", marginRight: "5px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
        <Typography variant="span" sx={{ color: theme.black, fontWeight: "bold" }}>Traveled </Typography> ) : ( <Typography variant='span' sx={{ color: theme.green, fontWeight: "bold" }}> Starts in {calculateDaysLeft(tripData.trip)} {calculateDaysLeft(tripData.trip) > 0 ? 'day' : 'days'} </Typography>)}
-       <WbSunnyOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
+       <WbSunnyOutlinedIcon sx={{ marginLeft: "15px", marginRight: "5px" }} /> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
        </Stack>
        <Typography component="h2" variant="h6" mb={0.3} mt={2}>My Bags</Typography>
        <Typography component="p" variant="p" >Lorem ipsum dolor sit amet</Typography>
