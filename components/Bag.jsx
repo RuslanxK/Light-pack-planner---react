@@ -63,7 +63,7 @@ const Bag = ({bagData, trips, session}) => {
 
     <IconButton onClick={openPopup} sx={{marginLeft: "auto", marginTop: "4px", marginRight: "4px"}}><ContentCopyIcon sx={{fontSize: "14px"}}/></IconButton>
     <Image src="/backpack.png" width={60} height={60} alt='bag' priority style={{marginBottom: "10px"}} onClick={NavigateToInnerBag}/>
-      <Typography height="25px" pl={3} pb={1.5} width={theme.fullWidth} component="span" variant='span' fontSize="14px" display={theme.flexBox} alignItems={theme.center} 
+      <Typography height="25px" borderRadius="7px" pb={1.5} width="215px" component="span" variant='span' fontSize="14px" display={theme.flexBox} alignItems={theme.center} 
       onClick={NavigateToInnerBag}>{bagData.name.length > 16 ? `${bagData.name.substring(0, 16)}..` : bagData.name}  { tripHover ? <IconButton onClick={NavigateToInnerBag} size='small' sx={{marginLeft: "5px"}}><NearMeOutlinedIcon  sx={{fontSize: "17px"}}  /></IconButton> : null }</Typography>
 
     { isPopupOpen ? <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
