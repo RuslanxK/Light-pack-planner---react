@@ -175,9 +175,9 @@ const Trips = ({trips, bags, session}) => {
     { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={createTrip}>
 
-          <Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
 
-             <Stack width="80%">
+             <Stack width="90%">
 
              <Typography variant='span' component="h2" fontWeight="600">Create New Trip</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
