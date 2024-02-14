@@ -74,7 +74,7 @@
   padding-bottom: 30px;
 }
 
-.trips {
+.boxes {
 
    padding-left: 35px;
 }
@@ -111,7 +111,7 @@
    display: none;
 }
 
-.main-info, .trips {
+.main-info, .boxes {
 
   padding: 25px;
 }
@@ -128,7 +128,7 @@
 }
 
 
-.trips {
+.boxes {
 
   display: flex;
   justify-content: center;

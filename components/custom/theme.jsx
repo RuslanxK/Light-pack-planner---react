@@ -58,7 +58,6 @@ export const theme = createTheme({
 
       height: "170px",
       width: "100%",
-      marginLeft: "210px",
       columns: "repeat(auto-fit, 240px);"
   },
 

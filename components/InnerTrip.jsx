@@ -169,7 +169,8 @@ const countryNameArr = countriesArr.map((x) => x.common)
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
-        <Stack p={5}>
+        <div class="main-info">
+        <Stack>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography onClick={() => console.log(tripData)} component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
           <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange }}} onClick={openPopup} />
@@ -188,13 +189,17 @@ const countryNameArr = countriesArr.map((x) => x.common)
       </Stack>
         </Stack>
 
-     <Stack pl={10} display={theme.grid} gap={5} gridTemplateColumns={theme.bags.columns}>
+        </div>
+
+    <div class="boxes">
+     
+     <Stack display={theme.grid} gap={5} gridTemplateColumns={theme.bags.columns}>
      <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} backgroundColor={theme.main.lightGray} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
       <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
      </Stack>
       {bags}
      </Stack>
-
+     </div>
 
 
 
