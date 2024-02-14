@@ -180,7 +180,7 @@ const countryNameArr = countriesArr.map((x) => x.common)
         <Typography component="p" variant="p"> {tripData?.trip?.about} </Typography>
 
        <Stack pt={2}>
-       <Stack  direction="row" backgroundColor={theme.main.lightGray} pt={1} pb={1} pl={1.5} pr={1.5} borderRadius={theme.radius} width="fit-content">
+       <Stack direction="row" flexWrap="wrap" backgroundColor={theme.main.lightGray} pt={1} pb={1} pl={1.5} pr={1.5} borderRadius={theme.radius} width="fit-content">
        <SportsScoreOutlinedIcon /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "15px", marginRight: "3px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
        <Typography variant="span" sx={{ color: theme.black, fontWeight: "bold" }}>Traveled </Typography> ) : ( <Typography variant='span' sx={{ color: theme.green, fontWeight: "bold" }}> Starts in {calculateDaysLeft(tripData.trip)} {calculateDaysLeft(tripData.trip) > 0 ? 'day' : 'days'} </Typography>)}
        <WbSunnyOutlinedIcon sx={{ marginLeft: "15px", marginRight: "3px" }} /> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
@@ -204,8 +204,8 @@ const countryNameArr = countriesArr.map((x) => x.common)
     { isAddPopupOpen ?  <MuiPopup isOpen={isAddPopupOpen} onClose={closePopup} >
         <form onSubmit={addBag}>
 
-          <Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
-             <Stack width="80%">
+          <Stack direction="row"  justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+             <Stack width="90%">
              <Typography variant='span' component="h2" fontWeight="600">Add new bag</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
              </Stack>
@@ -226,8 +226,8 @@ const countryNameArr = countriesArr.map((x) => x.common)
     { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={updateTrip}>
 
-          <Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
-             <Stack width="80%">
+          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+             <Stack width="90%">
              <Typography variant='span' component="h2" fontWeight="600">Update Trip</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
              </Stack>
@@ -288,9 +288,9 @@ const countryNameArr = countriesArr.map((x) => x.common)
 
 
 { isDeletePopupOpen ? <MuiPopup isOpen={isDeletePopupOpen} onClose={closePopup}>
-<Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+<Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
 
-<Stack width="95%">
+<Stack width="90%">
 <Typography variant='span' component="h2" fontWeight="600" mb={1.5}>Delete Trip</Typography>
 <Typography variant='span' component="span">
    Are you sure you want to delete this trip? This action cannot be undone.

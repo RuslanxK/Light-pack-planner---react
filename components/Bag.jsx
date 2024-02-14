@@ -68,7 +68,7 @@ const Bag = ({bagData, trips, session}) => {
 
     { isPopupOpen ? <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
             <form onSubmit={duplicateBag}>
-            <Stack p={2} spacing={2}>
+            <Stack  spacing={2}>
             <Stack flex={1} direction="row" justifyContent="space-between">
             <Typography component="h2" variant="span" fontWeight="600">
               Choose trip
