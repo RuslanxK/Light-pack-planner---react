@@ -182,26 +182,22 @@ const countryNameArr = countriesArr.map((x) => x.common)
        <Stack flex={1} direction="row" backgroundColor={theme.main.lightGray} pt={1.2} pb={1.2} pl={2} pr={2} borderRadius={theme.radius} width="fit-content">
        <SportsScoreOutlinedIcon sx={{ marginRight: "5px" }} /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
        <Typography variant="span" sx={{ color: theme.black, fontWeight: "bold" }}>Traveled </Typography> ) : ( <Typography variant='span' sx={{ color: theme.green, fontWeight: "bold" }}> Starts in {calculateDaysLeft(tripData.trip)} {calculateDaysLeft(tripData.trip) > 0 ? 'day' : 'days'} </Typography>)}
-       <WbSunnyOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> Duration {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
+       <WbSunnyOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }} /> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
        </Stack>
-       <Typography component="h2" variant="h6" mb={0.3} mt={1.5} onClick={() => console.log(data)}>My Bags</Typography>
-       <Typography component="p" variant="p" mb={2}>Lorem ipsum dolor sit amet</Typography>
+       <Typography component="h2" variant="h6" mb={0.3} mt={2}>My Bags</Typography>
+       <Typography component="p" variant="p" >Lorem ipsum dolor sit amet</Typography>
       </Stack>
         </Stack>
-
         </div>
 
     <div class="boxes">
-     
-     <Stack display={theme.grid} gap={5} gridTemplateColumns={theme.bags.columns}>
+     <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.bags.columns}>
      <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} backgroundColor={theme.main.lightGray} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
       <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
      </Stack>
       {bags}
      </Stack>
      </div>
-
-
 
 
     { isAddPopupOpen ?  <MuiPopup isOpen={isAddPopupOpen} onClose={closePopup} >
