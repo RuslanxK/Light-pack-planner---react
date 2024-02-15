@@ -130,12 +130,12 @@ const InnerBag = ({bagData, items, bags, session}) => {
   return (
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
-    <Nav bags={bags} session={session}/>
+     <Nav bags={bags} session={session}/>
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
 
-        <Stack p={5}>
+        <div class="main-info">
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2" variant='span' fontWeight="600">{bagData?.bag?.name}</Typography>
         <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange } }} onClick={openPopup} />
@@ -162,16 +162,16 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
         <DataSaverOffOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }}/> {itemsTotal} items 
          </Stack> 
-      </Stack>
+      </div>
 
 
-      <Stack width="100%" display={theme.flexBox} alignItems={theme.center}>
+      <Stack display={theme.flexBox} direction="column" alignItems={theme.center}>
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0 }}
        series={[{
            data: categoryPieChartData,
            arcLabel: getArcLabel,
            innerRadius: 30,
-           outerRadius: 125,
+           outerRadius: 100,
            paddingAngle: 5,
            cornerRadius: 5,
            startAngle: -180,
