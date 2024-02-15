@@ -7,6 +7,11 @@
   width: 0px;
 }
 
+.login-text {
+
+    margin-bottom: 20px;
+}
+
 .login-button, .login-button-regular {
   width: 280px;
   padding: 13.5px;
@@ -93,12 +98,20 @@
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: white;
   
 }
 
 
 
 @media only screen and (max-width:768px) {
+
+  .login-text {
+
+     color: white;
+  }
+
   .login-img {
     display: none;
     width: 0vw;
