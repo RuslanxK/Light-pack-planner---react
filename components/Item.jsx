@@ -113,11 +113,11 @@ const Item = (props) => {
     
     <Stack pl={1.5} pr={1.5} pt={0.5} sx={{'&:hover': {backgroundColor: theme.main.lightestGray}}}>
     
-      <form onSubmit={saveItemData}>
+      <form onSubmit={saveItemData} style={{overflowX: "scroll"}}>
 
-      <Stack display={theme.flexBox} flexDirection="row" justifyContent={theme.between} alignItems={theme.center}>
+      <Stack display={theme.flexBox} flexDirection="row" justifyContent={theme.between} alignItems={theme.center} >
 
-      <TextField size='small' variant='standard' name='name' label="name" sx={{ width: '50%', marginRight: "15px", borderBottom: "1px solid #C0C0C0"}} value={itemData.name} InputLabelProps={{ style : {fontSize: 13, color: "black"}}} InputProps={{disableUnderline: true}} inputProps={{style: {fontSize: 13, color: "#404040"}}} onChange={handleChange} onBlur={saveItemData}/>
+      <TextField size='small' variant='standard' name='name' label="name" sx={{width: '50%', marginRight: "15px", borderBottom: "1px solid #C0C0C0"}} value={itemData.name} InputLabelProps={{ style : {fontSize: 13, color: "black"}}} InputProps={{disableUnderline: true}} inputProps={{style: {fontSize: 13, color: "#404040"}}} onChange={handleChange} onBlur={saveItemData}/>
       <TextField size='small' variant='standard' name='description' label='note' sx={{width: '100%', marginRight: "15px", borderBottom: "1px solid #C0C0C0"}} value={itemData.description} InputLabelProps={{ style : {fontSize: 13, color: "black"}}} inputProps={{style: {fontSize: 13, color: "#404040"}}} InputProps={{disableUnderline: true}}  onChange={handleChange} onBlur={saveItemData} />
       <TextField size='small' variant='standard' type='number' name='qty' label="qty" sx={{width: '10%', marginRight: "15px", borderBottom: "1px solid #C0C0C0"}} value={itemData.qty} onChange={handleChange} InputLabelProps={{ style : {fontSize: 13, color: "black"}}} InputProps={{disableUnderline: true}} inputProps={{ min: 1, max: 99, style: {fontSize: 13, color: "#404040"} }} onBlur={saveItemData}/>
       <TextField size='small' variant='standard' type='number' name='weight' label='weight' sx={{width: '12%', marginRight: "15px", borderBottom: "1px solid #C0C0C0"}} value={itemData.weight} onChange={handleChange} InputLabelProps={{ style : {fontSize: 13, color: "black"}}} InputProps={{disableUnderline: true}} inputProps={{ min: 0.1, max: 99, style: {fontSize: 13, color: "#404040"} }} onBlur={saveItemData} />
