@@ -177,15 +177,15 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 180,
+           cx: 185,
            cy: 150,
          },
        ]}
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300",}, visibility: itemsTotal ? "visible" :  "hidden"}}
     
-       height={360}
+       height={330}
        tooltip={{}}
-       slotProps={{ legend: { direction: "column", position: { vertical: "middle", horizontal: "right" }}}}
+       slotProps={{ legend: { direction: "column", position: { vertical: "bottom", horizontal: "center" }}}}
        skipAnimation
        />
 
