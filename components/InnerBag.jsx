@@ -172,7 +172,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            data: categoryPieChartData,
            arcLabel: getArcLabel,
            innerRadius: 30,
-           outerRadius: 100,
+           outerRadius: 110,
            paddingAngle: 5,
            cornerRadius: 5,
            startAngle: -180,
@@ -184,8 +184,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300",}, visibility: itemsTotal ? "visible" :  "hidden"}}
     
        height={330}
-       tooltip={{}}
-       slotProps={{ legend: { direction: "column", position: { vertical: "bottom", horizontal: "center" }}}}
+       slotProps={{ legend: { direction: "column", position: { vertical: "center", horizontal: "center" }}}}
        skipAnimation
        />
 
