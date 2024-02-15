@@ -166,7 +166,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </div>
 
 
-      <Stack>
+      <Stack mb={2} pl={2}>
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}}
        series={[{
            data: categoryPieChartData,
@@ -177,7 +177,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 185,
+           cx: 180,
            cy: 150,
          },
        ]}
@@ -185,7 +185,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
     
        height={380}
        tooltip={{}}
-       slotProps={{ legend: { direction: "column", position: { vertical: "bottom", horizontal: "left" }}}}
+       slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "left" }}}}
        skipAnimation
        />
 
