@@ -3,13 +3,12 @@
   margin: 0px;
 }
 
-
 ::-webkit-scrollbar {
   width: 0px;
 }
 
 .login-button, .login-button-regular {
-  width: 300px;
+  width: 280px;
   padding: 13.5px;
   font-size: 16px;
   cursor: pointer;
@@ -18,7 +17,6 @@
   border-radius: 5px;
   border: 2px solid #dadada;
   background-color: white;
-  padding: 16px;
 }
 
 .login-button:hover {
@@ -26,7 +24,6 @@
 }
 
 .login-button-regular {
-
   background-color: #00ac1c;
   color: white;
   border: #00ac1c;
@@ -34,7 +31,6 @@
 }
 
 .premium {
-
     margin-right: 18px;
     margin-left: 18px;
     margin-top: 20px;
@@ -49,13 +45,11 @@
 }
 
 .premium:hover {
-
    background-color: black;
 }
 
 
 .logout {
-
     background: none;
     border: none;
     font-size: 15px;
@@ -65,48 +59,36 @@
 }
 
 .logout:hover {
-
     color: gray;
     cursor: pointer;
     
 }
 
-
-
 .main-info {
-
   padding-left: 35px;
   padding-top: 40px;
   padding-bottom: 30px;
 }
 
 .boxes {
-
    padding-left: 35px;
 }
 
-
 .latestBag {
-
     padding-top: 60px;
 }
 
-
 .logo-mobile {
-
    display: none;
 }
 
 .login-img {
-
   display: block;
   width: 50vw;
   height: 100vh;
 }
 
-
 .login-content {
-
   width: 50vw;
   height: 100vh;
   display: flex;
@@ -115,52 +97,41 @@
 }
 
 
+
 @media only screen and (max-width:768px) {
-
   .login-img {
-
     display: none;
     width: 0vw;
-   
 }
 
 .login-content {
-
   width: 100vw;
   background-image: url("./public/hiking.png");
   background-size: cover;
 }
 
-
 .nav {
-
    display: none;
- 
 }
 
 .recent {
-
    display: none;
 }
 
 .main-info, .boxes {
-
   padding: 25px;
 }
 
 .latestBag {
-
     padding-top: 20px;
 }
 
 .logo-mobile {
-
   display: block;
   margin-bottom: 50px;
 }
 
 .boxes {
-
   display: flex;
   justify-content: center;
 }
