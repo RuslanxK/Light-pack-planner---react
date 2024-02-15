@@ -214,12 +214,11 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 
-
      { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={updateBag}>
 
-          <Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
-             <Stack width="80%">
+          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+             <Stack width="90%">
              <Typography variant='span' component="h2" fontWeight="600">Update Bag</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
              </Stack>
@@ -237,9 +236,9 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 { isDeletePopupOpen ? <MuiPopup isOpen={isDeletePopupOpen} onClose={closePopup}>
-<Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+<Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
 
-<Stack width="95%">
+<Stack width="90%">
 <Typography variant='span' component="h2" fontWeight="600" mb={1.5}>Delete Bag</Typography>
 <Typography variant='span' component="span">
    Are you sure you want to delete this bag? This action cannot be undone.
