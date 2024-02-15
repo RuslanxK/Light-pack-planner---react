@@ -87,6 +87,12 @@
    display: none;
 }
 
+
+#logo-mobile-login {
+
+  display: none
+}
+
 .login-img {
   display: block;
   width: 50vw;
@@ -107,9 +113,16 @@
 
 @media only screen and (max-width:768px) {
 
+
+  #logo-mobile-login {
+
+    display: block
+}
+
   .login-text {
 
      color: white;
+     font-size: 27px;
   }
 
   .login-img {
