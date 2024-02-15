@@ -172,7 +172,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            data: categoryPieChartData,
            arcLabel: getArcLabel,
            innerRadius: 35,
-           outerRadius: 115,
+           outerRadius: 110,
            paddingAngle: 5,
            cornerRadius: 5,
            startAngle: -180,
