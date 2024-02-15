@@ -35,7 +35,7 @@ const handleSubmit = (e) => {
 
 
     <div class="login-content">
-    <img id="logo-mobile-login" src="/logo.png" alt="logo" width="110px" height="70" style={{ position: "absolute", top: "16px", left: '25px' }}/> 
+    <img id="logo-mobile-login" src="/logo.png" alt="logo" width="90px" height="58" style={{ position: "absolute", top: "25px", left: '25px' }}/> 
     <Stack display={theme.flexBox} justifyContent={theme.center} backgroundColor="rgba(255,255,255, 0.4)" borderRadius="7px" height="200px" mb={8} p={3}>
     <h1 className='login-text'>Log in to Planner</h1>
     {/* <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor:"rgba(255,255,255, 0.5)", padding: "20px", borderRadius:"10px"}}>
