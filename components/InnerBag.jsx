@@ -193,7 +193,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 
-    <Stack display={theme.flexBox}>
+    <Stack display={theme.flexBox} pl={1} pr={1}>
 
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} borderRadius={theme.radius} mb={2} sx={{cursor: "pointer"}} onClick={addCategory}>
