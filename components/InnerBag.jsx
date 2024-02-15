@@ -50,7 +50,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
   const categoryWeightsArr = bagData?.totalWeightCategory 
-  const categoryPieChartData = bagData?.categories?.slice(0, 4).map((category) => {  
+  const categoryPieChartData = bagData?.categories?.map((category) => {  
   const categoryWeight = categoryWeightsArr?.categoriesTotalWeight?.find((item) => item.categoryId === category._id)
 
         return {
@@ -151,10 +151,10 @@ const InnerBag = ({bagData, items, bags, session}) => {
     
         <MonitorWeightOutlinedIcon sx={{  marginRight: "5px" }}/> 
         { bagData?.totalBagWeight > bagData?.bag?.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData?.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography>  }
-        <NordicWalkingIcon sx={{ marginLeft: "20px", marginRight: "5px" }}/>
+        <NordicWalkingIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/>
         <Typography variant="span" component="span"> { bagData?.worn ? "worn " + bagData?.worn?.toFixed(2) + " kg" : "worn 0.00 kg"}</Typography>
 
-        <DataSaverOffOutlinedIcon sx={{ marginLeft: "20px", marginRight: "5px" }}/> {itemsTotal} items 
+        <DataSaverOffOutlinedIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/> {itemsTotal} items 
          </Stack> 
       </div>
 
