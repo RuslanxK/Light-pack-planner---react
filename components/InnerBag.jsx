@@ -166,7 +166,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </div>
 
 
-      <Stack display={theme.flexBox} direction="column" alignItems={theme.center}>
+      <Stack >
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0 }}
        series={[{
            data: categoryPieChartData,
@@ -177,7 +177,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 200,
+           cx: 240,
            cy: 150,
          },
        ]}
