@@ -19,6 +19,7 @@ import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import Nav from './Nav';
+import MobileNav from './MobileNav'
 
 
 const InnerTrip = ({tripData, trips, bagsData, session}) => {
@@ -170,8 +171,8 @@ const countryNameArr = countriesArr.map((x) => x.common)
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
         <div class="main-info">
+        <MobileNav />
         <Stack>
-
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
           <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange }}} onClick={openPopup} />

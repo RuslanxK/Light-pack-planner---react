@@ -1,6 +1,6 @@
 "use client"
 
-import {Stack, Typography, IconButton, Autocomplete, Button, Container, useMediaQuery} from '@mui/material';
+import {Stack, Typography, IconButton, Autocomplete, Button, Container} from '@mui/material';
 import Trip from './Trip'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -25,9 +25,6 @@ import MobileNav from './MobileNav'
 const Trips = ({trips, bags, session}) => {
 
   const theme = useTheme()
-
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
 
   const router = useRouter();
   const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"

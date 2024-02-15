@@ -17,6 +17,8 @@ import NordicWalkingIcon from '@mui/icons-material/NordicWalking';
 import { PieChart, pieArcLabelClasses} from "@mui/x-charts/PieChart";
 import SideItem from '../components/SideItem'
 import Nav from './Nav';
+import MobileNav from './MobileNav'
+
 
 const InnerBag = ({bagData, items, bags, session}) => {
 
