@@ -83,7 +83,7 @@
     padding-top: 60px;
 }
 
-.logo-mobile {
+.menu-mobile {
    display: none;
 }
 
@@ -155,9 +155,12 @@
     padding-top: 20px;
 }
 
-.logo-mobile {
+.menu-mobile {
   display: block;
   margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .boxes {

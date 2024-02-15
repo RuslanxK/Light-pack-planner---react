@@ -17,13 +17,6 @@ const Login = () => {
   };
 
   
-const handleSubmit = (e) => {
-
-    e.preventDefault()
-    const data = new FormData(e.currentTarget)
-
-    console.log(data)
-}
 
   return (
     <Stack display={theme.flexBox} direction="row" justifyContent={theme.end} sx={{overflowY: "hidden"}}>

@@ -19,6 +19,7 @@ import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { useState, useEffect, useTransition} from 'react';
 import Nav from './Nav';
+import MobileNav from './MobileNav'
 
 
 const Trips = ({trips, bags, session}) => {
@@ -114,7 +115,7 @@ const Trips = ({trips, bags, session}) => {
 
       <div class="main-info">
 
-      <img src='./logo.png' width="90px" height="60px" class="logo-mobile" />
+        <MobileNav />
 
        <Typography component="h2" fontWeight="600" variant='span' fontSize="20px"> 
         Welcome, {session?.user?.name.split(' ')[0]}
