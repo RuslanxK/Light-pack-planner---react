@@ -121,6 +121,8 @@
   width: 100vw;
   background-image: url("./public/hiking.png");
   background-size: cover;
+  align-items: flex-end;
+  
 }
 
 .nav {
