@@ -50,7 +50,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
   const categoryWeightsArr = bagData?.totalWeightCategory 
-  const categoryPieChartData = bagData?.categories?.slice(0, 8).map((category) => {  
+  const categoryPieChartData = bagData?.categories?.slice(0, 4).map((category) => {  
   const categoryWeight = categoryWeightsArr?.categoriesTotalWeight?.find((item) => item.categoryId === category._id)
 
         return {
@@ -177,7 +177,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 150,
+           cx: 180,
            cy: 150,
          },
        ]}
