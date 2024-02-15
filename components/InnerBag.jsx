@@ -177,7 +177,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 240,
+           cx: 150,
            cy: 150,
          },
        ]}
