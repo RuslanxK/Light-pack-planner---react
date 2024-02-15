@@ -167,7 +167,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
       <Stack >
-      <PieChart margin={{ top: 0, left:0, right:0, bottom: 0 }}
+      <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}}
        series={[{
            data: categoryPieChartData,
            arcLabel: getArcLabel,
@@ -182,7 +182,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
          },
        ]}
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300",}, visibility: itemsTotal ? "visible" :  "hidden"}}
-       width={600}
+    
        height={360}
        tooltip={{}}
        slotProps={{ legend: { direction: "column", position: { vertical: "middle", horizontal: "right" }}}}
