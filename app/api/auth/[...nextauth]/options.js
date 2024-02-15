@@ -30,7 +30,6 @@ export const options = {
       
       callbacks: {
 
-
         async redirect({ url, baseUrl }) {
           const isRelativeUrl = url.startsWith("/");
           if (isRelativeUrl) {

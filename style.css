@@ -8,7 +8,7 @@
   width: 0px;
 }
 
-.login-button {
+.login-button, .login-button-regular {
   width: 330px;
   padding: 13.5px;
   font-size: 16px;
@@ -18,14 +18,20 @@
   border-radius: 5px;
   border: 2px solid #dadada;
   background-color: white;
-  
+  padding: 16px;
 }
 
 .login-button:hover {
   border: 2px solid black;
 }
 
+.login-button-regular {
 
+  background-color: #00ac1c;
+  color: white;
+  border: #00ac1c;
+  padding: 18px;
+}
 
 .premium {
 
@@ -91,6 +97,22 @@
    display: none;
 }
 
+.login-img {
+
+  display: block;
+  width: 50vw;
+  height: 100vh;
+}
+
+
+.login-content {
+
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  
+}
 
 
 @media only screen and (max-width:768px) {
@@ -98,7 +120,17 @@
   .login-img {
 
     display: none;
+    width: 0vw;
+   
 }
+
+.login-content {
+
+  width: 100vw;
+  background-image: url("./public/hiking.png");
+  background-size: cover;
+}
+
 
 .nav {
 
@@ -126,7 +158,6 @@
   display: block;
   margin-bottom: 50px;
 }
-
 
 .boxes {
 
