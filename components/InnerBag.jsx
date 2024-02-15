@@ -150,9 +150,9 @@ const InnerBag = ({bagData, items, bags, session}) => {
         <Stack display={theme.flexBox} direction="row" flexWrap="wrap" justifyContent={theme.center} alignItems={theme.contentCenter} backgroundColor={theme.main.lightGray} mt={2} pt={1.2} pb={1.2} pl={2} pr={2} width="fit-content" borderRadius={theme.radius}>
     
         <MonitorWeightOutlinedIcon sx={{  marginRight: "5px" }}/> 
-        { bagData?.totalBagWeight > bagData?.bag?.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData?.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData?.totalBagWeight?.toFixed(2)} / {bagData?.bag?.goal} kg </Typography>  }
+        { bagData?.totalBagWeight > bagData?.bag?.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData?.totalBagWeight?.toFixed(1)} / {bagData?.bag?.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData?.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData?.totalBagWeight?.toFixed(1)} / {bagData?.bag?.goal} kg </Typography>  }
         <NordicWalkingIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/>
-        <Typography variant="span" component="span"> { bagData?.worn ? "worn " + bagData?.worn?.toFixed(2) + " kg" : "worn 0.00 kg"}</Typography>
+        <Typography variant="span" component="span"> { bagData?.worn ? "worn " + bagData?.worn?.toFixed(1) + " kg" : "0.0 kg"}</Typography>
 
         <DataSaverOffOutlinedIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/> {itemsTotal} items 
          </Stack> 
