@@ -166,24 +166,24 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </div>
 
 
-      <Stack mb={2}>
+      <Stack mb={2} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}}
        series={[{
            data: categoryPieChartData,
            arcLabel: getArcLabel,
-           innerRadius: 30,
-           outerRadius: 110,
+           innerRadius: 35,
+           outerRadius: 115,
            paddingAngle: 5,
            cornerRadius: 5,
            startAngle: -180,
            endAngle: 180,
-           cx: 180,
+           cx: 150,
            cy: 150,
          },
        ]}
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300"}, visibility: itemsTotal ? "visible" :  "hidden"}}
     
-       height={380}
+       height={400}
        tooltip={{}}
        slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "center" }}}}
        skipAnimation
