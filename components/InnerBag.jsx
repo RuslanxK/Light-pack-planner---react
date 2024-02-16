@@ -18,6 +18,7 @@ import { PieChart, pieArcLabelClasses} from "@mui/x-charts/PieChart";
 import SideItem from '../components/SideItem'
 import Nav from './Nav';
 import MobileNav from './MobileNav'
+import LastPageOutlinedIcon from '@mui/icons-material/LastPageOutlined';
 
 
 const InnerBag = ({bagData, items, bags, session}) => {
@@ -203,6 +204,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
      <Typography component="span" variant="span" textAlign="center" mb={3} color={theme.main.lightGray}>added to your plans</Typography>
+     <IconButton sx={{position: "absolute", backgroundColor: "white", left: "10px", bottom: "10px"}}><LastPageOutlinedIcon /></IconButton>
      <Stack sx={{overflowY: "scroll"}} height="85.5vh" pl={3}>
      {allBagsItems}
      </Stack>
