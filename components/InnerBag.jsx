@@ -50,7 +50,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
   const categoryWeightsArr = bagData?.totalWeightCategory 
-  const categoryPieChartData = bagData?.categories?.map((category) => {  
+  const categoryPieChartData = bagData?.categories?.slice(0,10).map((category) => {  
   const categoryWeight = categoryWeightsArr?.categoriesTotalWeight?.find((item) => item.categoryId === category._id)
 
         return {
@@ -199,7 +199,6 @@ const InnerBag = ({bagData, items, bags, session}) => {
      {items?.length ? 
      
      <div class="recent">
-
      <Stack width={theme.nav.width} height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
