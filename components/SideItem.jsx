@@ -66,9 +66,9 @@ const addItemToCategory = async (e) => {
 
  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
   <form onSubmit={addItemToCategory}>
-        <Stack p={2} spacing={2}>
+        <Stack spacing={2}>
           <Stack flex={1} direction="row" justifyContent="space-between">
-            <Typography component="h2" variant="h4">Add Item to category</Typography>
+            <Typography component="h2" variant="span">Add Item to category</Typography>
             <CloseIcon onClick={closePopup} />
           </Stack>
           <Typography component="p" variant="p"> Choose where to add <Typography component="span" variant="span" color={theme.green}>{itemData.name}</Typography></Typography>
