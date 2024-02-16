@@ -141,7 +141,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
      <Nav bags={bags} session={session}/>
 
-     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
+     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
