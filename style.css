@@ -8,11 +8,11 @@
 }
 
 .login-text {
-
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.login-button, .login-button-regular {
+.login-button,
+.login-button-regular {
   width: 280px;
   padding: 13.5px;
   font-size: 16px;
@@ -36,37 +36,34 @@
 }
 
 .premium {
-    margin-right: 18px;
-    margin-left: 18px;
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
+  margin-right: 18px;
+  margin-left: 18px;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: gray;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .premium:hover {
-   background-color: black;
+  background-color: black;
 }
 
-
 .logout {
-    background: none;
-    border: none;
-    font-size: 15px;
-    display: flex;
-    justify-content: center;
-
+  background: none;
+  border: none;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .logout:hover {
-    color: gray;
-    cursor: pointer;
-    
+  color: gray;
+  cursor: pointer;
 }
 
 .main-info {
@@ -76,21 +73,19 @@
 }
 
 .boxes {
-   padding-left: 35px;
+  padding-left: 35px;
 }
 
 .latestBag {
-    padding-top: 60px;
+  padding-top: 60px;
 }
 
 .menu-mobile {
-   display: none;
+  display: none;
 }
 
-
 #logo-mobile-login {
-
-  display: none
+  display: none;
 }
 
 .login-img {
@@ -106,86 +101,77 @@
   justify-content: center;
   align-items: center;
   background-color: white;
-  
 }
-
 
 .scroll-div {
-
-   padding-left: 10px;
-   padding-right: 10px;
-   padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
 }
 
-@media only screen and (max-width:768px) {
-
-
+@media only screen and (max-width: 768px) {
   #logo-mobile-login {
-
-    display: block
-}
+    display: block;
+  }
 
   .login-text {
-
-     color: white;
-     font-size: 27px;
+    color: white;
+    font-size: 27px;
   }
 
   .login-img {
     display: none;
     width: 0vw;
-}
+  }
 
-.login-content {
-  width: 100vw;
-  background-image: url("./public/hiking.png");
-  background-size: cover;
-  background-position: center;
-  align-items: flex-end;
-  
-}
+  .login-content {
+    width: 100vw;
+    background-image: url("./public/hiking.png");
+    background-size: cover;
+    background-position: center;
+    align-items: flex-end;
+  }
 
-.nav {
-   display: none;
-}
+  .nav {
+    display: none;
+  }
 
-/* .recent {
-   display: none;
-} */
+  .recent {
+    position: absolute;
+    right: 0;
+  }
 
-.main-info, .boxes {
-  padding: 25px;
-}
+  .main-info,
+  .boxes {
+    padding: 25px;
+  }
 
-.latestBag {
+  .latestBag {
     padding-top: 20px;
-}
+  }
 
-.menu-mobile {
-  display: block;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .menu-mobile {
+    display: block;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.boxes {
-  display: flex;
-  justify-content: center;
-}
+  .boxes {
+    display: flex;
+    justify-content: center;
+  }
 
-.scroll-div {
-
+  .scroll-div {
     overflow-x: scroll;
     display: flex;
     justify-content: space-between;
     align-items: space-between;
   }
-  
 
-.scroll-div input, .scroll-div select {
-
-   width: auto;
-}
-
+  .scroll-div input,
+  .scroll-div select {
+    width: auto;
+  }
 }
