@@ -11,6 +11,40 @@
   margin-bottom: 20px;
 }
 
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .login-button,
 .login-button-regular {
   width: 280px;
@@ -103,15 +137,20 @@
   background-color: white;
 }
 
-.scroll-div {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 2px;
+.side-bar-icon-mobile {
+  display: none;
 }
 
-.side-bar-icon-mobile {
+.recent-desktop {
+  display: block;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
 
+.recent-mobile {
   display: none;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
 }
 
 @media only screen and (max-width: 768px) {
@@ -141,9 +180,18 @@
     display: none;
   }
 
-  .recent {
+  .recent-mobile {
     position: absolute;
     right: 0;
+    display: block;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  .recent-desktop {
+    display: none;
+    -webkit-animation: fadeOut 1s;
+    animation: fadeOut 1s;
   }
 
   .main-info,
@@ -180,9 +228,7 @@
     width: auto;
   }
 
-
   .side-bar-icon-mobile {
-
     display: block;
   }
 }

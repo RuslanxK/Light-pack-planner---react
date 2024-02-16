@@ -37,11 +37,8 @@ const InnerBag = ({bagData, items, bags, session}) => {
     setEditedBag({ ...editedBag, [name]: value });
   };
 
-
   useEffect(() => {
-    
     localStorage.setItem('bagId', bagData?.bag?._id);
-
   }, []);
 
 
@@ -63,7 +60,6 @@ const InnerBag = ({bagData, items, bags, session}) => {
       })
     ;
 
-
   const TOTAL = categoryWeightsArr?.categoriesTotalWeight?.map((category) => category.totalWeight).reduce((a, b) => a + b, 0) 
   const getArcLabel = (params) => {
     const percent = params.value / TOTAL;
@@ -72,12 +68,8 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
 
-
   const addCategory = async () => {
-
     const newCategory = {userId: session?.user?.id, bagId: bagData?.bag?._id, tripId: bagData?.bag?.tripId, name: 'new category' };
-
-      console.log(newCategory)
     try {
       const res = await axios.post('/categories/new', newCategory);
       startTransition(router.refresh)
@@ -116,7 +108,6 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
   const removeBag = async () => {
-
     try {
       await axios.delete(`/bags/${bagData.bag._id}`);
       setDeletePopupOpen(false)
@@ -129,19 +120,14 @@ const InnerBag = ({bagData, items, bags, session}) => {
   }
 
 
-
   const showHideSideBar  = () => {
-
     setShowSideBarMobile(!showSideBarMobile)
   }
-
 
   return (
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
-
      <Nav bags={bags} session={session}/>
-
      { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "45px", height: "45px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
@@ -158,18 +144,15 @@ const InnerBag = ({bagData, items, bags, session}) => {
           {bagData?.bag?.description}
         </Typography>
 
-      
         <Stack display={theme.flexBox} direction="row" flexWrap="wrap" justifyContent={theme.center} alignItems={theme.contentCenter} backgroundColor={theme.main.lightGray} mt={2} pt={1} pb={1} pl={1} pr={1} width="fit-content" borderRadius={theme.radius}>
     
         <MonitorWeightOutlinedIcon sx={{  marginRight: "5px" }}/> 
         { bagData?.totalBagWeight > bagData?.bag?.goal ?  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: "red" }}>{bagData?.totalBagWeight?.toFixed(1)} / {bagData?.bag?.goal} kg </Typography> :  <Typography variant="span" component="span" sx={{ fontWeight: "bold", color: bagData?.totalBagWeight > 0.00 ? theme.green : "black" }}> {bagData?.totalBagWeight?.toFixed(1)} / {bagData?.bag?.goal} kg </Typography>  }
         <NordicWalkingIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/>
         <Typography variant="span" component="span"> { bagData?.worn ? "worn " + bagData?.worn?.toFixed(1) + " kg" : "0.0 kg"}</Typography>
-
         <DataSaverOffOutlinedIcon sx={{ marginLeft: "15px", marginRight: "5px" }}/> {itemsTotal} items 
          </Stack> 
       </div>
-
 
       <Stack mb={2} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}}
@@ -197,20 +180,18 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </Stack>
 
 
-
     <Stack display={theme.flexBox} pl={1} pr={1.2}>
-
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} borderRadius={theme.radius} mb={2} sx={{cursor: "pointer"}} onClick={addCategory}>
-      <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
+    <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
-      {categories}
+    {categories}
     </Stack>
     </Stack>
+
     
      {items?.length ? 
-     
-     <div class="recent">
+     <div class="recent-desktop">
      <Stack width={theme.nav.width} height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
@@ -219,36 +200,42 @@ const InnerBag = ({bagData, items, bags, session}) => {
      {allBagsItems}
      </Stack>
      </Stack>
-
      </Stack> 
      </div> : null }
 
 
+     {items?.length && showSideBarMobile  ? 
+     <div class="recent-mobile">
+     <Stack width={theme.nav.width} height={theme.nav.height}>
+     <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
+     <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
+     <Typography component="span" variant="span" textAlign="center" mb={3} color={theme.main.lightGray}>added to your plans</Typography>
+     <Stack sx={{overflowY: "scroll"}} height="85.5vh" pl={3}>
+     {allBagsItems}
+     </Stack>
+     </Stack>
+     </Stack> 
+     </div> : null }
+
 
      { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={updateBag}>
-
           <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
              <Stack width="90%">
              <Typography variant='span' component="h2">Update Bag</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
              </Stack>
-
              <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
              <TextField label="Bag name" name="name" required onChange={handleChange} sx={{width: "48.5%", marginBottom: "20px"}} value={editedBag.name || ""} inputProps={{ maxLength: 26 }}/>
              <TextField label="Weight goal (kg)" type="number" required name="goal" onChange={handleChange} sx={{width: "48.5%", marginBottom: "20px"}} value={editedBag.goal || ""} inputProps={{ min: 1, max: 99 }} />
             <TextField multiline label="Description" name="description" required onChange={handleChange} sx={{width: "100%"}} value={editedBag.description || "" } inputProps={{ maxLength: 200 }} /> 
-
             <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Update</Button>
           </Stack>
       </form>
-
   </MuiPopup> : null }
-
 
 { isDeletePopupOpen ? <MuiPopup isOpen={isDeletePopupOpen} onClose={closePopup}>
 <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
-
 <Stack width="90%">
 <Typography variant='span' component="h2" mb={1.5}>Delete Bag</Typography>
 <Typography variant='span' component="span">
@@ -259,13 +246,8 @@ const InnerBag = ({bagData, items, bags, session}) => {
 <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
 <Button sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeBag} disableElevation>Delete</Button>
 </Stack>
-
 </MuiPopup> : null }
-
-
-
     </Box>
-
     </Container>
   )
 }
