@@ -31,6 +31,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
   const [showSideBarMobile, setShowSideBarMobile] = useState(false)
+  const [pieChartHeight, setPieChartHeight] = useState(310);
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -73,6 +74,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
     try {
       const res = await axios.post('/categories/new', newCategory);
       startTransition(router.refresh)
+      setPieChartHeight((prevHeight) => prevHeight + 10);
 
     } catch (err) {
       console.log(err);
@@ -113,6 +115,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
       setDeletePopupOpen(false)
       router.push(`/trips?id=${bagData.bag.tripId}`)
       startTransition(router.refresh);
+      
     }
      catch (error) {
         console.log(error)
@@ -174,9 +177,9 @@ const InnerBag = ({bagData, items, bags, session}) => {
        ]}
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300"}, visibility: itemsTotal ? "visible" :  "hidden"}}
     
-       height={320}
+       height={pieChartHeight}
        tooltip={{}}
-       slotProps={{ legend: { direction: "column", position: { vertical: "bottom", horizontal: "center" }}}}
+       slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "center" }}}}
        
        />
 
