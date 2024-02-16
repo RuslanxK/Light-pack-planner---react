@@ -68,7 +68,7 @@ const addItemToCategory = async (e) => {
   <form onSubmit={addItemToCategory}>
         <Stack spacing={1}>
           <Stack direction="row" justifyContent="space-between">
-            <Typography component="h2" variant="span">Add Item to category</Typography>
+            <Typography component="h2" variant="span">Add to category</Typography>
             <CloseIcon onClick={closePopup} />
           </Stack>
           <Typography component="p" variant="p"> Choose where to add <Typography component="span" variant="span" color={theme.green}>{itemData.name}</Typography></Typography>
