@@ -154,10 +154,12 @@ const InnerBag = ({bagData, items, bags, session}) => {
          </Stack> 
       </div>
 
-      <Stack mb={2} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}>
-      <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}}
+      <Stack mb={2} >
+      <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}} 
        series={[{
            data: categoryPieChartData,
+           faded: { innerRadius: 30, additionalRadius: -15, color: 'gray' },
+           highlightScope: { faded: 'global', highlighted: 'item' },
            arcLabel: getArcLabel,
            innerRadius: 35,
            outerRadius: 110,
@@ -168,19 +170,20 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cx: 180,
            cy: 150,
          },
+         
        ]}
-       sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300"}, visibility: itemsTotal ? "visible" :  "hidden"}}
+       sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300"}, visibility: itemsTotal ? "visible" :  "hidden", position: "absolute"}}
     
-       height={400}
+       height={320}
        tooltip={{}}
-       slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "center" }}}}
+       slotProps={{ legend: { direction: "column", position: { vertical: "bottom", horizontal: "center" }}}}
        
        />
 
       </Stack>
 
 
-    <Stack display={theme.flexBox} pl={1} pr={1.2}>
+    <Stack pl={1} pr={1.2}>
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} borderRadius={theme.radius} mb={2} sx={{cursor: "pointer"}} onClick={addCategory}>
     <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
