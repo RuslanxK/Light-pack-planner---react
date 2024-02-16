@@ -30,6 +30,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
+  const [showSideBarMobile, setShowSideBarMobile] = useState(false)
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -131,7 +132,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
   const showHideSideBar  = () => {
 
-       
+    setShowSideBarMobile(!showSideBarMobile)
   }
 
 
@@ -141,7 +142,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
      <Nav bags={bags} session={session}/>
 
-     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
+     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "45px", height: "45px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
