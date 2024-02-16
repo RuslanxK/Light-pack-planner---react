@@ -47,7 +47,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const itemsTotal = bagData?.items?.reduce((acc, item) => acc + item.qty, 0) 
 
   const categoryWeightsArr = bagData?.totalWeightCategory 
-  const categoryPieChartData = bagData?.categories?.slice(0,10).map((category) => {  
+  const categoryPieChartData = bagData?.categories?.slice(0,6).map((category) => {  
   const categoryWeight = categoryWeightsArr?.categoriesTotalWeight?.find((item) => item.categoryId === category._id)
 
         return {
