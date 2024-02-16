@@ -31,7 +31,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
   const [showSideBarMobile, setShowSideBarMobile] = useState(false)
-  const [pieChartHeight, setPieChartHeight] = useState(310);
+  const [pieChartHeight, setPieChartHeight] = useState(330);
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -74,7 +74,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
     try {
       const res = await axios.post('/categories/new', newCategory);
       startTransition(router.refresh)
-      setPieChartHeight((prevHeight) => prevHeight + 10);
+      setPieChartHeight((prevHeight) => prevHeight + 5);
 
     } catch (err) {
       console.log(err);
