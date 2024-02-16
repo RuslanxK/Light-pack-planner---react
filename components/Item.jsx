@@ -148,9 +148,9 @@ const Item = (props) => {
 
 
       { removePopupOpen ? <MuiPopup isOpen={removePopupOpen} onClose={closePopup}>
-       <Stack direction="row" pl={2} pr={2} pt={1} pb={1} justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
+       <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
 
-      <Stack width="95%">
+      <Stack width="90%">
       <Typography variant='span' component="h2" fontWeight="600" mb={1.5}>Delete item</Typography>
       <Typography variant='span' component="span">
        Are you sure you want to delete this item? This action cannot be undone.
@@ -168,7 +168,7 @@ const Item = (props) => {
 {popupOpen ? <MuiPopup isOpen={popupOpen} onClose={closePopup}>
 
    <form onSubmit={saveLink}>
-        <Stack p={1}>
+        <Stack>
           <Stack flex={1} direction="row" justifyContent="space-between">
             <Typography variant="h6" component="h3" marginBottom="10px">
               Add a link for this item
