@@ -31,7 +31,6 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
   const [showSideBarMobile, setShowSideBarMobile] = useState(false)
-  const [pieChartHeight, setPieChartHeight] = useState(330);
 
   const handleChange = (event) => {
     let { name, value } = event.target;
@@ -42,12 +41,10 @@ const InnerBag = ({bagData, items, bags, session}) => {
     localStorage.setItem('bagId', bagData?.bag?._id);
   }, []);
 
-
   const allBagsItems = items.map((item) => { return <SideItem key={item._id} itemData={item} color="white" categoryData={bagData?.categories} update={() => startTransition(router.refresh)}  /> }) 
 
   const categories = bagData?.categories?.map((category) => <Category key={category._id} categoryData={category} items={bagData?.items} session={session} />)
   const itemsTotal = bagData?.items?.reduce((acc, item) => acc + item.qty, 0) 
-
 
   const categoryWeightsArr = bagData?.totalWeightCategory 
   const categoryPieChartData = bagData?.categories?.slice(0,10).map((category) => {  
@@ -68,14 +65,11 @@ const InnerBag = ({bagData, items, bags, session}) => {
   };
 
 
-
   const addCategory = async () => {
     const newCategory = {userId: session?.user?.id, bagId: bagData?.bag?._id, tripId: bagData?.bag?.tripId, name: 'new category' };
     try {
       const res = await axios.post('/categories/new', newCategory);
       startTransition(router.refresh)
-      setPieChartHeight((prevHeight) => prevHeight + 5);
-
     } catch (err) {
       console.log(err);
     }
@@ -161,7 +155,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
       <PieChart margin={{ top: 0, left:0, right:0, bottom: 0}} 
        series={[{
            data: categoryPieChartData,
-           faded: { innerRadius: 30, additionalRadius: -15, color: 'gray' },
+           faded: {innerRadius: 30, additionalRadius: -15, color: 'gray'},
            highlightScope: { faded: 'global', highlighted: 'item' },
            arcLabel: getArcLabel,
            innerRadius: 35,
@@ -173,11 +167,10 @@ const InnerBag = ({bagData, items, bags, session}) => {
            cx: 180,
            cy: 150,
          },
-         
        ]}
        sx={{[`& .${pieArcLabelClasses.root}`]: { fill: 'white', fontSize: 14, fontWeight: "300"}, visibility: itemsTotal ? "visible" :  "hidden"}}
     
-       height={pieChartHeight}
+       height={380}
        tooltip={{}}
        slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "center" }}}}
        
