@@ -18,7 +18,7 @@ import { PieChart, pieArcLabelClasses} from "@mui/x-charts/PieChart";
 import SideItem from '../components/SideItem'
 import Nav from './Nav';
 import MobileNav from './MobileNav'
-import LastPageOutlinedIcon from '@mui/icons-material/LastPageOutlined';
+import FlipCameraIosOutlinedIcon from '@mui/icons-material/FlipCameraIosOutlined';
 
 
 const InnerBag = ({bagData, items, bags, session}) => {
@@ -128,10 +128,20 @@ const InnerBag = ({bagData, items, bags, session}) => {
   }
 
 
+
+  const showHideSideBar  = () => {
+
+       
+  }
+
+
   return (
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
+
      <Nav bags={bags} session={session}/>
+
+     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{borderRadius: "100%", position: "fixed", bottom: "10px", left: "10px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
@@ -204,7 +214,6 @@ const InnerBag = ({bagData, items, bags, session}) => {
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
      <Typography component="span" variant="span" textAlign="center" mb={3} color={theme.main.lightGray}>added to your plans</Typography>
-     <IconButton sx={{position: "absolute", backgroundColor: "white", left: "10px", bottom: "10px"}}><LastPageOutlinedIcon /></IconButton>
      <Stack sx={{overflowY: "scroll"}} height="85.5vh" pl={3}>
      {allBagsItems}
      </Stack>

@@ -109,6 +109,11 @@
   padding-top: 2px;
 }
 
+.side-bar-icon-mobile {
+
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   #logo-mobile-login {
     display: block;
@@ -173,5 +178,11 @@
   .scroll-div input,
   .scroll-div select {
     width: auto;
+  }
+
+
+  .side-bar-icon-mobile {
+
+    display: block;
   }
 }
