@@ -53,7 +53,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
         return {
           id: category._id,
           value: categoryWeight?.totalWeight || 0 ,
-          label: category?.name?.length > 12 ? `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name?.substring(0, 12)}...` : `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name}`
+          label: category?.name?.length > 6 ? `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name?.substring(0, 6)}...` : `${categoryWeight?.totalWeight?.toFixed(2) || 0.00} kg - ${category?.name}`
         };
       })
     ;
