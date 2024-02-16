@@ -151,7 +151,7 @@ const Item = (props) => {
        <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
 
       <Stack width="90%">
-      <Typography variant='span' component="h2" fontWeight="600" mb={1.5}>Delete item</Typography>
+      <Typography variant='span' component="h2" mb={1.5}>Delete item</Typography>
       <Typography variant='span' component="span">
        Are you sure you want to delete this item? This action cannot be undone.
        Deleting this item will permanently remove it from the system, and any associated data will be lost.</Typography>
@@ -170,13 +170,12 @@ const Item = (props) => {
    <form onSubmit={saveLink}>
         <Stack>
           <Stack flex={1} direction="row" justifyContent="space-between">
-            <Typography variant="h6" component="h3" marginBottom="10px">
+            <Typography variant="span" component="h2" marginBottom="10px">
               Add a link for this item
             </Typography>
             <CloseIcon onClick={closePopup} />
           </Stack>
           <TextField
-            size="small"
             name="link"
             label="Link"
             variant="outlined"
@@ -185,7 +184,7 @@ const Item = (props) => {
             sx={{ marginBottom: "10px" }}
           />
           
-          <Button type="submit" sx={{padding: "9px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Save</Button>
+          <Button type="submit" sx={{padding: "13px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Save</Button>
         </Stack>
       </form>
 

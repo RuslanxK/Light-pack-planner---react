@@ -33,7 +33,7 @@ const Trip = (props) => {
   return (
     <Stack display={theme.flexBox} justifyContent={theme.between} alignItems={theme.center} onMouseOver={() => setTripHover(true)} onMouseLeave={() => setTripHover(false)} borderRadius={theme.radius} height={theme.trips.height} onClick={NavigateToInnerTrip} boxShadow={theme.boxShadow} sx={{transition: theme.transition, cursor: "pointer", "&:hover": {boxShadow: theme.boxShadowHover}}}>
       <img src={props?.tripData?.url || './default.png'} width="100%" height={170} alt='trip' priority style={{borderTopLeftRadius: theme.trips.borderLeft, borderTopRightRadius: theme.trips.borderRight, objectFit: theme.cover, filter: calculateDaysLeft(props.tripData) <= 0 ? "grayscale(100%)" : "none" }}/>
-      { calculateDaysLeft(props?.tripData) <= 0 ? <Typography component="h3" variant='span' position="absolute" marginTop="80px" fontWeight="bold" fontSize="23px" color={theme.main.lightGray}>Traveled</Typography> : null}
+      { calculateDaysLeft(props?.tripData) <= 0 ? <Typography component="h2" variant='span' position="absolute" marginTop="80px" fontWeight="bold" fontSize="23px" color={theme.main.lightGray}>Traveled</Typography> : null}
       <Typography height="25px" width="265px" borderRadius="7px" pt={0.8} pb={1} component="span" variant='span' fontSize="14px" display={theme.flexBox} alignItems={theme.center} justifyContent={theme.left}>{props?.tripData?.name?.length > 36? `${props.tripData.name.substring(0, 36)}..` : props?.tripData?.name} { tripHover ? <IconButton onClick={NavigateToInnerTrip} size='small' sx={{marginLeft: "5px"}}><NearMeOutlinedIcon sx={{fontSize: "17px"}} /></IconButton> : null }</Typography>
     </Stack>
   )

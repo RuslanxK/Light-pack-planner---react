@@ -70,7 +70,7 @@ const Bag = ({bagData, trips, session}) => {
             <form onSubmit={duplicateBag}>
             <Stack  spacing={2}>
             <Stack flex={1} direction="row" justifyContent="space-between">
-            <Typography component="h2" variant="span" fontWeight="600">
+            <Typography component="h2" variant="span">
               Choose trip
             </Typography>
             <CloseIcon onClick={closePopup} />

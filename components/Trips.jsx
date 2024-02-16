@@ -177,7 +177,7 @@ const Trips = ({trips, bags, session}) => {
 
              <Stack width="90%">
 
-             <Typography variant='span' component="h2" fontWeight="600">Create New Trip</Typography>
+             <Typography variant='span' component="h2">Create New Trip</Typography>
              <Typography variant='span' component="span" mb={3}>Popup content goes here</Typography>
 
              </Stack>

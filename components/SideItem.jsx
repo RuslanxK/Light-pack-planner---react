@@ -61,13 +61,13 @@ const addItemToCategory = async (e) => {
     <Stack onClick={openPopup}  p={0.7} mr={1} backgroundColor="white" width="20px" borderRadius="5px" sx={{cursor: "pointer", transition: "transform 0.2s ease-in-out", '&:hover': {transform: "scale(1.1)"}}}>
      <FlipCameraIosOutlinedIcon sx={{color: theme.green, fontSize: "20px"}} />
    </Stack>
-   <Typography onClick={() => console.log(itemToCategory)} component="span" variant="span" fontSize="15px" color={theme.main.lightGray}>{itemData?.name?.length > 10 ? itemData?.name?.substring(0, 10) + "..." : itemData?.name}</Typography>
+   <Typography component="span" variant="span" fontSize="15px" color={theme.main.lightGray}>{itemData?.name?.length > 10 ? itemData?.name?.substring(0, 10) + "..." : itemData?.name}</Typography>
    </Stack>
 
  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
   <form onSubmit={addItemToCategory}>
-        <Stack spacing={2}>
-          <Stack flex={1} direction="row" justifyContent="space-between">
+        <Stack spacing={1}>
+          <Stack direction="row" justifyContent="space-between">
             <Typography component="h2" variant="span">Add Item to category</Typography>
             <CloseIcon onClick={closePopup} />
           </Stack>
@@ -79,7 +79,7 @@ const addItemToCategory = async (e) => {
               getOptionLabel={(option) => option.name}
               isOptionEqualToValue={isOptionEqualToValue}
               getOptionKey={(option) => option.key}
-              sx={{marginBottom: "20px"}}/>
+              sx={{marginBottom: "10px"}}/>
 
 
              <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Add</Button>
