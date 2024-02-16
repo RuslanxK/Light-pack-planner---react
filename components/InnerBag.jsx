@@ -174,7 +174,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
        height={400}
        tooltip={{}}
        slotProps={{ legend: { direction: "row", position: { vertical: "bottom", horizontal: "center" }}}}
-       skipAnimation
+       
        />
 
       </Stack>
