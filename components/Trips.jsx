@@ -130,12 +130,10 @@ const Trips = ({trips, bags, session}) => {
 
   
     <div class="boxes">
-    {/* <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.trips.columns} > */}
-    <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} backgroundColor={theme.main.lightGray} height="210px" borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
+    <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} height={theme.trips.height} backgroundColor={theme.main.lightGray}  borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
     { tripData}
-    {/* </Stack> */}
     </div>
 
    <div class="latestBag">
@@ -146,7 +144,7 @@ const Trips = ({trips, bags, session}) => {
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
 
-        <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.latestBagBoxes.columns} justifyContent={theme.center} alignItems={theme.center} width="100%" mt={4}>
+        <div id='boxes' class="boxes">
 
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
@@ -166,7 +164,7 @@ const Trips = ({trips, bags, session}) => {
         <Typography component="h3" variant='span' fontWeight="600">{itemsTotal || 0 }</Typography>
         </LatestBagStack>
 
-        </Stack>
+        </div>
         </div>
 
 
