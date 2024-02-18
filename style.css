@@ -108,7 +108,13 @@
 
 .boxes {
   padding-left: 35px;
+  display: grid;
+  grid-template-columns:repeat(auto-fit, 290px);
+  gap: 30px;
+
 }
+
+
 
 .latestBag {
   padding-top: 60px;
@@ -213,7 +219,8 @@
 
   .boxes {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+   
   }
 
   .scroll-div {

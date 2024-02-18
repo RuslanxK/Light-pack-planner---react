@@ -193,12 +193,11 @@ const countryNameArr = countriesArr.map((x) => x.common)
         </div>
 
     <div class="boxes">
-     <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.bags.columns}>
+     
      <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} backgroundColor={theme.main.lightGray} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
       <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
      </Stack>
       {bags}
-     </Stack>
      </div>
 
 

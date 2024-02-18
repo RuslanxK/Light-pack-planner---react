@@ -52,6 +52,7 @@ export const theme = createTheme({
       borderRight: "7px",
       width: "100%",
       columns: "repeat(auto-fit, 290px);",
+      
   },
 
   bags: {

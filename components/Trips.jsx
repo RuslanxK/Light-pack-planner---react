@@ -130,12 +130,12 @@ const Trips = ({trips, bags, session}) => {
 
   
     <div class="boxes">
-    <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.trips.columns} >
+    {/* <Stack display={theme.grid} gap={4} gridTemplateColumns={theme.trips.columns} > */}
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} backgroundColor={theme.main.lightGray} height="210px" borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
     { tripData}
-    </Stack>
+    {/* </Stack> */}
     </div>
 
    <div class="latestBag">
