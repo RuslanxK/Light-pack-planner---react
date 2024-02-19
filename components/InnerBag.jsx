@@ -131,7 +131,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
 
         <div class="main-info">
-        <MobileNav />
+        <MobileNav session={session} bags={bags} />
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2" variant='span' fontWeight="600">{bagData?.bag?.name}</Typography>
         <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange } }} onClick={openPopup} />
