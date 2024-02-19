@@ -29,7 +29,7 @@ const Login = () => {
 
     <div class="login-content">
     <img id="logo-mobile-login" src="/logo.png" alt="logo" width="90px" height="58" style={{ position: "absolute", top: "25px", left: '25px' }}/> 
-    <Stack display={theme.flexBox} justifyContent={theme.center} backgroundColor="rgba(255,255,255, 0.4)" borderRadius="7px" height="200px" mb={8} p={3}>
+    <Stack display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} width="100%" backgroundColor="rgba(255,255,255, 0.4)" borderRadius="7px" mb={8} pt={3} pb={3} ml={3} mr={3}>
     <h1 className='login-text'>Log in to Planner</h1>
     {/* <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor:"rgba(255,255,255, 0.5)", padding: "20px", borderRadius:"10px"}}>
     <TextField label="Email" name="email" sx={{marginBottom: "15px", background: "white", width: "280px", borderRadius: "7px"}} />
