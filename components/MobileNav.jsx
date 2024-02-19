@@ -79,18 +79,8 @@ const logOut = () => {
          <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center}>
          <IconButton onClick={() => setOpenHamburger(!openHamburger)}><MenuIcon /></IconButton>
 
-       {session && session?.user ? (
-  <Stack display={theme.flexBox}  alignItems={theme.center}>
-    <Tooltip title={<><Typography  variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
-      <Typography variant='span' p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
-    </>
-  }>
-     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
-     </Tooltip>
-     </Stack>
-) : null}
 
-         {openHamburger ? <Stack p={2} backgroundColor="white" mt={37} right="35px" zIndex="99" position="absolute" width="220px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
+         {openHamburger ? <Stack p={2} backgroundColor="white" mt={38} right="35px" zIndex="99" position="absolute" width="220px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
 
          <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
@@ -150,6 +140,17 @@ const logOut = () => {
 
          </Stack> : null }
 
+
+         {session && session?.user ? (
+  <Stack display={theme.flexBox}  alignItems={theme.center}>
+    <Tooltip title={<><Typography  variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
+      <Typography variant='span' p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
+    </>
+  }>
+     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
+     </Tooltip>
+     </Stack>
+) : null}
          
          
          </Stack>
