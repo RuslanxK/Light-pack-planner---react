@@ -160,8 +160,8 @@ const closePopup = () => {
 };
 
 
-const countriesArr = countries.map((x) => x.name)
-const countryNameArr = countriesArr.map((x) => x.common) 
+const countriesArr = countries?.map((x) => x.name)
+const countryNameArr = countriesArr?.map((x) => x.common) 
 
   return (
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
