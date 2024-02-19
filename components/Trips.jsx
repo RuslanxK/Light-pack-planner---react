@@ -112,7 +112,7 @@ const Trips = ({trips, bags, session}) => {
 
       <div class="main-info">
 
-        <MobileNav />
+        <MobileNav session={session} bags={bags} />
 
        <Typography component="h2" fontWeight="600" variant='span' fontSize="20px"> 
         Welcome, {session?.user?.name.split(' ')[0]}
