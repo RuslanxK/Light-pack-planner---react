@@ -29,7 +29,7 @@ const filteredBags = sortedBags.slice(0, 6)
 
 const bagData = filteredBags?.map((bag) => {
       return <Typography onClick={() =>  navigateToBag(bag)} fontSize="14px" variant='span'component="span" mt={1} 
-      sx={{ cursor: "pointer" ,"&:hover": { color: theme.green }}} key={bag._id}> <Image src="/backpack.png" alt='backpack' width={14} height={14} style={{marginRight: "3px"}} /> {bag.name.length > 10 ? `${bag.name.substring(0, 12)}...` : bag.name}</Typography>
+      sx={{ cursor: "pointer" ,"&:hover": { color: theme.green }}} key={bag._id}> <Image src="/backpack.png" alt='backpack' width={14} height={14} style={{marginRight: "3px"}} /> {bag?.name?.length > 10 ? `${bag?.name?.substring(0, 12)}...` : bag?.name}</Typography>
   })
 
 
