@@ -171,7 +171,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
         <div class="main-info">
-        <MobileNav session={session} bags={bags}/>
+        <MobileNav session={session} bags={bagsData}/>
         <Stack>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
