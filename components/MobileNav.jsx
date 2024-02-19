@@ -16,7 +16,7 @@ const MobileNav = ({session, bags}) => {
          <Stack display="flex" direction="row">
          <IconButton onClick={() => setOpenHamburger(!openHamburger)}><MenuIcon /></IconButton>
 
-         {openHamburger ? <Stack backgroundColor="white" mt={6} right="35px" zIndex="99" position="absolute" width="350px" height="350px" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;"></Stack> : null }
+         {openHamburger ? <Stack backgroundColor="white" mt={6} right="35px" zIndex="99" position="absolute" width="250px" height="350px" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;"></Stack> : null }
        
          </Stack>
      </div>
