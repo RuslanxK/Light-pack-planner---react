@@ -80,7 +80,7 @@ const logOut = () => {
          <IconButton onClick={() => setOpenHamburger(!openHamburger)}><MenuIcon /></IconButton>
 
 
-         {openHamburger ? <Stack p={2} backgroundColor="white" mt={50} right="35px" zIndex="99" position="absolute" width="220px" height="auto" minHeight="300px" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
+         {openHamburger ? <Stack p={2} backgroundColor="white" top="100px" right="35px" zIndex="99" position="absolute" width="180px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
 
          <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
