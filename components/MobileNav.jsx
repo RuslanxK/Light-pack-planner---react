@@ -11,7 +11,7 @@ import { Tooltip } from '@mui/material';
 import { signOut } from "next-auth/react"
 import { useTheme } from '@emotion/react';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import CloseIcon from '@mui/icons-material/Close';
 
 const MobileNav = ({session, bags}) => {
 
@@ -77,7 +77,7 @@ const logOut = () => {
          <img src='./logo.png' width="90px" height="58px" class="logo-mobile" onClick={() => router.push('/')} />
 
          <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center}>
-         <IconButton onClick={() => setOpenHamburger(!openHamburger)}><MenuIcon /></IconButton>
+         <IconButton onClick={() => setOpenHamburger(!openHamburger)}>{ openHamburger ? <CloseIcon /> : <MenuIcon />}</IconButton>
 
 
          {openHamburger ? <Stack p={2} backgroundColor="white" top="80px" right="35px" zIndex="99" position="absolute" width="160px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
