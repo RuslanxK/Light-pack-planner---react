@@ -162,6 +162,7 @@
   display: none;
   -webkit-animation: fadeOut 1s;
   animation: fadeOut 1s;
+  right: 0;
 }
 
 @media only screen and (max-width: 768px) {
