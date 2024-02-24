@@ -195,7 +195,6 @@
     position: absolute;
     right: 0;
     display: block;
-    width: 150px;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
   }
