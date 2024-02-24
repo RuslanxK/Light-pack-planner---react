@@ -72,6 +72,13 @@ const logOut = () => {
 }
 
 
+const navigateToBag = (bag) => {
+
+  localStorage.setItem('tripId', bag.tripId);
+  router.push(`/bag?id=${bag._id}`)
+}
+
+
   return (
      <div class="menu-mobile">
          <img src='./logo.png' width="90px" height="58px" class="logo-mobile" onClick={() => router.push('/')} />
@@ -117,7 +124,7 @@ const logOut = () => {
             <Typography fontSize="13px" variant='span'component="span"> Lorem ipsum </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion onClick={() => router.push('/settings')}>
           <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Settings 

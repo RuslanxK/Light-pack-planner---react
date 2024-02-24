@@ -23,7 +23,7 @@ const theme = useTheme()
 const router = useRouter()
 
 const sortedBags = bags?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-const filteredBags = sortedBags.slice(0, 6)
+const filteredBags = sortedBags?.slice(0, 6)
 
 
 const bagData = filteredBags?.map((bag) => {
@@ -124,7 +124,7 @@ const navigateToBag = (bag) => {
             <Typography fontSize="13px" variant='span'component="span"> Lorem ipsum </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion onClick={() => router.push('/settings')}>
           <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Settings <SettingsOutlinedIcon sx={{ fontSize: "21px" }} />
