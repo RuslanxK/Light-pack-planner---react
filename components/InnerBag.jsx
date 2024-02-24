@@ -205,7 +205,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
      {items?.length && showSideBarMobile  ? 
      <div class="recent-mobile">
-     <Stack width={theme.nav.width} height={theme.nav.height}>
+     <Stack width="180px" height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width="180px"  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
      <Typography component="span" variant="span" textAlign="center" mb={3} color={theme.main.lightGray}>added to your plans</Typography>
