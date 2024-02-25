@@ -87,8 +87,12 @@ const navigateToBag = (bag) => {
          <IconButton onClick={() => setOpenHamburger(!openHamburger)}>{ openHamburger ? <CloseIcon /> : <MenuIcon />}</IconButton>
 
 
-         {openHamburger ? <Stack p={2} backgroundColor="white" top="80px" right="35px" zIndex="99" position="absolute" width="160px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
+         {openHamburger ? <Stack p={2} display={theme.flex}  alignItems="flex-start" backgroundColor="white" top="80px" right="35px" zIndex="99" position="absolute" width="190px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
 
+        <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center}>
+         <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
+         <Typography component="span" variant='span' fontSize="14px" ml={0.5}>{session?.user?.name}</Typography>
+         </Stack>
          <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between,"&:hover": { color: theme.green }}}>
@@ -130,31 +134,21 @@ const navigateToBag = (bag) => {
               Settings 
             </Typography>            
           </AccordionSummary>
-
         </Accordion>
-
         <Accordion>
           <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
-            <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "15px", marginRight: "5px"}}/> Log out</button>
+            <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "14px", marginRight: "5px"}}/> Log out</button>
             </Typography>            
           </AccordionSummary>
-
         </Accordion>
-
-     
-
-
          </Stack> : null }
-
-
          {session && session?.user ? (
   <Stack display={theme.flexBox}  alignItems={theme.center}>
     <Tooltip title={<><Typography  variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
       <Typography variant='span' p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
     </>
   }>
-     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
      </Tooltip>
      </Stack>
 ) : null}
