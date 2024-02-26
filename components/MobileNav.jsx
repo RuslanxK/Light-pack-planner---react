@@ -89,10 +89,7 @@ const navigateToBag = (bag) => {
 
          {openHamburger ? <Stack p={2} display={theme.flex}  alignItems="flex-start" backgroundColor="white" top="80px" right="35px" zIndex="99" position="absolute" width="190px" height="auto" borderRadius="7px" boxShadow="rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;">
 
-        <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center} mb={0.5}>
-         <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={30} height={30} /></IconButton>
-         <Typography component="span" fontWeight="500" variant='span' fontSize="14px" ml={0.5}>{session?.user?.name}</Typography>
-         </Stack>
+  
          <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between,"&:hover": { color: theme.green }}}>
@@ -135,10 +132,13 @@ const navigateToBag = (bag) => {
             </Typography>            
           </AccordionSummary>
         </Accordion>
-        <Accordion sx={{marginTop: "5px"}}>
+        <Accordion>
           <AccordionSummary aria-controls="panel5d-content" id="panel5d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
+            <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center} mb={0.5}>
+            <IconButton sx={{marginRight: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={30} height={30} /></IconButton>
             <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "14px", marginRight: "5px"}}/> Log out</button>
+            </Stack>
             </Typography>            
           </AccordionSummary>
         </Accordion>

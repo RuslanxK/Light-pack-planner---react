@@ -125,7 +125,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
      <Nav bags={bags} session={session}/>
-     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}><FlipCameraIosOutlinedIcon /></IconButton></div> : null }
+     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}>{showSideBarMobile === true ? <CloseIcon /> : <FlipCameraIosOutlinedIcon /> }</IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
@@ -217,8 +217,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
      </Stack>
      </Stack> 
      </div> : null }
-     
-
+    
 
      { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={updateBag}>
