@@ -1,6 +1,6 @@
 "use client"
 
-import { Stack, Typography, IconButton, Box, TextField, Button, Container } from '@mui/material'
+import { Stack, Typography, IconButton, Box, TextField, Button, Container} from '@mui/material'
 import Category from '../components/Category'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import axios from 'axios';
@@ -204,6 +204,8 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
 
      {items?.length && showSideBarMobile  ? 
+
+     
      <div class="recent-mobile">
      <Stack width="185px" height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width="185px"  sx={{backgroundColor: theme.green}}>
@@ -215,6 +217,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
      </Stack>
      </Stack> 
      </div> : null }
+     
 
 
      { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
