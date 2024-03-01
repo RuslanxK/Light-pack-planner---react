@@ -1,13 +1,21 @@
 import React from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
+import Image from 'next/image'
 
 
 const Loading = () => {
   return (
-    <Box sx={{ width: '100%', height: "100vh" }}>
-    <LinearProgress />
-    </Box>
+    <Stack display="flex" justifyContent="center" height="100vh"alignItems="center">
+
+    <Stack margin="0 auto" mb={3}>
+    <Image src="/logo.png" alt='Light Pack - Planner' width={110} height={70}/>
+    </Stack>
+
+    <Stack width="400px">
+    <LinearProgress color="success" />
+    </Stack>
+    </Stack>
   )
 }
 
