@@ -35,11 +35,13 @@ export default function NotFound() {
 
   return( 
 
-     <Stack display="flex" justifyContent="flex-end" width="100%" alignItems="center" height="100vh">
+     <Stack display="flex" justifyContent="center" width="100%" alignItems="center" height="100vh">
+        <div className="container" ref={container}></div>
+      <Stack p={2}>
       <Typography component="h1" variant="span" fontWeight="bold" fontSize="40px">Sorry</Typography>
       <Typography component="h2" variant="span" fontWeight="400" fontSize="25px">We couldn't find that page.</Typography>
-      <Button sx={{marginTop: "10px", backgroundColor: theme.green}} variant="contained" disableElevation onClick={navigateToHome}> Light pack - planner's Home page</Button>
-      <div className="container" ref={container}></div>
+      <button class="premium" onClick={navigateToHome}> Light pack - planner's home page</button>
+      </Stack>
      </Stack>
   )
       
