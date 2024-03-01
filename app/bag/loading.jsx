@@ -12,8 +12,8 @@ const Loading = () => {
     <Image src="/logo.png" alt='Light Pack - Planner' width={110} height={70}/>
     </Stack>
 
-    <Stack width="400px">
-    <LinearProgress color="success" />
+    <Stack width="300px">
+    <LinearProgress color="success" sx={{padding: "2px", borderRadius: "7px"}}/>
     </Stack>
     </Stack>
   )
