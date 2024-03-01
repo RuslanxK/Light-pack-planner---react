@@ -102,7 +102,7 @@ const navigateToBag = (bag) => {
         >
           <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
             <Typography fontSize="14px" variant='span' width={theme.fullWidth} sx={{ display: theme.flexBox, justifyContent: theme.between, "&:hover": { color: theme.green }, }} >
-              Bags <HikingOutlinedIcon sx={{ fontSize: "21px" }} />
+              Recent Bags <HikingOutlinedIcon sx={{ fontSize: "21px" }} />
             </Typography>
           </AccordionSummary>
           <AccordionDetails>

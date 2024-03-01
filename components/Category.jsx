@@ -80,7 +80,7 @@ const Category = (props) => {
 
 
   return (
-    <Stack width={theme.category.width} border={theme.category.border} display={theme.flexBox} mb={0.5} justifyContent={theme.center} backgroundColor="white">
+    <Stack width={theme.category.width} borderRadius={theme.radius} border={theme.category.border} display={theme.flexBox} mb={1} justifyContent={theme.center} backgroundColor="white">
 
       <Stack display={theme.flexBox} direction="row" justifyContent={theme.between} alignItems={theme.center} pt={1} pb={0.6}>
 

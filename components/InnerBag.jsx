@@ -179,12 +179,14 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </Stack> : null }
 
 
-    
-    <Stack border="1px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
-     backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} mb={0.5} sx={{cursor: "pointer"}} onClick={addCategory}>
+    <div class="categories">
+    <Stack border="1px dashed gray" borderRadius={theme.radius} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
+     backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} mb={1} sx={{cursor: "pointer"}} onClick={addCategory}>
     <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
     {categories}
+    </div>
+
     </Stack>
    
 

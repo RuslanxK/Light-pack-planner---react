@@ -7,7 +7,6 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordion from "@mui/material/Accordion";
 import Image from 'next/image';
-import { Tooltip } from '@mui/material';
 import { signOut } from "next-auth/react"
 import { useTheme } from '@emotion/react';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -103,7 +102,7 @@ const navigateToBag = (bag) => {
         >
           <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
             <Typography fontSize="14px" variant='span' width={theme.fullWidth} sx={{ display: theme.flexBox, justifyContent: theme.between, "&:hover": { color: theme.green }, }} >
-              Bags 
+              Recent Bags 
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
