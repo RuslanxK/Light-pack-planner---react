@@ -35,7 +35,6 @@ const [isAddPopupOpen, setAddPopupOpen] = useState(false)
 const [editedTrip, setEditedTrip] = useState({name: tripData?.trip?.name, about:tripData?.trip?.about, distance: tripData?.trip?.distance, startDate: dayjs(tripData?.trip?.startDate), endDate: dayjs(tripData?.trip?.endDate) });
 const [newBag, setNewBag] = useState({})
 
-
 const router = useRouter();
 const theme = useTheme()
 
@@ -43,9 +42,11 @@ useEffect(() => {
   const getCountries = async () => {
        const { data } = await axios.get(countriesApi)
        setCounties(data)
-       localStorage.setItem('tripId', newBag.tripId);
   }
    getCountries()
+
+   localStorage.setItem('tripId', tripData.trip._id);
+
 }, []);
 
 
