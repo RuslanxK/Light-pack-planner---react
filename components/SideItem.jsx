@@ -6,6 +6,7 @@ import MuiPopup from './custom/MuiPopup';
 import CloseIcon from "@mui/icons-material/Close";
 import axios from 'axios';
 
+
 const SideItem = ({itemData, categoryData, update}) => {
 
 const [isPopupOpen, setPopupOpen] = useState(false);
@@ -21,6 +22,7 @@ const isOptionEqualToValue = (option, value) => option._id === value?._id;
 
 
 useEffect(() => {
+
   const tripId = localStorage.getItem('tripId');
   const bagId = localStorage.getItem('bagId');
   if (tripId && bagId) {
@@ -30,7 +32,7 @@ useEffect(() => {
       bagId: bagId
     }));
   }
-}, []);
+}, [itemToCategory.tripId, itemToCategory.bagId]);
 
 
 const openPopup = () => {
