@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useTransition, useRef  } from 'react'
+import React, { Fragment, useState, useTransition, useEffect } from 'react'
 import { Stack, Typography, Autocomplete, TextField, Button} from '@mui/material'
 import FlipCameraIosOutlinedIcon from '@mui/icons-material/FlipCameraIosOutlined';
 import { useTheme } from '@emotion/react';
@@ -8,12 +8,9 @@ import axios from 'axios';
 
 const SideItem = ({itemData, categoryData, update}) => {
 
-  const tripId = typeof localStorage !== 'undefined' ? localStorage.getItem('tripId') : null;
-  const bagId = typeof localStorage !== 'undefined' ? localStorage.getItem('bagId') : null;
-
 const [isPopupOpen, setPopupOpen] = useState(false);
 const [isTransitionStarted, startTransition] = useTransition();
-const [itemToCategory, setItemToCategory] = useState({ tripId: tripId, bagId: bagId, categoryId: null});
+const [itemToCategory, setItemToCategory] = useState({ tripId: null, bagId: null, categoryId: null});
 const [selectedCategory, setSelectedCategory] = useState(null); // State to manage the selected category
 
 
@@ -21,6 +18,19 @@ const theme = useTheme()
 
 const categoryOptions = categoryData?.map((x) => ({ name: x.name, _id: x._id, key: x._id })) 
 const isOptionEqualToValue = (option, value) => option._id === value?._id;
+
+
+useEffect(() => {
+  const tripId = localStorage.getItem('tripId');
+  const bagId = localStorage.getItem('bagId');
+  if (tripId && bagId) {
+    setItemToCategory((prevData) => ({
+      ...prevData,
+      tripId: tripId,
+      bagId: bagId
+    }));
+  }
+}, []);
 
 
 const openPopup = () => {
