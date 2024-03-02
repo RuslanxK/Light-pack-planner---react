@@ -23,7 +23,10 @@ const Bag = ({bagData, trips, session}) => {
 
 
   const NavigateToInnerBag = () => {
+
+    localStorage.setItem('bagId', bagData._id);
     router.push(`/bag?id=${bagData._id}`)
+    
   }
 
   const openPopup = () => {

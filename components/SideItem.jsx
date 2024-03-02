@@ -25,6 +25,7 @@ useEffect(() => {
 
   const tripId = localStorage.getItem('tripId');
   const bagId = localStorage.getItem('bagId');
+
   if (tripId && bagId) {
     setItemToCategory((prevData) => ({
       ...prevData,
@@ -32,7 +33,7 @@ useEffect(() => {
       bagId: bagId
     }));
   }
-}, [itemToCategory.tripId, itemToCategory.bagId]);
+}, [categoryData]);
 
 
 const openPopup = () => {

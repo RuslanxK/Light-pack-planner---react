@@ -31,17 +31,16 @@ const InnerBag = ({bagData, items, bags, session}) => {
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editedBag, setEditedBag] = useState({tripId: bagData?.bag?.tripId, name: bagData?.bag?.name, goal: bagData?.bag?.goal, description: bagData?.bag?.description})
   const [showSideBarMobile, setShowSideBarMobile] = useState(false)
+  const [tripId, setTripId] = useState()
+  const [bagId, setBagId] = useState()
 
   const handleChange = (event) => {
     let { name, value } = event.target;
     setEditedBag({ ...editedBag, [name]: value });
   };
 
-  useEffect(() => {
-    localStorage.setItem('bagId', bagData?.bag?._id);
-  }, []);
   
-
+  
   const allBagsItems = items.map((item) => { return <SideItem key={item._id} itemData={item} color="white" categoryData={bagData?.categories} update={() => startTransition(router.refresh)}  /> }) 
 
   const categories = bagData?.categories?.map((category) => <Category key={category._id} categoryData={category} items={bagData?.items} session={session} />)
