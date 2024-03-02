@@ -110,7 +110,7 @@ const Trips = ({trips, bags, session}) => {
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
-      <div class="main-info">
+      <div className="main-info">
 
         <MobileNav session={session} bags={bags} />
 
@@ -129,14 +129,14 @@ const Trips = ({trips, bags, session}) => {
         </div>
 
   
-    <div class="boxes">
+    <div className="boxes">
     <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} height={theme.trips.height} backgroundColor={theme.main.lightGray}  borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
       <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
     </Stack>
     { tripData}
     </div>
 
-   <div class="latestBag">
+   <div className="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
     <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length ? `${trips?.latestBag?.name.substring(0, 6)}...` : null} </Typography>
@@ -144,7 +144,7 @@ const Trips = ({trips, bags, session}) => {
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
 
-        <div id='boxes' class="boxes">
+        <div id='boxes' className="boxes">
 
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>

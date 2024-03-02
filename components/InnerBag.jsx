@@ -125,12 +125,12 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
      <Nav bags={bags} session={session}/>
-     { items?.length ? <div class="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}>{showSideBarMobile === true ? <CloseIcon /> : <FlipCameraIosOutlinedIcon /> }</IconButton></div> : null }
+     { items?.length ? <div className="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}>{showSideBarMobile === true ? <CloseIcon /> : <FlipCameraIosOutlinedIcon /> }</IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
 
-        <div class="main-info">
+        <div className="main-info">
         <MobileNav session={session} bags={bags} />
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2" variant='span' fontWeight="600">{bagData?.bag?.name}</Typography>
@@ -179,7 +179,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
       </Stack> : null }
 
 
-    <div class="categories">
+    <div className="categories">
     <Stack border="1px dashed gray" borderRadius={theme.radius} display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center}
      backgroundColor={theme.main.lightGray} width={theme.category.width} height={theme.category.height} mb={1} sx={{cursor: "pointer"}} onClick={addCategory}>
     <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
@@ -192,7 +192,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
 
     
      {items?.length ? 
-     <div class="recent-desktop">
+     <div className="recent-desktop">
      <Stack width={theme.nav.width} height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width={theme.nav.width}  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>
@@ -208,7 +208,7 @@ const InnerBag = ({bagData, items, bags, session}) => {
      {items?.length && showSideBarMobile  ? 
 
      
-     <div class="recent-mobile">
+     <div className="recent-mobile">
      <Stack width="185px" height={theme.nav.height}>
      <Stack pt={2} display={theme.flexBox} alignItems={theme.left} position={theme.nav.fixed} height={theme.nav.height} width="185px"  sx={{backgroundColor: theme.green}}>
      <Typography component="h3" variant="span" textAlign="center" color="white">Recent Items</Typography>

@@ -170,7 +170,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
-        <div class="main-info">
+        <div className="main-info">
         <MobileNav session={session} bags={bagsData}/>
         <Stack>
         <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
@@ -192,7 +192,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
         </Stack>
         </div>
 
-    <div class="boxes">
+    <div className="boxes">
      
      <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} backgroundColor={theme.main.lightGray} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
       <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>

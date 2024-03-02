@@ -79,8 +79,8 @@ const navigateToBag = (bag) => {
 
 
   return (
-     <div class="menu-mobile">
-         <img src='./logo.png' width="90px" height="58px" class="logo-mobile" onClick={() => router.push('/')} />
+     <div className="menu-mobile">
+         <img src='./logo.png' width="90px" height="58px" className="logo-mobile" onClick={() => router.push('/')} />
 
          <Stack display={theme.flex} direction="row" justifyContent={theme.center} alignItems={theme.center}>
          <IconButton onClick={() => setOpenHamburger(!openHamburger)}>{ openHamburger ? <CloseIcon /> : <MenuIcon />}</IconButton>

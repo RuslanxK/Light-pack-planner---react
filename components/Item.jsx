@@ -112,7 +112,7 @@ const Item = (props) => {
   return (
 
     
-    <div class="scroll-div" sx={{ overflowX: "scroll", '&:hover': {backgroundColor: theme.main.lightestGray}}}>
+    <div className="scroll-div" sx={{ overflowX: "scroll", '&:hover': {backgroundColor: theme.main.lightestGray}}}>
     
       <form onSubmit={saveItemData}>
       

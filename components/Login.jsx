@@ -21,13 +21,13 @@ const Login = () => {
   return (
     <Stack display={theme.flexBox} direction="row" justifyContent={theme.end} sx={{overflowY: "hidden"}}>
       
-      <div class="login-img">
+      <div className="login-img">
         <img id="hiking-image" src="/hiking.png" alt="hiking" width="100%" style={{objectFit: "cover", height:"100vh" }} /> 
         <img id="logo" src="/logo.png" alt="logo" width="110px" height="70" style={{ position: "absolute", top: "16px", left: '35px' }}/> 
       </div>
 
 
-    <div class="login-content">
+    <div className="login-content">
     <img id="logo-mobile-login" src="/logo.png" alt="logo" width="90px" height="58" style={{ position: "absolute", top: "25px", left: '25px' }}/> 
     <Stack display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} width="100%" backgroundColor="rgba(255,255,255, 0.4)" borderRadius="7px" mb={8} p={3} ml={3} mr={3}>
     <h1 className='login-text'>Log in to Planner</h1>
