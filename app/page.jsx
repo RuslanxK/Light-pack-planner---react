@@ -20,7 +20,9 @@ const getData = async (session) => {
 
   try { 
 
-    const res = await fetch(`${process.env.API_URL}/api/trips/${session?.user?.id}/creator`, { cache: 'no-store'});
+
+    const res = await fetch(`${process.env.API_URL}/api/trips/${session?.user?.id}/creator`, {cache: 'no-store'});
+  ;
     const data = await res.json();
      const latestBag = data.latestBag
           const latestBagTotalWeight = data.latestBagTotalWeight

@@ -50,7 +50,8 @@ export const options = {
           return baseUrl;
         },
 
-        async session({session}) {
+
+        async session({session, token}) {
 
             await connectToDB()
             const sessionUser = await user.findOne({
@@ -58,16 +59,29 @@ export const options = {
             })
 
              if(sessionUser) {
+
+              if (token.access_token) {
+                session.access_token = token.access_token 
+            }
              session.user.id = sessionUser._id.toString()
              return session
              }
       
             },
-      
+
+
+            jwt({token, account, profile}) {
+             
+              if (account) {
+                  token.access_token = account.access_token 
+              }
+              return token
+          },
+
+
             async signIn({profile}) {
       
                try {
-                 
                    await connectToDB()
                    const userExists = await user.findOne({email: profile.email})
       

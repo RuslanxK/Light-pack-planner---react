@@ -72,7 +72,7 @@ const Trips = ({trips, bags, session}) => {
           const res = await axios.post(`/api/trips/new`, newTripDataWithUserId)
           setPopupOpen(false)
           startTransition(router.refresh)
-          
+
         } catch (err) {
           console.log(err);
         }
