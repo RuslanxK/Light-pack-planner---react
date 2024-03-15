@@ -73,6 +73,8 @@ const Trips = ({trips, bags, session}) => {
           setPopupOpen(false)
           startTransition(router.refresh)
 
+          
+
         } catch (err) {
           console.log(err);
         }
@@ -139,7 +141,7 @@ const Trips = ({trips, bags, session}) => {
    <div className="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
-    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length ? `${trips?.latestBag?.name.substring(0, 6)}...` : null} </Typography>
+    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length > 6 ? `${trips?.latestBag?.name.substring(0, 6)}...` : trips.latestBag?.name} </Typography>
     </Stack>
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>

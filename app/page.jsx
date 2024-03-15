@@ -18,8 +18,8 @@ const getBags = async (session) => {
 
 const getData = async (session) => {
 
-  try { 
 
+  try { 
 
     const res = await fetch(`${process.env.API_URL}/api/trips/${session?.user?.id}/creator`, {cache: 'no-store'});
   ;

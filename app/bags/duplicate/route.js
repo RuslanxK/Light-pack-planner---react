@@ -14,7 +14,7 @@ export const POST = async (req, res) => {
     const { userId, id, name, tripId, goal, description } = await req.json();
 
     // Create a new bag
-    const newBag = new bag({ userId, name, tripId, goal, description });
+    const newBag = new bag({ creator: userId, name, tripId, goal, description });
     await newBag.save();
 
     if (id) {
