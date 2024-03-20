@@ -93,7 +93,7 @@ const navigateToBag = (bag) => {
     <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between,"&:hover": { color: theme.green }}}>
-              Home <WindowOutlinedIcon sx={{ fontSize: "21px" }} />
+              Home 
             </Typography>
           </AccordionSummary>
         </Accordion>
@@ -103,7 +103,7 @@ const navigateToBag = (bag) => {
         >
           <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
             <Typography fontSize="14px" variant='span' width={theme.fullWidth} sx={{ display: theme.flexBox, justifyContent: theme.between, "&:hover": { color: theme.green }, }} >
-              Recent Bags <HikingOutlinedIcon sx={{ fontSize: "21px" }} />
+              Recent Bags 
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -116,7 +116,7 @@ const navigateToBag = (bag) => {
         >
           <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
-              Articles <PublicOutlinedIcon sx={{ fontSize: "21px" }} />
+              Articles 
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -128,7 +128,7 @@ const navigateToBag = (bag) => {
         <Accordion onClick={() => router.push('/settings')}>
           <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
-              Settings <SettingsOutlinedIcon sx={{ fontSize: "21px" }} />
+              Settings 
             </Typography>
           </AccordionSummary>
         </Accordion>
