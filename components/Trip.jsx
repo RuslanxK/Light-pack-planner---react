@@ -27,7 +27,9 @@ const Trip = (props) => {
 
   const NavigateToInnerTrip = () => {
 
-    router.push(`/trips?id=${props?.tripData?._id}`)
+     localStorage.setItem('tripId', props.tripData._id);
+     router.push(`/trips?id=${props?.tripData?._id}`)
+    
   }
 
   return (

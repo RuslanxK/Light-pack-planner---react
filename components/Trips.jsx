@@ -81,7 +81,10 @@ const Trips = ({trips, bags, session}) => {
       };
 
       const navigateToLatestBag = () => {
+           localStorage.setItem('tripId', latestBag.tripId);
+           localStorage.setItem('bagId', latestBag._id);
            router.push(`bag?id=${trips?.latestBag._id}`)
+           
       }
 
       const openPopup = () => {
