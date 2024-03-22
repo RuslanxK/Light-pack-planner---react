@@ -109,19 +109,14 @@
 .boxes {
   padding-left: 35px;
   display: grid;
-  grid-template-columns:repeat(auto-fit, 290px);
+  grid-template-columns: repeat(auto-fit, 290px);
   gap: 30px;
-
 }
 
 #boxes {
-
   justify-content: center;
   padding-left: 0px;
-
 }
-
-
 
 .latestBag {
   padding-top: 60px;
@@ -168,17 +163,13 @@
 }
 
 .categories {
-
-    margin-left: 10px;
-    margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .container {
-
-    width: 500px;
+  width: 500px;
 }
-
-
 
 @media only screen and (max-width: 768px) {
   #logo-mobile-login {
@@ -228,6 +219,7 @@
 
   .latestBag {
     padding-top: 20px;
+    padding-left: 25px;
   }
 
   .menu-mobile {
@@ -236,12 +228,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
   }
 
   .boxes {
     display: flex;
     flex-direction: column;
+  
    
   }
 
