@@ -133,7 +133,7 @@ const navigateToBag = (bag) => {
           </AccordionSummary>
         </Accordion>
 
-        <button className='premium'>Upgrade to premium</button>
+        <button className='premium'>Upgrade to Premium</button>
 
         {session && session?.user ? (
   <Stack display={theme.flexBox} pb={2} mt={2} alignItems={theme.center}>

@@ -1,112 +1,142 @@
-import GoogleProvider from 'next-auth/providers/google'
-import FacebookProvider from 'next-auth/providers/facebook'
-import { connectToDB } from "../../../../utils/database"
-import user from '../../../../models/user'
-
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import { connectToDB } from "../../../../utils/database";
+import user from "../../../../models/user";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from 'bcrypt'
 
 export const options = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
 
-      providers: [
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    }),
 
-          GoogleProvider({
-              clientId: process.env.GOOGLE_CLIENT_ID,
-              clientSecret: process.env.GOOGLE_CLIENT_SECRET
-          }),
-
-         FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-        }),
-
-      ],
-
-      session: {
-          strategy: 'jwt'
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: {},
+        password: {},
       },
-        
-      pages: {
-          signIn: "/login"
+
+      async authorize(credentials, req) {
+        try {
+
+          await connectToDB();
+
+          const email = credentials?.email
+          const password = credentials?.password
+
+          console.log(email)
+
+          const foundUser = await user.findOne({ email: email });
+
+          if (!foundUser) {
+            throw new Error("Invalid email or password");
+          }
+
+          const isCorrect = await bcrypt.compare(password, foundUser.password);
+
+          if (!isCorrect) {
+            throw new Error("Wrong credentials");
+          }
+
+          return foundUser;
+        } catch (error) {
+          console.log(error);
+          console.error()
+          return null;
+        }
       },
-      
-      callbacks: {
+    }),
+  ],
 
-        async redirect({ url, baseUrl }) {
-          const isRelativeUrl = url.startsWith("/");
-          if (isRelativeUrl) {
-            return `${baseUrl}${url}`;
-          }
-    
-          const isSameOriginUrl = new URL(url).origin === baseUrl;
-          const alreadyRedirected = url.includes('callbackUrl=')
-          if (isSameOriginUrl && alreadyRedirected) {
-            const originalCallbackUrl = decodeURIComponent(url.split('callbackUrl=')[1]);
-            return originalCallbackUrl;
-          }
-    
-          if (isSameOriginUrl) {
-            return url;
-          }
-    
-          return baseUrl;
-        },
+  session: {
+    strategy: "jwt",
+  },
 
+  pages: {
+    signIn: "/login",
+  },
 
-        async session({session, token}) {
-
-            await connectToDB()
-            const sessionUser = await user.findOne({
-               email: session.user.email
-            })
-
-             if(sessionUser) {
-
-              if (token.access_token) {
-                session.access_token = token.access_token 
-            }
-             session.user.id = sessionUser._id.toString()
-             return session
-             }
-      
-            },
-
-
-            jwt({token, account, profile}) {
-             
-              if (account) {
-                  token.access_token = account.access_token 
-              }
-              return token
-          },
-
-
-            async signIn({profile}) {
-      
-               try {
-                   await connectToDB()
-                   const userExists = await user.findOne({email: profile.email})
-      
-                   if (!userExists) {
-                    let imageUrl = profile.picture;
-
-                    if (typeof profile.picture === 'object' && profile.picture.data && profile.picture.data.url) {
-                        imageUrl = profile.picture.data.url;
-                    }
-                    await user.create({
-                        email: profile.email,
-                        username: profile.name.replace(" ", "").toLowerCase(),
-                        image: imageUrl || null 
-                    });
-                }
-
-                    return true;
-      
-               }  catch(error) {
-      
-                    console.log(error)
-                    return false
-               }
-            }
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      const isRelativeUrl = url.startsWith("/");
+      if (isRelativeUrl) {
+        return `${baseUrl}${url}`;
       }
-  
 
-} 
+      const isSameOriginUrl = new URL(url).origin === baseUrl;
+      const alreadyRedirected = url.includes("callbackUrl=");
+      if (isSameOriginUrl && alreadyRedirected) {
+        const originalCallbackUrl = decodeURIComponent(
+          url.split("callbackUrl=")[1]
+        );
+        return originalCallbackUrl;
+      }
+
+      if (isSameOriginUrl) {
+        return url;
+      }
+
+      return baseUrl;
+    },
+
+    async session({ session, token }) {
+      await connectToDB();
+      const sessionUser = await user.findOne({
+        email: session.user.email,
+      });
+
+      if (sessionUser) {
+        if (token.access_token) {
+          session.access_token = token.access_token;
+        }
+        session.user.id = sessionUser._id.toString();
+        return session;
+      }
+    },
+
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.access_token = account.access_token;
+      }
+      return token;
+    },
+
+
+    async signIn({ profile }) {
+      try {
+        await connectToDB();
+        const userExists = await user.findOne({ email: profile.email });
+
+        if (!userExists) {
+          let imageUrl = profile.picture;
+
+          if (
+            typeof profile.picture === "object" &&
+            profile.picture.data &&
+            profile.picture.data.url
+          ) {
+            imageUrl = profile.picture.data.url;
+          }
+          await user.create({
+            email: profile.email,
+            username: profile.name.replace(" ", "").toLowerCase(),
+            image: imageUrl || null,
+          });
+        }
+
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
+  },
+};

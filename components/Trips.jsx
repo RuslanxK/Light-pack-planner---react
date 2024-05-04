@@ -119,13 +119,13 @@ const Trips = ({trips, bags, session}) => {
 
         <MobileNav session={session} bags={bags} />
 
-       <Typography component="h2" fontWeight="600" variant='span' fontSize="20px"> 
+       <Typography component="h2" fontWeight="600" variant='span' fontSize="20px" mb={0.5}> 
         Welcome, {session?.user?.name.split(' ')[0]}
         </Typography>
-        <Typography component="p" variant="p">
+        <Typography component="p" variant="p" mb={2.5}>
           The journey of a thousand miles begins with a single step
         </Typography>
-        <Typography component="h3" variant="span" fontWeight="500" mt={1.5} >
+        <Typography component="h3" variant="span" fontWeight="500" mb={0.5} >
           My last planned trips 
         </Typography>
         <Typography component="p" variant="p">
@@ -141,7 +141,7 @@ const Trips = ({trips, bags, session}) => {
     { tripData}
     </div>
 
-   <div className="latestBag">
+  { bags.length >= 1 ? <div className="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
     <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length > 6 ? `${trips?.latestBag?.name.substring(0, 6)}...` : trips.latestBag?.name} </Typography>
@@ -171,7 +171,7 @@ const Trips = ({trips, bags, session}) => {
 
         </div>
         </div>
-
+          : null }
 
     { isPopupOpen ?  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
         <form onSubmit={createTrip}>
