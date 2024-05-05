@@ -120,7 +120,7 @@ const Trips = ({trips, bags, session}) => {
         <MobileNav session={session} bags={bags} />
 
        <Typography component="h2" fontWeight="600" variant='span' fontSize="20px" mb={0.5}> 
-        Welcome, {session?.user?.name.split(' ')[0]}
+        Welcome, {session?.user?.name?.split(' ')[0] || session?.user?.username?.split(' ')[0] }
         </Typography>
         <Typography component="p" variant="p" mb={2.5}>
           The journey of a thousand miles begins with a single step

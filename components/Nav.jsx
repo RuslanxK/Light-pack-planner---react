@@ -137,11 +137,11 @@ const navigateToBag = (bag) => {
 
         {session && session?.user ? (
   <Stack display={theme.flexBox} pb={2} mt={2} alignItems={theme.center}>
-    <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name}</Typography>
+    <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name || session?.user?.username}</Typography>
       <Typography variant='span'p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
     </>
   }>
-     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
+     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image || `${process.env.NEXT_PUBLIC_PROFILE_URL}/${session?.user?.profileImageKey}`} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
      </Tooltip>
       <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "15px", marginRight: "5px"}}/> Log out</button>
      </Stack>

@@ -1,37 +1,70 @@
 import user from "../../../models/user";
 import { connectToDB } from "../../../utils/database";
 import { NextResponse } from "next/server";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
+import crypto from "crypto"
+
+
+const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex")
+
+const filename = generateFileName();
+
+
+const s3 = new S3Client({
+
+    region: process.env.S3_BUCKET_REGION,
+    credentials: {
+
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
+    }
+})
+
 
 export const POST = async (req) => {
 
-    try {
-      await connectToDB();
+  try {
+    await connectToDB();
+    
+    
+    const { username, email, password, repeatedPassword } = await req.json();
 
-      const { username, email, password, repeatedPassword } = await req.json();
 
-      const exists = await user.findOne({email})
+    const putObjectCommand = new PutObjectCommand({
 
-      if(exists) {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: filename
+    })
 
-          return new NextResponse("Email Already exists", { status: 500 });
-      }
 
-      if(password !== repeatedPassword) {
+    const signedUrl = await getSignedUrl(s3, putObjectCommand, {
 
-        return new NextResponse("Passwords do not match", { status: 500 });
-      }
+        expiresIn: 60
+    })
 
-      const hashedPassword = await bcrypt.hash(password, 10 )
 
-      const User = new user({ username, email, password: hashedPassword });
-      await User.save();
-      return new NextResponse(JSON.stringify(User), { status: 200 });
-    } catch (error) {
-      
-      return new NextResponse("Failed to create user", { status: 500 });
+    
+    const exists = await user.findOne({ email });
+
+    if (exists) {
+      return new NextResponse("Email Already exists", { status: 500 });
     }
-  };
-  
 
-  export const revalidate = 0;
+    if (password !== repeatedPassword) {
+      return new NextResponse("Passwords do not match", { status: 500 });
+    }
+
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const User = new user({ username, email, password: hashedPassword, profileImageKey: putObjectCommand.input.Key });
+    await User.save();
+    return new NextResponse(JSON.stringify({User, signedUrl}), { status: 200 });
+  } catch (error) {
+    return new NextResponse("Failed to create user", { status: 500 });
+  }
+};
+
+export const revalidate = 0;

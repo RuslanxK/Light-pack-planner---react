@@ -20,19 +20,15 @@ export const options = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
 
       async authorize(credentials, req) {
         try {
-
           await connectToDB();
 
-          const email = credentials?.email
-          const password = credentials?.password
-
-          console.log(email)
+          const { email, password } = credentials;
 
           const foundUser = await user.findOne({ email: email });
 
@@ -48,8 +44,7 @@ export const options = {
 
           return foundUser;
         } catch (error) {
-          console.log(error);
-          console.error()
+          console.error(error);
           return null;
         }
       },
@@ -98,9 +93,12 @@ export const options = {
           session.access_token = token.access_token;
         }
         session.user.id = sessionUser._id.toString();
+        session.user.username = sessionUser.username 
+        session.user.profileImageKey = sessionUser.profileImageKey
         return session;
       }
     },
+
 
     async jwt({ token, account, profile }) {
       if (account) {
@@ -111,23 +109,28 @@ export const options = {
 
 
     async signIn({ profile }) {
+
+
+    
+
       try {
+
         await connectToDB();
-        const userExists = await user.findOne({ email: profile.email });
+        const userExists = await user.findOne({ email: profile?.email });
 
         if (!userExists) {
-          let imageUrl = profile.picture;
+          let imageUrl = profile?.picture;
 
           if (
-            typeof profile.picture === "object" &&
-            profile.picture.data &&
-            profile.picture.data.url
+            typeof profile?.picture === "object" &&
+            profile?.picture?.data &&
+            profile?.picture?.data?.url
           ) {
-            imageUrl = profile.picture.data.url;
+            imageUrl = profile?.picture?.data?.url;
           }
           await user.create({
-            email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
+            email: profile?.email,
+            username: profile?.name?.replace(" ", "").toLowerCase(),
             image: imageUrl || null,
           });
         }
@@ -139,4 +142,5 @@ export const options = {
       }
     },
   },
+  
 };
