@@ -5,8 +5,7 @@ const articleSchema = new Schema({
 
     title: { type: String, trim: true },
     description: { type: String, trim: true },
-    image: { type: Number, min: 0, default: 0 },
-   
+    imageKey: String
   },
   
   { timestamps: true }

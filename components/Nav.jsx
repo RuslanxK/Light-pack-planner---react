@@ -119,11 +119,7 @@ const navigateToBag = (bag) => {
               Articles 
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography fontSize="13px" variant='span'component="span"> Lorem ipsum </Typography>
-            <Typography fontSize="13px" variant='span'component="span"> Lorem ipsum </Typography>
-            <Typography fontSize="13px" variant='span'component="span"> Lorem ipsum </Typography>
-          </AccordionDetails>
+      
         </Accordion>
         <Accordion onClick={() => router.push('/settings')}>
           <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
