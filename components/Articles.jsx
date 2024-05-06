@@ -1,14 +1,19 @@
 "use client"
 
 import React from 'react'
+import { Stack } from '@mui/material'
+import Nav from './Nav'
 
 const Articles = ({articles}) => {
 
-
-    console.log(articles)
-
   return (
-    <div>Articles</div>
+    <Stack>
+      
+      <Nav />
+      
+      Articles
+      
+      </Stack>
   )
 }
 
