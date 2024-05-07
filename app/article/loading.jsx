@@ -1,20 +1,14 @@
 import React from 'react'
-import LinearProgress from '@mui/material/LinearProgress';
 import { Stack } from '@mui/material';
-import Image from 'next/image'
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const Loading = () => {
   return (
-    <Stack display="flex" justifyContent="center" height="100vh"alignItems="center">
+    <Stack display="flex" justifyContent="center" height="100vh" alignItems="center" width="100%">
 
-    <Stack margin="0 auto" mb={3}>
-    <Image src="/logo.png" alt='Light Pack - Planner' width={110} height={70}/>
-    </Stack>
+<CircularProgress color="success" size={70} sx={{marginRight: "210px"}} />
 
-    <Stack width="300px">
-    <LinearProgress color="success" sx={{padding: "2px", borderRadius: "7px"}}/>
-    </Stack>
     </Stack>
   )
 }

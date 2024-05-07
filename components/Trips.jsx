@@ -136,7 +136,7 @@ const Trips = ({trips, bags, session}) => {
     { tripData}
     </div>
 
-  { bags.length >= 1 ? <div className="latestBag">
+  { bags?.length >= 1 ? <div className="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
     <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length > 6 ? `${trips?.latestBag?.name.substring(0, 6)}...` : trips.latestBag?.name} </Typography>
@@ -149,13 +149,13 @@ const Trips = ({trips, bags, session}) => {
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
           <MonitorWeightOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips.latestBagTotalWeight > trips.latestBag?.goal ? "red" : "black"}}>{trips.latestBagTotalWeight ? trips.latestBagTotalWeight.toFixed(2) : 0.00 } / {trips.latestBag?.goal || 0.00 } kg</Typography>
+          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips?.latestBagTotalWeight > trips?.latestBag?.goal ? "red" : "black"}}>{trips?.latestBagTotalWeight ? trips?.latestBagTotalWeight.toFixed(2) : 0.00 } / {trips?.latestBag?.goal || 0.00 } kg</Typography>
         </LatestBagStack>
 
         <LatestBagStack>
         <Typography component="h4" variant='span' fontWeight="300">Total categories </Typography>
           <HorizontalSplitOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-         <Typography component="h3" variant='span' fontWeight="600">{ trips.totalCategories || 0 }</Typography>
+         <Typography component="h3" variant='span' fontWeight="600">{ trips?.totalCategories || 0 }</Typography>
         </LatestBagStack>
 
         <LatestBagStack>

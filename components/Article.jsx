@@ -30,9 +30,9 @@ const Article = ({articleData}) => {
 
   return (
 
-    <Stack height="242px" borderRadius="7px" boxShadow={theme.boxShadow}  sx={{transition: theme.transition, cursor: "pointer", "&:hover": {boxShadow: theme.boxShadowHover}}} onClick={NavigateToInnerArticle}  onMouseOver={() => setArticleHover(true)} onMouseLeave={() => setArticleHover(false)}>
+    <Stack height="222px" borderRadius="7px" boxShadow={theme.boxShadow}  sx={{transition: theme.transition, cursor: "pointer", "&:hover": {boxShadow: theme.boxShadowHover}}} onClick={NavigateToInnerArticle}  onMouseOver={() => setArticleHover(true)} onMouseLeave={() => setArticleHover(false)}>
 
-  <img src={`${process.env.NEXT_PUBLIC_ARTICLE_URL}/${articleData.imageKey}`} width="100%" height={170} alt='article'  style={{borderTopRightRadius: "7px", borderTopLeftRadius: "7px", objectFit: "cover"}} />
+  <img src={`${process.env.NEXT_PUBLIC_ARTICLE_URL}/${articleData.imageKey}`} width="100%" height={150} alt='article'  style={{borderTopRightRadius: "7px", borderTopLeftRadius: "7px", objectFit: "cover"}} />
 
       <Typography component="h2" variant='span' pt={1} pl={2} fontWeight="500" fontSize="18px">{truncateTitle(articleData.title)}</Typography>
       <Typography component="span" variant='span' pl={2}>{truncateTitle(articleData.description)} {articleHover ? <IconButton size='small' sx={{marginLeft: "5px"}}><NearMeOutlinedIcon sx={{fontSize: "17px"}} /></IconButton> : null }</Typography>
