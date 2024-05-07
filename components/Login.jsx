@@ -32,9 +32,10 @@ const Login = () => {
   };
 
 
-  const handleSubmit =  async () => {
+  const handleSubmit =  async (e) => {
 
-  
+     e.preventDefault()
+
      const response = await signIn("credentials", { email: loginData.email, password: loginData.password, redirect: false });
 
      if (response?.error) {
@@ -45,6 +46,7 @@ const Login = () => {
 
     if (response.url && response.ok === true) {
       router.push("/");
+      router.refresh()
     }
   }
   
@@ -65,11 +67,15 @@ const Login = () => {
     <Typography component="span" variant="span" mb={4} width="100%" color="gray">
           Welcome back! Please login to your account
     </Typography>
+    <form onSubmit={handleSubmit}>
     <div style={{display: "flex", marginBottom: "15px", flexDirection: "column", justifyContent: "center", alignItems: "stretch", borderRadius:"10px"}}>
+    
     <TextField type="email" label="Email" name="email" onChange={handleChange} sx={{marginBottom: "15px", background: "white", borderRadius: "7px"}} />
     <TextField type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "15px", background: "white", borderRadius: "7px"}} />
-    <button className="login-button-regular" onClick={handleSubmit}>Log in</button>
+    <button type='submit' className="login-button-regular">Log in</button>
+    
     </div>
+    </form>
 
     <button className='login-button' onClick={loginWithGoogle}> <Stack width="235px" margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/google.png" width="23px" style={{marginRight: "15px"}} alt="google" />Continue with Google </Stack></button>
     <button className='login-button' onClick={loginWithFacebook}> <Stack width="235px" margin="0 auto" display={theme.flexBox} direction="row" alignItems={theme.center}><img src="/facebook.png" width="20px" style={{marginRight: "15px"}} alt="google" />Continue with Facebook </Stack></button>
@@ -78,6 +84,8 @@ const Login = () => {
     { error ? <Stack width="100%" backgroundColor="rgba(255, 0, 0, 0.5)"><Typography p={1.5} color="white">{error}</Typography></Stack> : null }
 
     </Stack>
+    
+
       </div>
     </Stack>
   )

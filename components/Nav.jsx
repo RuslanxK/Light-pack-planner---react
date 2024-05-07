@@ -16,11 +16,14 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { signOut } from "next-auth/react"
 import { Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { usePathname } from "next/navigation"
+import { disableNavBar } from "../utils/disableNavBar"
 
 const Nav = ({bags, session}) => {
 
 const theme = useTheme()
 const router = useRouter()
+const path = usePathname()
 
 const sortedBags = bags?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 const filteredBags = sortedBags?.slice(0, 6)
@@ -83,6 +86,8 @@ const navigateToBag = (bag) => {
 
   return (
 
+    <>
+    {!disableNavBar.includes(path) && (
     <div className="nav">
     <Stack width={theme.nav.width} display={theme.flexBox} justifyContent={theme.between} height={theme.nav.height} backgroundColor="white"> 
     <Stack position={theme.nav.fixed} height={theme.nav.height} borderRight="1px solid #F2F2F2" width={theme.nav.width}>
@@ -110,10 +115,8 @@ const navigateToBag = (bag) => {
             {bagData?.length > 0 ? ( bagData) : ( <Typography component="p" fontSize="13px"> No bags yet</Typography> )}
           </AccordionDetails>
         </Accordion>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
+
+        <Accordion>
           <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" onClick={() => router.push("/articles")}>
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Articles 
@@ -121,6 +124,16 @@ const navigateToBag = (bag) => {
           </AccordionSummary>
       
         </Accordion>
+
+        <Accordion>
+          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" onClick={() => router.push("/articles")}>
+            <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
+              Billing
+            </Typography>
+          </AccordionSummary>
+      
+        </Accordion>
+
         <Accordion onClick={() => router.push('/settings')}>
           <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
@@ -148,7 +161,12 @@ const navigateToBag = (bag) => {
        
     </Stack>
     </div>
-  )
+        
+      )}
+      </>
+   )
+   
 }
+
 
 export default Nav

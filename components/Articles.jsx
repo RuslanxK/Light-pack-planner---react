@@ -79,9 +79,7 @@ const Articles = ({articles, session}) => {
 
   return (
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
-      
-    <Nav />
-
+    
 <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
       
 <div className="main-info">

@@ -18,8 +18,6 @@ import { DatePicker } from "@mui/x-date-pickers-pro";
 import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { useState, useEffect, useTransition} from 'react';
-import Nav from './Nav';
-import MobileNav from './MobileNav'
 
 
 const Trips = ({trips, bags, session}) => {
@@ -111,13 +109,10 @@ const Trips = ({trips, bags, session}) => {
 
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
       
-    <Nav session={session} bags={bags} /> 
 
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 
       <div className="main-info">
-
-        <MobileNav session={session} bags={bags} />
 
        <Typography component="h2" fontWeight="600" variant='span' fontSize="20px" mb={0.5}> 
         Welcome, {session?.user?.name?.split(' ')[0] || session?.user?.username?.split(' ')[0] }

@@ -9,7 +9,6 @@ import FormControl from '@mui/material/FormControl';
 import AddIcon from '@mui/icons-material/Add';
 import { DataGrid, GridToolbar, gridFilteredSortedRowIdsSelector, selectedGridRowsSelector} from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
-import Nav from "../components/Nav"
 
 
 
@@ -48,8 +47,6 @@ const Settings = () => {
   return (
 
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
-
-     <Nav  />
 
      <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
 

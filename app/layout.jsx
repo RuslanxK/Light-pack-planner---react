@@ -5,6 +5,10 @@ import { ThemeProvider} from "@mui/material";
 import { theme } from "../components/custom/theme.jsx";
 import Providers from '../components/Providers'
 import '../style.css'
+import Nav from "../components/Nav.jsx";
+import { Stack } from '@mui/material'
+import { getServerSession } from 'next-auth';
+import {options} from './api/auth/[...nextauth]/options'
 
 
 const poppins = Poppins({
@@ -20,7 +24,13 @@ export const metadata = {
 
 
 
+
+
 export default async function RootLayout({ children }) {
+
+
+  const session = await getServerSession(options)
+
 
   return (
     <html lang="en">
@@ -33,7 +43,10 @@ export default async function RootLayout({ children }) {
       <ThemeProvider theme={theme}>
          <body className={poppins.className} suppressHydrationWarning={true}>
           <AppRouterCacheProvider>
+            <Stack display="flex" flexDirection="row">
+            <Nav session={session} />
            {children}
+           </Stack>
           </AppRouterCacheProvider>
           </body>
           </ThemeProvider>

@@ -16,8 +16,6 @@ import DataSaverOffOutlinedIcon from "@mui/icons-material/DataSaverOffOutlined";
 import NordicWalkingIcon from '@mui/icons-material/NordicWalking';
 import { PieChart, pieArcLabelClasses} from "@mui/x-charts/PieChart";
 import SideItem from '../components/SideItem'
-import Nav from './Nav';
-import MobileNav from './MobileNav'
 import FlipCameraIosOutlinedIcon from '@mui/icons-material/FlipCameraIosOutlined';
 
 
@@ -124,15 +122,13 @@ const InnerBag = ({bagData, items, bags, session}) => {
   return (
 
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
-     <Nav bags={bags} session={session}/>
-     { items?.length ? <div className="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}>{showSideBarMobile === true ? <CloseIcon /> : <FlipCameraIosOutlinedIcon /> }</IconButton></div> : null }
+    { items?.length ? <div className="side-bar-icon-mobile"><IconButton onClick={showHideSideBar} sx={{ width: "55px", height: "55px", zIndex: "99", borderRadius: "100%", position: "fixed", bottom: "15px", left: "15px", backgroundColor: theme.green, color: "white", "&:hover": {backgroundColor: "#32CD32"}}}>{showSideBarMobile === true ? <CloseIcon /> : <FlipCameraIosOutlinedIcon /> }</IconButton></div> : null }
 
     <Box display="flex" flexDirection="row" width={theme.fullWidth} backgroundColor={theme.main.lightestGray} minHeight="100vh"height="100%">
     <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7}>
 
         <div className="main-info">
-        <MobileNav session={session} bags={bags} />
-        <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
+       <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
         <Typography component="h2" variant='span' fontWeight="600">{bagData?.bag?.name}</Typography>
         <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange } }} onClick={openPopup} />
         <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" } }} onClick={openRemovePopup} />
