@@ -10,7 +10,6 @@ const Register = () => {
 
 
   const [registerData, setRegisterData] = useState({})
-
   const [error, setError] = useState("")
 
   const theme = useTheme()
@@ -57,6 +56,12 @@ const Register = () => {
         }
   
     })
+
+      const sendTo = {email: registerData.email}
+
+      const email = await axios.post("/api/emailVerify", sendTo )
+
+       console.log(email)
 
       router.push("/login")
   }
