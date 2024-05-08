@@ -54,18 +54,13 @@ const Register = () => {
   
            "Content-Type": registerData.image.type
         }
-  
     })
-
-      const sendTo = {email: registerData.email}
-
-      const email = await axios.post("/api/emailVerify", sendTo )
-
-       console.log(email)
-
+      const sendTo = {email: registerData.email, id: data.data.User._id}
+      await axios.post("/api/emailVerify", sendTo )
       router.push("/login")
   }
    catch (error) {
+
       setError(error.response.data)
    }
 
