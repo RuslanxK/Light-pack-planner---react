@@ -5,6 +5,7 @@ import { useTheme } from '@emotion/react';
 import { signIn } from "next-auth/react"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
 
   const [loginData, setLoginData] = useState({})
   const [error, setError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const theme = useTheme()
@@ -35,18 +37,30 @@ const Login = () => {
   const handleSubmit =  async (e) => {
 
      e.preventDefault()
+     setIsLoading(true)
 
      const response = await signIn("credentials", { email: loginData.email, password: loginData.password, redirect: false });
 
      if (response?.error) {
+
       setError("Invalid email or password");
+      setIsLoading(false)
+
     } else {
       setError(null);
     }
 
     if (response.url && response.ok === true) {
-      router.push("/");
-      router.refresh()
+      
+      setTimeout(() => {
+
+        setIsLoading(false)
+        router.push("/");
+        router.refresh()
+        
+      }, 1500);
+    
+    
     }
   }
   
@@ -72,7 +86,7 @@ const Login = () => {
     
     <TextField type="email" label="Email" name="email" onChange={handleChange} sx={{marginBottom: "15px", background: "white", borderRadius: "7px"}} />
     <TextField type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "15px", background: "white", borderRadius: "7px"}} />
-    <button type='submit' className="login-button-regular">Log in</button>
+    <button type='submit' className="login-button-regular" style={{display: "flex", justifyContent: "center"}}>Log in { isLoading ? <CircularProgress color="inherit" size={20} sx={{marginLeft: "15px"}} /> : null }</button>
     
     </div>
     </form>

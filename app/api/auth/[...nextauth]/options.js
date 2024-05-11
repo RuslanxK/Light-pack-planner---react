@@ -36,6 +36,11 @@ export const options = {
             throw new Error("Invalid email or password");
           }
 
+          if(foundUser.verifiedCredentials === false) {
+
+            throw new Error("User is not verified");
+          }
+
           const isCorrect = await bcrypt.compare(password, foundUser.password);
 
           if (!isCorrect) {
@@ -43,6 +48,7 @@ export const options = {
           }
 
           return foundUser;
+
         } catch (error) {
           console.error(error);
           return null;

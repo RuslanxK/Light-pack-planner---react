@@ -94,6 +94,7 @@ const Register = () => {
      console.log(error)
 
       setError(error.response.data)
+      setIsLoading(false)
    }
 
   }
@@ -127,16 +128,6 @@ const Register = () => {
    <Stack display="flex" direction="row" alignItems="center">
 
 
-   {registerData.image && (
-          <img
-            src={URL.createObjectURL(registerData.image)}
-            alt="Profile"
-            width="40px"
-            height="40px"
-            style={{ borderRadius: "100px", objectFit: "cover", marginRight: "10px" }}
-          />
-        )}
-
     <input
         required
         name='image'
@@ -152,8 +143,8 @@ const Register = () => {
 
     <TextField required inputRef={usernameRef} type="text" label="Username" name='username' onChange={handleChange} sx={{marginBottom: "15px", marginTop: "25px", borderRadius: "7px"}} />
     <TextField required inputRef={emailRef} type="email" label="Email" name="email" onChange={handleChange} sx={{marginBottom: "15px", borderRadius: "7px"}} InputProps={{ style: { border: "2px" } }} />
-    <TextField required inputRef={repeatPasswordRef} type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "15px", borderRadius: "7px"}} />
-    <TextField required inputRef={passwordRef} type="password" label="Repeat password" name='repeatedPassword' onChange={handleChange} sx={{marginBottom: "15px", borderRadius: "7px"}} />
+    <TextField required inputRef={repeatPasswordRef} inputProps={{minLength : 10}} type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "15px", borderRadius: "7px"}} />
+    <TextField required inputRef={passwordRef} inputProps={{minLength : 10}} type="password" label="Repeat password" name='repeatedPassword' onChange={handleChange} sx={{marginBottom: "15px", borderRadius: "7px"}} />
     <button type='submit' className="login-button-regular" style={{display: "flex", justifyContent: "center"}}>Create Account   { isLoading ? <CircularProgress color="inherit" size={20} sx={{marginLeft: "15px"}} /> : null }</button>
     <Typography component="span" variant="span" width="100%" color="gray" mb={2}>Already have an account? <Typography onClick={() => router.push("/login")} component="span" variant="span" color="blue" sx={{textDecoration: "underline", cursor: "pointer"}}>Sign in</Typography></Typography>
 
