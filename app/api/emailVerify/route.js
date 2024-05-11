@@ -27,7 +27,7 @@ export const POST = async (req) => {
       <h2 style="font-weight: 500; color: black";>Verify your email address</h2>
       <hr class="solid" style="width: 50%; border: 1px solid #ededed;">
       <p style="color: gray; font-size: 15px;">In order to use your Light Pack Planner account, you need to confirm your email address.</p>
-      <a href="http://localhost:3000/${id}"><button style="padding: 15px; margin-bottom: 15px; border: none; color: white; width: 300px; background-color: #08CA28";>Verify your email address</button></a>
+      <a href="http://localhost:3000/verify?id=${id}"><button style="padding: 15px; margin-bottom: 15px; border: none; color: white; width: 300px; background-color: #08CA28";>Verify your email address</button></a>
       <hr class="solid" style="margin-bottom: 15px; width: 75px; border: 1px solid #ededed;">
       <span style="color: gray; font-size: 12px;">if you did not sign up for this account you can ignore this email and the account will be deleted.</span>
     </div>

@@ -22,6 +22,12 @@ const userSchema = new Schema({
   profileImageKey: {
 
       type: String
+  },
+
+  verifiedCredentials: {
+
+     type: Boolean,
+     default: false
   }
 
 });
