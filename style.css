@@ -12,6 +12,7 @@
   margin-bottom: 20px;
   font-weight: 600;
   width: 100%;
+  line-height: 1;
 }
 
 @-webkit-keyframes fadeIn {
@@ -50,7 +51,6 @@
 
 .login-button,
 .login-button-regular {
-  
   padding: 13.5px;
   font-size: 16px;
   cursor: pointer;
@@ -71,9 +71,7 @@
   padding: 15px;
 }
 
-
 .login-button-regular:hover {
-
   background-color: #08ca28;
 }
 
@@ -177,8 +175,6 @@
   width: 500px;
 }
 
-
-
 ::-webkit-file-upload-button {
   background: rgb(182, 182, 182);
   color: white;
@@ -188,11 +184,7 @@
   padding-left: 18px;
   padding-right: 18px;
   border-radius: 5px;
-  
 }
-
-
-
 
 @media only screen and (max-width: 768px) {
   #logo-mobile-login {
@@ -256,8 +248,6 @@
   .boxes {
     display: flex;
     flex-direction: column;
-  
-   
   }
 
   .scroll-div {
