@@ -1,6 +1,6 @@
 "use client"
 
-import {Fragment, useRef} from "react"
+import {Fragment} from "react"
 import { Stack, TextField, Typography, Button } from '@mui/material'
 import { useTheme } from '@emotion/react';
 import { useState } from 'react';
@@ -8,13 +8,11 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
-import { styled } from '@mui/material/styles';
-import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
-import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import EditIcon from '@mui/icons-material/Edit';
 
-const Register = () => {
 
+const Register = () => {
 
   const [registerData, setRegisterData] = useState({})
   const [error, setError] = useState("")
@@ -24,29 +22,14 @@ const Register = () => {
 
   const theme = useTheme()
   const router = useRouter();
-  const usernameRef = useRef(null);
-  const emailRef = useRef(null)
-  const imageRef = useRef(null)
-  const passwordRef = useRef(null)
-  const repeatPasswordRef = useRef(null)
-
-
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
+  
 
   
   const handleFileChange = (event) => {
     const { name } = event.target;
     const selectedFile = event.target.files[0];
+
+
     if (selectedFile) {
       setRegisterData({ ...registerData, [name]: selectedFile });
       setError("");
@@ -63,17 +46,15 @@ const Register = () => {
 
 
 
-  const resetFields = () => {
-    usernameRef.current.value = null;
-    emailRef.current.value = null;
-    imageRef.current.value = null;
-    passwordRef.current.value = null;
-    repeatPasswordRef.current.value = null;
-  };
-
 
   const register =  async (e) => {
     e.preventDefault()
+
+    if (!registerData.image || !(registerData.image instanceof File)) {
+      setError("Profile picture is required.");
+      return;
+    }
+
     if (registerData.image && registerData.image.size > 2 * 1024 * 1024) {
       setError("File size exceeds the maximum limit of 2 MB.");
       return; 
@@ -85,6 +66,7 @@ const Register = () => {
 
       const data = await axios.post('/api/register', registerData)
 
+
       const awsUrl = data.data.signedUrl
 
       await fetch(awsUrl, {
@@ -95,24 +77,25 @@ const Register = () => {
            "Content-Type": registerData.image.type
         }
     })
+
       const sendTo = {email: registerData.email, id: data.data.User._id}
+      
       await axios.post("/api/emailVerify", sendTo )
-      resetFields();
-      setIsLoading(false)
       setSuccess("Account created successfully. Please check your email to verify your account.");
+      setIsLoading(false)
+   
+         
   }
    catch (error) {
 
      console.log(error)
 
-      setError(error.response.data)
       setIsLoading(false)
+      setError(error?.response?.data)
    }
-
   }
 
   
-
 
   return (
     <Stack display={theme.flexBox} direction="row" justifyContent={theme.end} sx={{overflowY: "hidden"}}>
@@ -145,27 +128,29 @@ const Register = () => {
       disableElevation
       role={undefined}
       variant="outlined"
-      sx={{ width: registerData.image ? "auto" : "100%", marginBottom: "5px", padding: registerData.image ? "0px" : "20px", borderStyle: registerData.image ? "none" : "dashed", borderWidth: "2px", '&:hover': { backgroundColor: 'white', borderStyle: registerData.image ? "none" : "dashed", borderWidth: "2px"}}}
+      sx={{ width:"auto", borderRadius: "100px", marginBottom: "5px", padding: registerData.image ? "0px" : "20px", borderStyle: registerData.image ? "none" : "dashed", borderWidth: "2px", '&:hover': { backgroundColor: 'white', borderStyle: registerData.image ? "none" : "dashed", borderWidth: "2px"}}}
      >
       
-      { registerData.image ?  <Fragment> <img width="100px" height="100px" style={{borderRadius: "100px", objectFit: "cover"}} src={URL.createObjectURL(registerData.image)} /> { isHover ? <EditIcon sx={{position: "absolute", fill: "white"}} /> : null } </Fragment> : <CloudUploadOutlinedIcon sx={{fontSize: "50px"}}/>}
+      { registerData.image ?  <Fragment> <img width="80px" height="80px" style={{borderRadius: "100px", objectFit: "cover"}} src={URL.createObjectURL(registerData.image)} /> { isHover ? <EditIcon sx={{position: "absolute", fill: "white"}} /> : null } </Fragment> : <PersonAddAlt1Icon sx={{fontSize: "40px"}}/>}
 
-      <VisuallyHiddenInput type="file" required  name='image' inputRef={imageRef}  accept="image/jpeg,image/png,image/webp" onChange={handleFileChange} />
+      <input type="file" name='image' style={{width: "0px"}} accept="image/jpeg,image/png,image/webp" onChange={handleFileChange} />
 
     </Button>  
      
       </Stack>
 
 
-    <TextField required inputRef={usernameRef} type="text" label="Username" name='username' onChange={handleChange} sx={{marginBottom: "12px", marginTop: "20px", borderRadius: "7px"}} />
-    <TextField required inputRef={emailRef} type="email" label="Email" name="email" onChange={handleChange} sx={{marginBottom: "12px", borderRadius: "7px"}} InputProps={{ style: { border: "2px" } }} />
-    <TextField required inputRef={repeatPasswordRef} inputProps={{minLength : 10}} type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "12px", borderRadius: "7px"}} />
-    <TextField required inputRef={passwordRef} inputProps={{minLength : 10}} type="password" label="Repeat password" name='repeatedPassword' onChange={handleChange} sx={{marginBottom: "20px", borderRadius: "7px"}} />
+    <TextField required type="text" label="Username" name='username' onChange={handleChange} sx={{marginBottom: "12px", marginTop: "20px", borderRadius: "7px"}} />
+    <TextField required type="email" label="Email" name="email" onChange={handleChange} sx={{marginBottom: "12px", borderRadius: "7px"}} InputProps={{ style: { border: "2px" } }} />
+    <TextField required inputProps={{minLength : 10}} type="password" label="Password" name='password' onChange={handleChange} sx={{marginBottom: "12px", borderRadius: "7px"}} />
+    <TextField required inputProps={{minLength : 10}} type="password" label="Repeat password" name='repeatedPassword' onChange={handleChange} sx={{marginBottom: "20px", borderRadius: "7px"}} />
     <button type='submit' className="login-button-regular" style={{display: "flex", justifyContent: "center"}}>Create Account   { isLoading ? <CircularProgress color="inherit" size={20} sx={{marginLeft: "15px"}} /> : null }</button>
-    <Typography component="span" variant="span" width="100%" color="gray" mb={2}>Already have an account? <Typography onClick={() => router.push("/login")} component="span" variant="span" color="blue" sx={{textDecoration: "underline", cursor: "pointer"}}>Sign in</Typography></Typography>
+    <Typography component="span" variant="span" width="100%" color="gray" mb={2}>Already have an account? <Typography onClick={() => router.push("/login")} component="span" variant="span" color="#2d7fb5" sx={{cursor: "pointer"}}>Sign in</Typography></Typography>
 
     { error ?  <Alert severity="error">{error}</Alert> : null }
     {success ?  <Alert severity="success">{success}</Alert>: null }
+
+
     </form>
 
     </Stack>

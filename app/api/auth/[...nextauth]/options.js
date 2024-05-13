@@ -3,7 +3,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { connectToDB } from "../../../../utils/database";
 import user from "../../../../models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
 export const options = {
   providers: [
@@ -36,8 +36,7 @@ export const options = {
             throw new Error("Invalid email or password");
           }
 
-          if(foundUser.verifiedCredentials === false) {
-
+          if (foundUser.verifiedCredentials === false) {
             throw new Error("User is not verified");
           }
 
@@ -48,7 +47,6 @@ export const options = {
           }
 
           return foundUser;
-
         } catch (error) {
           console.error(error);
           return null;
@@ -99,12 +97,11 @@ export const options = {
           session.access_token = token.access_token;
         }
         session.user.id = sessionUser._id.toString();
-        session.user.username = sessionUser.username 
-        session.user.profileImageKey = sessionUser.profileImageKey
+        session.user.username = sessionUser.username;
+        session.user.profileImageKey = sessionUser.profileImageKey;
         return session;
       }
     },
-
 
     async jwt({ token, account, profile }) {
       if (account) {
@@ -113,16 +110,16 @@ export const options = {
       return token;
     },
 
-
-    async signIn({ profile }) {
-
-
-    
-
+    async signIn({ profile, credentials }) {
       try {
 
         await connectToDB();
+
+        if (!credentials) {
         const userExists = await user.findOne({ email: profile?.email });
+
+        console.log(profile);
+        console.log(userExists);
 
         if (!userExists) {
           let imageUrl = profile?.picture;
@@ -141,6 +138,8 @@ export const options = {
           });
         }
 
+      }
+
         return true;
       } catch (error) {
         console.log(error);
@@ -148,5 +147,4 @@ export const options = {
       }
     },
   },
-  
 };
