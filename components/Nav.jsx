@@ -1,6 +1,6 @@
 "use client"
 
-import { Stack, Typography, IconButton } from '@mui/material'
+import { Stack, Typography, IconButton, Switch } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@emotion/react';
@@ -8,30 +8,56 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { styled } from "@mui/material/styles";
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import WindowOutlinedIcon from '@mui/icons-material/WindowOutlined';
 import HikingOutlinedIcon from "@mui/icons-material/HikingOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PaymentIcon from '@mui/icons-material/Payment';
 import { signOut } from "next-auth/react"
 import { Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { usePathname } from "next/navigation"
 import { disableNavBar } from "../utils/disableNavBar"
+import BackpackIcon from '@mui/icons-material/Backpack';
+import TranslateComponent from "../components/TranslateComponent"
+import axios from 'axios';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-const Nav = ({bags, session}) => {
+const Nav = ({bags, session, user}) => {
 
 const theme = useTheme()
 const router = useRouter()
 const path = usePathname()
 
+const [mode, setMode] = useState(user.mode);
+const [isTransitionStarted, startTransition] = useTransition();
+
+
+
+const toggleTheme = async () => {
+      
+  const newMode = mode === "light" ? "dark" : "light";
+  setMode(newMode);
+
+  const obj = {mode: newMode}
+  try {
+         await axios.put(`/api/user/${session?.user.id}`, obj)
+         startTransition(router.refresh)
+       }
+         catch(err) {
+           console.log(err)
+       }
+};
+
 const sortedBags = bags?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-const filteredBags = sortedBags?.slice(0, 6)
+const filteredBags = sortedBags?.slice(0, 4)
 
 
 const bagData = filteredBags?.map((bag) => {
-      return <Typography onClick={() =>  navigateToBag(bag)} fontSize="14px" variant='span'component="span" mt={1} 
-      sx={{ cursor: "pointer" ,"&:hover": { color: theme.green }}} key={bag._id}> <Image src="/backpack.png" alt='backpack' width={14} height={14} style={{marginRight: "3px"}} /> {bag?.name?.length > 10 ? `${bag?.name?.substring(0, 12)}...` : bag?.name}</Typography>
+      return <Typography onClick={() =>  navigateToBag(bag)} fontSize="14px" variant='span'component="span" mt={0.5} ml={0.8} 
+      sx={{ cursor: "pointer" ,"&:hover": { color: theme.green }}} key={bag._id}> <BackpackIcon sx={{fontSize: "15px", color: "#4a4a4a", marginRight: "5px"}} /> {bag?.name?.length > 10 ? `${bag?.name?.substring(0, 12)}...` : bag?.name}</Typography>
   })
 
 
@@ -45,8 +71,10 @@ const [expanded, setExpanded] = useState("panel1");
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
-  border: `2px solid #F2F2F2`,
+  border: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #F2F2F2",
+  background: "none",
   borderRight: "0px",
+  borderLeft: "0px",
   "&:not(:last-child)": { borderBottom: 0 },
   "&::before": {
     display: "none",
@@ -62,11 +90,11 @@ const AccordionSummary = styled((props) => (
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  borderTop: "2px solid #F2F2F2",
+  borderTop: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #F2F2F2",
   display: theme.flexBox,
   flexDirection: "column",
   alignItems: theme.start,
-  marginLeft: theme.spacing(1),
+ 
 }));
 
 
@@ -88,11 +116,12 @@ const navigateToBag = (bag) => {
 
     <>
     {!disableNavBar.includes(path) && (
-    <div className="nav">
-    <Stack width={theme.nav.width} display={theme.flexBox} justifyContent={theme.between} height={theme.nav.height} backgroundColor="white"> 
-    <Stack position={theme.nav.fixed} height={theme.nav.height} borderRight="1px solid #F2F2F2" width={theme.nav.width}>
+    <div className="nav" style={{background: theme.palette.mode === "dark" ? "#171717" : null}}>
+    <Stack  width={theme.nav.width} display={theme.flexBox}  height={theme.nav.height}> 
+    <Stack position={theme.nav.fixed} justifyContent="space-between" height={theme.nav.height} borderRight={theme.palette.mode === "dark" ? `2px solid ${theme.main.darkColor}` : "1px solid #F2F2F2"} width={theme.nav.width}>
+    <Stack>
     <Stack margin="0 auto" pt={2} pb={2} onClick={() => router.push('/')}>
-    <Image src="/logo.png" alt='Light Pack - Planner' width={110} height={70}/>
+    <Image src={ theme.palette.mode === "dark" ? "/white-logo.png" : "/logo.png"} alt='Light Pack - Planner' width={110} height={70}/>
     </Stack> 
 
     <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")} onClick={() => router.push("/")}>
@@ -100,6 +129,7 @@ const navigateToBag = (bag) => {
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between,"&:hover": { color: theme.green }}}>
               Home 
             </Typography>
+            <WindowOutlinedIcon sx={{fontSize: "20px", color: "#4a4a4a"}} />
           </AccordionSummary>
         </Accordion>
         <Accordion
@@ -110,9 +140,10 @@ const navigateToBag = (bag) => {
             <Typography fontSize="14px" variant='span' width={theme.fullWidth} sx={{ display: theme.flexBox, justifyContent: theme.between, "&:hover": { color: theme.green }, }} >
               Recent Bags 
             </Typography>
+            <HikingOutlinedIcon sx={{fontSize: "20px", color: "#4a4a4a"}} />
           </AccordionSummary>
           <AccordionDetails>
-            {bagData?.length > 0 ? ( bagData) : ( <Typography component="p" fontSize="13px"> No bags yet</Typography> )}
+            {bagData?.length > 0 ? ( bagData) : ( <Typography component="p" fontSize="13px" ml={1}> No bags yet</Typography> )}
           </AccordionDetails>
         </Accordion>
 
@@ -121,15 +152,17 @@ const navigateToBag = (bag) => {
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Articles 
             </Typography>
+            <PublicOutlinedIcon sx={{fontSize: "20px", color: "#4a4a4a"}} />
           </AccordionSummary>
       
         </Accordion>
 
         <Accordion>
-          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" onClick={() => router.push("/articles")}>
+          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" onClick={() => router.push("/billing")}>
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Billing
             </Typography>
+            <PaymentIcon sx={{fontSize: "20px", color: "#4a4a4a"}}/>
           </AccordionSummary>
       
         </Accordion>
@@ -139,26 +172,35 @@ const navigateToBag = (bag) => {
             <Typography fontSize="14px" variant='span' width="100%" sx={{ display: theme.flexBox, justifyContent: theme.between, alignItems: theme.contentCenter, "&:hover": { color: theme.green },}}>
               Settings 
             </Typography>
+            <SettingsOutlinedIcon sx={{fontSize: "20px", color: "#4a4a4a"}} />
           </AccordionSummary>
         </Accordion>
 
-        <button className='premium'>Upgrade to Premium</button>
+        <button className='premium'>Planner Premium</button>
 
         {session && session?.user ? (
-  <Stack display={theme.flexBox} pb={2} mt={2} alignItems={theme.center}>
-    <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{session?.user?.name || session?.user?.username}</Typography>
+  <Stack display={theme.flexBox} pb={1} mt={1} alignItems={theme.center}>
+
+  <TranslateComponent />
+
+
+    <Tooltip title={<><Typography p={0.2} variant='span' component="h3" fontWeight="300" color="inherit">{user.username}</Typography>
       <Typography variant='span'p={0.2} component="h3" fontWeight="300" color="inherit">{session?.user?.email}</Typography>
     </>
   }>
-     <IconButton sx={{marginBottom: "5px"}}><Image src={session?.user?.image || `${process.env.NEXT_PUBLIC_PROFILE_URL}/${session?.user?.profileImageKey}`} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
+     <IconButton sx={{marginTop: "5px"}}><Image src={session?.user?.image || `${process.env.NEXT_PUBLIC_PROFILE_URL}/${session?.user?.profileImageKey}`} alt='user' style={{ borderRadius: "100%" }} width={35} height={35} /></IconButton>
      </Tooltip>
-      <button className='logout' onClick={logOut}> <LogoutIcon sx={{fontSize: "15px", marginRight: "5px"}}/> Log out</button>
-     </Stack>
-) : null}
-        </Stack>
-     
+      <Typography className='logout' fontSize="15px" onClick={logOut}> <LogoutIcon sx={{fontSize: "17px", marginRight: "5px"}}/> Log out</Typography>
 
-       
+
+     </Stack>
+     
+) : null}
+
+</Stack>
+       <Stack display="flex" direction="row" justifyContent="center" alignItems="center" mb={1}><Typography component="span" variant="span" fontWeight="600" mr={1}><LightModeIcon sx={{color: "#4a4a4a"}}/></Typography> <Switch onChange={toggleTheme} checked={mode === "dark"} />  <Typography component="span" variant="span" ml={1} fontWeight="600"><DarkModeIcon sx={{color: "#4a4a4a"}}/></Typography></Stack>
+        </Stack>
+    
     </Stack>
     </div>
         

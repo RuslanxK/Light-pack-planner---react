@@ -1,5 +1,4 @@
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import { connectToDB } from "../../../../utils/database";
 import user from "../../../../models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -12,10 +11,6 @@ export const options = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
 
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    }),
 
     CredentialsProvider({
       name: "credentials",
@@ -99,6 +94,8 @@ export const options = {
         session.user.id = sessionUser._id.toString();
         session.user.username = sessionUser.username;
         session.user.profileImageKey = sessionUser.profileImageKey;
+        session.user.weightOption = sessionUser.weightOption
+        session.user.distance = sessionUser.distance
         return session;
       }
     },

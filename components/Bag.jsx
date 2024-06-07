@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useTransition} from 'react'
-import { Stack, Typography, IconButton, Autocomplete, Button, TextField} from '@mui/material'
+import { Stack, Typography, IconButton, Autocomplete, Button, TextField, Tooltip} from '@mui/material'
 import Image from 'next/image'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useRouter } from 'next/navigation';
@@ -60,11 +60,11 @@ const Bag = ({bagData, trips, session}) => {
   const isOptionEqualToValue = (option, value) => option._id === value?._id;
 
 
-  return (
-    <Stack onMouseOver={() => setTripHover(true)} onMouseLeave={() => setTripHover(false)} borderRadius={theme.radius} height={theme.bags.height} boxShadow={theme.boxShadow} sx={{cursor: "pointer", transition: theme.transition, '&:hover': {boxShadow: theme.boxShadowHover}}} 
+  return ( 
+    <Stack backgroundColor={theme.palette.mode === "dark" ? theme.main.darkColor : null } onMouseOver={() => setTripHover(true)} onMouseLeave={() => setTripHover(false)} borderRadius={theme.radius} height={theme.bags.height} boxShadow={theme.boxShadow} sx={{cursor: "pointer", transition: theme.transition, '&:hover': {boxShadow: theme.boxShadowHover}}} 
     display={theme.flexBox} justifyContent={theme.between} alignItems={theme.center}>
 
-    <IconButton onClick={openPopup} sx={{marginLeft: "auto", marginTop: "4px", marginRight: "4px"}}><ContentCopyIcon sx={{fontSize: "14px"}}/></IconButton>
+    <Tooltip title="Duplicate"><IconButton onClick={openPopup} sx={{marginLeft: "auto", marginTop: "4px", marginRight: "4px"}}><ContentCopyIcon sx={{fontSize: "14px"}}/></IconButton></Tooltip>
     <Image src="/backpack.png" width={60} height={60} alt='bag' priority style={{marginBottom: "10px"}} onClick={NavigateToInnerBag}/>
       <Typography height="25px" marginRight="auto" pl={2} borderRadius="7px" pb={1} component="span" variant='span' fontSize="14px" display={theme.flexBox} alignItems={theme.left} justifyContent={theme.start} 
       onClick={NavigateToInnerBag}>{bagData?.name?.length > 25 ? `${bagData?.name?.substring(0, 25)}..` : bagData?.name}  { tripHover ? <IconButton onClick={NavigateToInnerBag} size='small' sx={{marginLeft: "5px"}}><NearMeOutlinedIcon  sx={{fontSize: "17px"}}  /></IconButton> : null }</Typography>

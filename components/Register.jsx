@@ -46,7 +46,6 @@ const Register = () => {
 
 
 
-
   const register =  async (e) => {
     e.preventDefault()
 
@@ -102,7 +101,7 @@ const Register = () => {
       
       <div className="login-img">
         <img id="hiking-image" src="/hiking-2.jpg" alt="hiking" width="100%" style={{objectFit: "cover", height:"100vh" }} /> 
-        <img id="logo" src="/logo.png" alt="logo" width="110px" height="70" style={{ position: "absolute", top: "16px", left: '35px' }}/> 
+        <img id="logo" onClick={() => router.push('/login')} src="/logo.png" alt="logo" width="110px" height="70" style={{ position: "absolute", top: "16px", left: '35px' }}/> 
       </div>
 
 

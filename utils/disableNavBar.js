@@ -3,4 +3,6 @@ export const disableNavBar = [
   "/login",
   "/verify",
   "/reset-password",
+  "/new-password",
+  "/share"
 ];

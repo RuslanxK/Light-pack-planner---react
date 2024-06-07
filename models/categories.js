@@ -9,6 +9,7 @@ const categorySchema = new Schema({
     tripId: String,
     bagId: String,
     name: { type: String, trim: true },
+    order: {type: Number, default: null},
    
 })
 

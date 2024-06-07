@@ -1,6 +1,7 @@
 import { models, Schema, model } from "mongoose";
 
 const userSchema = new Schema({
+  
   email: {
     type: String,
     unique: [true, "Email is already exists!"],
@@ -11,8 +12,20 @@ const userSchema = new Schema({
     type: String,
   },
 
+  birthdate: {
+
+     type: String,
+     default: "2024-01-01T00:00:00.000Z"
+  },
+
   password: {
       type: String,
+  },
+
+  weightOption: {
+
+      type: String,
+      default: "lb"
   },
 
   image: {
@@ -20,15 +33,59 @@ const userSchema = new Schema({
   },
 
   profileImageKey: {
-
       type: String
   },
 
   verifiedCredentials: {
-
      type: Boolean,
      default: false
-  }
+  },
+
+  changingPassword: {
+      type: Boolean,
+      default: false
+  },
+
+
+  passwordResetTokenExpires: {
+       type: Date, 
+       default: null,
+  },
+
+
+  emailToken: { 
+    type: String, 
+    default: null 
+  },
+
+
+  isActive: { 
+    type: Boolean, 
+    required: true, 
+    default: false 
+  },
+
+
+  distance: {
+
+     type: String,
+     default: "Miles"
+  },
+
+
+  mode: {
+
+       type: String,
+       default: "light"
+  },
+  
+
+  isAdmin: { 
+    type: Boolean,
+    required: true, 
+    default: false
+  
+  },
 
 });
 

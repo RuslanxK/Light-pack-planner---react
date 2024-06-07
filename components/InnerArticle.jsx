@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Nav from './Nav'
-import { Container, Typography, Stack, Button } from '@mui/material'
+import { Container, Typography, Stack, Link } from '@mui/material'
 import { useTheme } from '@emotion/react';
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +16,7 @@ const InnerArticle = ({articleData}) => {
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
 
 
-        <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+        <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} minHeight="100vh">
 
         <img src={`${process.env.NEXT_PUBLIC_ARTICLE_URL}/${articleData.imageKey}`} height="500px" style={{objectFit: "cover"}} alt='article' />
 
@@ -28,7 +28,7 @@ const InnerArticle = ({articleData}) => {
 
         </Stack>
 
-        <Button variant="contained" disableElevation={true} onClick={() => router.push("/articles")}>Back to all articles</Button>
+        <Link sx={{cursor: "pointer"}} onClick={() => router.push("/articles")}>Back to all articles</Link>
 
         </div>
 

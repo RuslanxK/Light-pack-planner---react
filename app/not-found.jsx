@@ -1,32 +1,13 @@
 "use client"
 
-import { Stack, Typography, Button} from "@mui/material"
+import { Stack, Typography, Link} from "@mui/material"
 import { useRouter } from 'next/navigation';
-import Lottie from "lottie-web";
-import { useEffect, useRef } from "react";
 import { useTheme } from '@emotion/react';
 
 export default function NotFound() {
 
   const router = useRouter();
   const theme = useTheme()
-
-  const container = useRef(null)
-
-
-  useEffect(() => {
-
-     Lottie.loadAnimation({
-        container: container.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        animationData: require('../components/notfound.json')
-     })
-
-     return () => { Lottie.destroy() }
-
-  }, []);
 
 
     const navigateToHome = () => {
@@ -35,12 +16,13 @@ export default function NotFound() {
 
   return( 
 
-     <Stack display="flex" justifyContent="center" width="100%" alignItems="center" height="100vh">
-        <div className="container" ref={container}></div>
+     <Stack display="flex" justifyContent="center" width="100%" alignItems="center" height="100vh" mr="210px">
       <Stack p={2}>
-      <Typography component="h1" variant="span" fontWeight="bold" fontSize="40px">Sorry</Typography>
-      <Typography component="h2" variant="span" fontWeight="400" fontSize="25px">We couldn't find that page.</Typography>
-      <button class="premium" onClick={navigateToHome}> Light pack - planner's home page</button>
+      <img src="/notfound.jpg" width="350px" style={{margin: "0 auto"}} />
+      <Typography component="h1" variant="span" fontWeight="400" fontSize="30px" mb={2.5} textAlign="center">We couldn't connect the dots.</Typography>
+      <Typography component="span" variant="span" fontWeight="400" mb={2.5} textAlign="center">This page was not found. You may have mistyped the <br /> address or the page may have moved.</Typography>
+      <Link onClick={navigateToHome} width="230px" sx={{cursor: "pointer", margin: "0 auto", color: theme.green, textDecorationColor: theme.green}} textAlign="center">Take me to the home page</Link>
+
       </Stack>
      </Stack>
   )

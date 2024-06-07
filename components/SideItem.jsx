@@ -47,7 +47,8 @@ const closePopup = () => {
 const addItemToCategory = async (e) => {
     e.preventDefault()
 
-    const itemObj = {tripId: itemToCategory.tripId, bagId: itemToCategory.bagId, categoryId: itemToCategory.categoryId, 
+  
+    const itemObj = {userId: itemData.creator, tripId: itemToCategory.tripId, bagId: itemToCategory.bagId, categoryId: itemToCategory.categoryId, 
       name: itemData.name, description: itemData.description, link: itemData.link, priority: itemData.priority, qty: itemData.qty, weight: itemData.weight, wgtOpt: itemData.wgtOpt, worn: itemData.worn}
 
     try {
@@ -102,4 +103,4 @@ const addItemToCategory = async (e) => {
   )
 }
 
-export default SideItem
+export default React.memo(SideItem)

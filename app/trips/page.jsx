@@ -25,8 +25,8 @@ const getTrips = async (session) => {
 }
 
 
-const getTrip = async (id) => {
-  const res = await fetch(`${process.env.API_URL}/api/trips/${id}`, { cache: 'no-store'});
+const getTrip = async (id, session) => {
+  const res = await fetch(`${process.env.API_URL}/api/trips/${id}/${session?.user?.id}`, { cache: 'no-store'});
   if(!res.ok) {
     console.error()
    }
@@ -39,7 +39,7 @@ const page = async({searchParams}) => {
   const session = await getServerSession(options)
   const id = searchParams.id
 
-  const trip = await getTrip(id)
+  const trip = await getTrip(id, session)
   const trips = await getTrips(session)
   const bags = await getBags(session)
 

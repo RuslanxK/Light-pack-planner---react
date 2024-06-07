@@ -27,23 +27,28 @@ export const GET = async (req, {params}) => {
 
 
 export const PUT = async (req, { params }) => {
-    try {
-        
-      await connectToDB();
-  
-      const User = await user.findOne({ _id: params.id });
-  
-      if (!User) {
-        return new NextResponse('User not found', { status: 404 });
-      }
-  
-      const { verifiedCredentials } = await req.json();
-  
-      Object.assign(User, { verifiedCredentials });
-  
-      await User.save();
-      return new NextResponse('User is Updated Successfully', { status: 200 });
-    } catch (err) {
-      return new NextResponse('Failed to update User', { status: 500 });
+  try {
+    await connectToDB();
+
+    const User = await user.findOne({ _id: params.id });
+
+    if (!User) {
+      return new NextResponse('User not found', { status: 404 });
     }
-  };
+
+    // Get the entire request body
+    const requestBody = await req.text();
+    const bodyData = JSON.parse(requestBody);
+
+    // Update User fields using the data from the request body
+    Object.keys(bodyData).forEach(key => {
+      User[key] = bodyData[key];
+    });
+
+    await User.save();
+    return new NextResponse('User is Updated Successfully', { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return new NextResponse('Failed to update User', { status: 500 });
+  }
+};

@@ -1,11 +1,8 @@
 "use client"
 
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
-export const theme = createTheme({
-
-
-
+const commonProperties = {
   flexBox: "flex",
   row: "row",
   center: "center",
@@ -20,77 +17,68 @@ export const theme = createTheme({
   transition: "0.3s",
   cover: "cover",
   fullWidth: "100%",
-
   green: "#00ac1c",
   red: "#DC143C",
   redHover: "#B22222",
   orange: "#ff731c",
-
   main: {
-     
-      lightGray: "#f4f4f4",
-      lightestGray: "#fcfcfc"
+    lightGray: "#f4f4f4",
+    lightestGray: "#fcfcfc",
+    darkColor: "#2A2A2A"
   },
-
   logo: {
-
-     marginTop: "10px"
+    marginTop: "10px"
   },
-
   nav: {
-
-     fixed: "fixed",
-     width: "210px",
-     height: "100vh"
+    fixed: "fixed",
+    width: "210px",
+    height: "100vh"
   },
-
-
   trips: {
-
-      height: "auto",
-      borderLeft: "7px",
-      borderRight: "7px",
-      width: "100%",
-      height: "190px",
-      columns: "repeat(auto-fit, 290px);",
-      
+    height: "auto",
+    borderLeft: "7px",
+    borderRight: "7px",
+    width: "100%",
+    height: "190px",
+    columns: "repeat(auto-fit, 290px);"
   },
-
   bags: {
-
-      height: "170px",
-      width: "100%",
-      columns: "repeat(auto-fit, 240px);"
+    height: "170px",
+    width: "100%",
+    columns: "repeat(auto-fit, 240px);"
   },
-
-
   latestBagBoxes: {
-
     height: "130px",
     boxShadow: "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;",
-    hover:  "rgba(0, 172, 28, 0.05) 0px 6px 24px 0px, rgba(0, 172, 28, 1) 0px 0px 0px 1px",
+    hover: "rgba(0, 172, 28, 0.05) 0px 6px 24px 0px, rgba(0, 172, 28, 1) 0px 0px 0px 1px",
+    white: "rgba(255, 255, 255, 0.05) 0px 6px 24px 0px, rgba(255, 255, 255, 1) 0px 0px 0px 1px",
     borderRadius: "7px",
-    columns: "repeat(auto-fit, 240px);",
-},
-
-
-  category:  {
-
-      width: "100%",
-      height: "50px",
-      size: "13px",
-      border: "1px solid #d3d3d3"
+    columns: "repeat(auto-fit, 240px);"
   },
-
+  category: {
+    width: "100%",
+    height: "45px",
+    size: "13px",
+    border: "1px solid #d3d3d3"
+  },
   items: {
+    size: "13px",
+    borderTop: "1px solid #d3d3d3"
+  }
+};
 
-      size: "13px",
-      borderTop: "1px solid #d3d3d3"
-      
+export const lightTheme = createTheme({
+  palette: {
+    mode: 'light'
   },
- 
+  ...commonProperties
 });
 
-
+export const darkTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  },
+  ...commonProperties
+});
 
   

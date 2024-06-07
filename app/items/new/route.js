@@ -6,8 +6,13 @@ export const POST = async (req, res) => {
     try {
       await connectToDB();
 
-      const { userId, tripId, bagId, categoryId, name, qty, description, weight, wgtOpt, priority, link, worn } = await req.json();
-      const Item = new item({ creator: userId, tripId, bagId, categoryId, name, qty, description, weight, wgtOpt, priority, link, worn });
+      const { userId, tripId, bagId, categoryId, name, qty, description, weight, wgtOpt, priority, link, worn, price } = await req.json();
+
+      const existingCategoriesCount = await item.countDocuments({ categoryId });
+
+      const order = existingCategoriesCount;
+
+      const Item = new item({ creator: userId, tripId, bagId, categoryId, name, qty, description, weight, wgtOpt, priority, link, worn, order, price});
       await Item.save();
       return new NextResponse(JSON.stringify(Item), { status: 200 });
     } catch (error) {

@@ -1,12 +1,11 @@
 "use client"
 
-import { Stack, Typography, IconButton, Autocomplete, TextField, Button, Container } from '@mui/material'
+import { Stack, Typography, IconButton, Autocomplete, TextField, Button, Container, Tooltip } from '@mui/material'
 import Bag from './Bag'
 import axios from 'axios';
 import { useState, useTransition, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import DrawOutlinedIcon from "@mui/icons-material/DrawOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useTheme } from '@emotion/react';
 import MuiPopup from './custom/MuiPopup'
@@ -18,9 +17,11 @@ import dayjs from "dayjs";
 import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import EditLocationOutlinedIcon from '@mui/icons-material/EditLocationOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
-const InnerTrip = ({tripData, trips, bagsData, session}) => {
+const InnerTrip = ({tripData, trips, session}) => {
 
 
 const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"
@@ -114,7 +115,7 @@ const addBag = async (e) => {
 const updateTrip =  async (e) => {
   e.preventDefault()
   try {
-    await axios.put(`/api/trips/${tripData.trip._id}`, editedTrip);
+    await axios.put(`/api/trips/${tripData.trip._id}/${session?.user?.id}`, editedTrip);
 
     startTransition(router.refresh)
     setPopupOpen(false)
@@ -128,7 +129,7 @@ const updateTrip =  async (e) => {
 const removeTrip = async () => {
 
   try {
-    await axios.delete(`/api/trips/${tripData.trip._id}`);
+    await axios.delete(`/api/trips/${tripData.trip._id}/${session?.user?.id}`);
     setDeletePopupOpen(false)
     router.push('/')
     startTransition(router.refresh)
@@ -166,22 +167,25 @@ const countryNameArr = countriesArr?.map((x) => x.common)
     <Container sx={{display: "flex"}} maxWidth={false} disableGutters>
       
 
-    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.fullWidth}  minHeight="100vh">
+
+    <Stack alignItems="flex-start" m={2}><IconButton sx={{backgroundColor: theme.palette.mode === "dark" ? theme.main.darkColor : "#f2f0f0"}} onClick={() => router.push('/')}><ArrowBackIcon /></IconButton></Stack>
+
 
         <div className="main-info">
         <Stack>
-        <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center}>
-        <Typography component="h2"variant='span' fontWeight="600" >{tripData?.trip?.name}</Typography>
-          <DrawOutlinedIcon sx={{ marginLeft: "15px", cursor: "pointer", "&:hover": { color: theme.orange }}} onClick={openPopup} />
-          <DeleteOutlineOutlinedIcon sx={{ marginLeft: "5px", cursor: "pointer", "&:hover": { color: "red" }}} onClick={openRemovePopup} />
+        <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} boxShadow={'rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;'}  backgroundColor={ theme.palette.mode === "dark" ? theme.main.darkColor : "#f2f2f2"} mr={6} pl={2} pr={2} pt={1.5} pb={1.5} mb={3} borderRadius="7px">
+        <Typography component="h2"variant='span' fontWeight="600" mr={1}>{tripData?.trip?.name}</Typography>
+          <Tooltip title="Edit"><IconButton onClick={openPopup}><EditLocationOutlinedIcon sx={{cursor: "pointer", "&:hover": { color: theme.orange }}}  /></IconButton> </Tooltip>
+          <Tooltip title="Delete"><IconButton onClick={openRemovePopup}><DeleteOutlineOutlinedIcon sx={{ cursor: "pointer", "&:hover": { color: "red" }}}  /></IconButton></Tooltip>
         </Stack>
-        <Typography component="p" variant="p"> {tripData?.trip?.about} </Typography>
+        <Typography component="p" variant="p" sx={{marginRight: "45px"}}> {tripData?.trip?.about} </Typography>
 
-       <Stack pt={2}>
-       <Stack direction="row" flexWrap="wrap" backgroundColor={theme.main.lightGray} pt={1} pb={1} pl={1.5} pr={1.5} borderRadius={theme.radius} width="fit-content">
-       <SportsScoreOutlinedIcon /> {tripData?.trip?.distance} km <MoreTimeIcon sx={{ marginLeft: "15px", marginRight: "3px" }} /> {calculateDaysLeft(tripData.trip) <= 0 ? (
+       <Stack mt={3}>
+       <Stack direction="row" flexWrap="wrap"  borderRadius={theme.radius} width="fit-content" alignItems="center">
+       <IconButton sx={{marginRight: "2px"}}><SportsScoreOutlinedIcon sx={{fontSize: "22px"}} /></IconButton> {tripData?.trip?.distance} km <IconButton sx={{marginRight: "2px", marginLeft: "2px"}}><MoreTimeIcon sx={{fontSize: "22px"}} /></IconButton> {calculateDaysLeft(tripData.trip) <= 0 ? (
        <Typography variant="span" sx={{ color: theme.black, fontWeight: "bold" }}>Traveled </Typography> ) : ( <Typography variant='span' sx={{ color: theme.green, fontWeight: "bold" }}> Starts in {calculateDaysLeft(tripData.trip)} {calculateDaysLeft(tripData.trip) > 0 ? 'day' : 'days'} </Typography>)}
-       <WbSunnyOutlinedIcon sx={{ marginLeft: "15px", marginRight: "3px" }} /> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
+       <IconButton sx={{marginRight: "2px", marginLeft: "2px"}}><WbSunnyOutlinedIcon sx={{fontSize: "22px"}}/></IconButton> {calculateDuration()} {calculateDuration() === 1 ? 'day' : 'days'}
        </Stack>
        <Typography component="h2" variant="h6" mb={0.3} mt={2}>My Bags</Typography>
        <Typography component="p" variant="p" >Lorem ipsum dolor sit amet</Typography>
@@ -191,8 +195,8 @@ const countryNameArr = countriesArr?.map((x) => x.common)
 
     <div className="boxes">
      
-     <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} backgroundColor={theme.main.lightGray} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
-      <IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
+     <Stack border="2px dashed gray" alignItems={theme.center} display={theme.flexBox} justifyContent={theme.center} width={theme.bags.width} height={theme.bags.height} borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openAddPopup}>
+      <Tooltip title="Add bag"><IconButton><AddOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton></Tooltip>
      </Stack>
       {bags}
      </div>
@@ -209,7 +213,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
 
              <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
              <TextField label="Bag name" name="name" required onChange={handleBagChange} sx={{width: "48.5%", marginBottom: "20px"}}  inputProps={{ maxLength: 26 }}/>
-             <TextField label="Weight goal (kg)" type="number" required name="goal" onChange={handleBagChange} sx={{width: "48.5%", marginBottom: "20px"}} inputProps={{ min: 1, max: 99 }} />
+             <TextField label={`Weight goal - ${session?.user?.weightOption}`} type="number" required name="goal" onChange={handleBagChange} sx={{width: "48.5%", marginBottom: "20px"}} inputProps={{ min: 1 }} />
             <TextField multiline label="Description" name="description" required onChange={handleBagChange} sx={{width: "100%"}} inputProps={{ maxLength: 200 }} /> 
 
             <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Add</Button>
@@ -238,7 +242,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
               sx={{width: "48%", marginBottom: "20px"}} />
 
             <TextField
-              label="Distance (km)"
+              label={`Distance - ${session?.user?.distance}`}
               type="number"
               required
               value={editedTrip.distance}

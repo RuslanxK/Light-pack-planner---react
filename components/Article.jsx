@@ -30,7 +30,7 @@ const Article = ({articleData}) => {
 
   return (
 
-    <Stack height="222px" borderRadius="7px" boxShadow={theme.boxShadow}  sx={{transition: theme.transition, cursor: "pointer", "&:hover": {boxShadow: theme.boxShadowHover}}} onClick={NavigateToInnerArticle}  onMouseOver={() => setArticleHover(true)} onMouseLeave={() => setArticleHover(false)}>
+    <Stack backgroundColor={theme.palette.mode === "dark" ? theme.main.darkColor : null } height="222px" borderRadius="7px" boxShadow={theme.boxShadow}  sx={{transition: theme.transition, cursor: "pointer", "&:hover": {boxShadow: theme.boxShadowHover}}} onClick={NavigateToInnerArticle}  onMouseOver={() => setArticleHover(true)} onMouseLeave={() => setArticleHover(false)}>
 
   <img src={`${process.env.NEXT_PUBLIC_ARTICLE_URL}/${articleData.imageKey}`} width="100%" height={150} alt='article'  style={{borderTopRightRadius: "7px", borderTopLeftRadius: "7px", objectFit: "cover"}} />
 

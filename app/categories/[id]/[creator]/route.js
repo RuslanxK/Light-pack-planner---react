@@ -1,15 +1,16 @@
-import category from "../../../models/categories";
-import item from "../../../models/item";
+import category from "../../../../models/categories";
+import item from "../../../../models/item";
 import { NextResponse } from "next/server";
-import { connectToDB } from "../../../utils/database";
+import { connectToDB } from "../../../../utils/database";
+
 
 export const DELETE = async (req, {params}) => {
   try {
 
     await connectToDB();
 
-    await category.findByIdAndDelete(params.id);
-    await item.deleteMany({ categoryId: params.id });
+    await category.findByIdAndDelete({_id: params.id, creator: params.creator});
+    await item.deleteMany({ categoryId: params.id, creator: params.creator });
     return new NextResponse("Category is Deleted Successfully", {
       status: 200,
     });
@@ -23,22 +24,26 @@ export const DELETE = async (req, {params}) => {
 
 export const PUT = async (req, { params }) => {
   try {
-  
-    const Category = await category.findOne({ _id: params.id});
+    const Category = await category.findOne({ _id: params.id, creator: params.creator });
 
     if (!Category) {
       return new NextResponse('Category not found', { status: 404 });
     }
 
-    const { name } = await req.json();
+    const { name, order } = await req.json();
+
     Object.assign(Category, { name });
+   
+    if (order !== undefined) {
+      Object.assign(Category, { order });
+    }
 
     await Category.save();
+
     return new NextResponse('Category is Updated Successfully', { status: 200 });
   } catch (err) {
     return new NextResponse('Failed to update category', { status: 500 });
   }
 };
-
 
 export const revalidate = 0;

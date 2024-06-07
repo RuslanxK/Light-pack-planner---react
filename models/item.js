@@ -12,10 +12,12 @@ const itemSchema = new Schema({
     qty: { type: Number, min: 1 },
     description: { type: String, trim: true },
     weight: { type: Number, min: 0.1 },
-    wgtOpt: {type: String},
     priority: { type: String, trim: true, default: "low" },
     link: String,
     worn: {type: Boolean, default: false},
+    productImageKey: { type: String, default: null },
+    order: {type: Number, default: null},
+    price: {type: Number, default: 0.00}
    
 
 }, { timestamps: true })

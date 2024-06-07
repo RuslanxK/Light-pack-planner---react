@@ -59,7 +59,14 @@ export const POST = async (req) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const User = new user({ username, email, password: hashedPassword, profileImageKey: putObjectCommand.input.Key });
+    let admin = false
+
+    if(email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+       
+        admin = true
+    }
+
+    const User = new user({ username, email, password: hashedPassword, profileImageKey: putObjectCommand.input.Key, isAdmin: admin });
     await User.save();
     return new NextResponse(JSON.stringify({User, signedUrl}), { status: 200 });
   } catch (error) {

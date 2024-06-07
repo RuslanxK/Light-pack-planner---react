@@ -1,6 +1,6 @@
 "use client"
 
-import {Stack, Typography, IconButton, Autocomplete, Button, Container} from '@mui/material';
+import {Stack, Typography, IconButton, Autocomplete, Button, Container, Tooltip} from '@mui/material';
 import Trip from './Trip'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -27,20 +27,24 @@ const Trips = ({trips, bags, session}) => {
   const router = useRouter();
   const countriesApi = "https://restcountries.com/v3.1/all?fields=name,flags"
 
-  const [countries, setCounties] = useState([])
+  const [countries, setCountries] = useState([])
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [newTripData, setNewTripData] = useState({ startDate: dayjs(), endDate: dayjs() });
   const [isTransitionStarted, startTransition] = useTransition();
 
 
   useEffect(() => {
-
-     const getData = async () => {
-          const { data } = await axios.get(countriesApi)
-          setCounties(data)
-     }
-        getData()
-
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(countriesApi);
+        const filteredData = data.filter(country => country.name.common !== 'Palestine');
+        const sortedData = filteredData.sort((a, b) => a.name.common.localeCompare(b.name.common));
+        setCountries(sortedData);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+    getData();
   }, []);
   
   
@@ -56,10 +60,12 @@ const Trips = ({trips, bags, session}) => {
        if (aEndDate > bEndDate) return -1;
        return 0; 
      }).map((trip) => (<Trip key={trip._id} tripData={trip}  /> ));
+
     
     const itemsTotal = trips?.totalItems?.reduce((acc, item) => acc + item.qty, 0) 
     const countriesArr = countries.map((x) => x.name)
     const countryNameArr = countriesArr.map((x) => x.common) 
+
 
       const createTrip = async (e) => {
         e.preventDefault()
@@ -110,7 +116,7 @@ const Trips = ({trips, bags, session}) => {
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
       
 
-    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+    <Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={5} pt={5} minHeight="100vh">
 
       <div className="main-info">
 
@@ -126,12 +132,14 @@ const Trips = ({trips, bags, session}) => {
         <Typography component="p" variant="p">
           Seamless Trip Planning and Bag Organization Made Simple.
         </Typography>
+
+        
         </div>
 
   
     <div className="boxes">
-    <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} height={theme.trips.height} backgroundColor={theme.main.lightGray}  borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
-      <IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton>
+    <Stack border="2px dashed gray" display={theme.flexBox} justifyContent={theme.center} alignItems={theme.center} height={theme.trips.height}  borderRadius={theme.radius} sx={{cursor: "pointer"}} onClick={openPopup}>
+      <Tooltip title="Add trip"><IconButton><AddLocationAltOutlinedIcon sx={{fontSize: "25px", color: "gray" }}/></IconButton></Tooltip>
     </Stack>
     { tripData}
     </div>
@@ -139,7 +147,7 @@ const Trips = ({trips, bags, session}) => {
   { bags?.length >= 1 ? <div className="latestBag">
    <Stack display={theme.flexBox} flexDirection={theme.row} alignItems={theme.center} justifyContent={theme.center}>
     <Typography component="h2" variant="span" fontWeight="500" mr={1}> My last bag status </Typography>
-    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips.latestBag?.name.length > 6 ? `${trips?.latestBag?.name.substring(0, 6)}...` : trips.latestBag?.name} </Typography>
+    <Typography component="h3" variant="span" fontWeight="500" sx={{color: theme.green, textDecoration: "underline", cursor: "pointer", "&:hover": {color: "#32cd32"}}} onClick={navigateToLatestBag}>{ trips?.latestBag?.name.length > 6 ? `${trips?.latestBag?.name.substring(0, 6)}...` : trips?.latestBag?.name} </Typography>
     </Stack>
    
         <Typography component="p" variant="p" mb={2} textAlign="center"> Streamline Your Gear, Simplify Your Adventure. </Typography>
@@ -149,7 +157,7 @@ const Trips = ({trips, bags, session}) => {
         <LatestBagStack>
           <Typography component="h4" variant='span' fontWeight="300">Total weight</Typography>
           <MonitorWeightOutlinedIcon sx={{fontSize: "30px", color: theme.green}}/>
-          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips?.latestBagTotalWeight > trips?.latestBag?.goal ? "red" : "black"}}>{trips?.latestBagTotalWeight ? trips?.latestBagTotalWeight.toFixed(2) : 0.00 } / {trips?.latestBag?.goal || 0.00 } kg</Typography>
+          <Typography component="h3" variant='span'  fontWeight="600" sx={{color: trips?.latestBagTotalWeight > trips?.latestBag?.goal ? "red" : null}}>{trips?.latestBagTotalWeight ? trips?.latestBagTotalWeight.toFixed(2) : 0.00 } / {trips?.latestBag?.goal || 0.00 } {session?.user?.weightOption}</Typography>
         </LatestBagStack>
 
         <LatestBagStack>
@@ -189,9 +197,8 @@ const Trips = ({trips, bags, session}) => {
                />
 
             <TextField
-              label="Distance (km)"
+              label={`Distance - ${session?.user?.distance}`}
               type="number"
-              required
               name="distance"
               onChange={handleChange}
               sx={{ width: "48.5%", marginBottom: "20px" }}

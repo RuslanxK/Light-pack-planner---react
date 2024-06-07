@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useState, useTransition, useRef  } from 'react'
-import {  Container, Typography, Stack, TextField, Button } from '@mui/material'
-import Nav from './Nav'
+import {  Container, Typography, Stack, TextField, Button, IconButton } from '@mui/material'
 import { useTheme } from '@emotion/react';
 import Article from './Article';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 const Articles = ({articles, session}) => {
@@ -80,7 +80,10 @@ const Articles = ({articles, session}) => {
   return (
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
     
-<Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} pb={7} backgroundColor={theme.main.lightestGray} minHeight="100vh">
+<Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} minHeight="100vh">
+
+<Stack alignItems="flex-start" m={2}><IconButton onClick={() => router.push('/')}><ArrowBackIcon /></IconButton></Stack>
+
       
 <div className="main-info">
 

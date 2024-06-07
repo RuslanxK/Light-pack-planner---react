@@ -12,13 +12,15 @@ const VerifiedPage = ({user}) => {
 
   const router = useRouter()
 
-  if(user.verifiedCredentials === true) {
-
-    router.push('/login'); 
-  }
-
 
   React.useEffect(() => {
+
+
+    if(user.verifiedCredentials === true) {
+
+      return router.push('/login'); 
+    }
+
     
     const fetchData = async () => {
       try {
@@ -27,7 +29,7 @@ const VerifiedPage = ({user}) => {
         await axios.put(`/api/user/${user._id}`, verified);
         router.push('/login'); 
       } catch (error) {
-        console.error('Error:', error);
+        console.log('Error:', error);
       }
     };
 
@@ -46,7 +48,7 @@ const VerifiedPage = ({user}) => {
     return () => {
       clearInterval(timer);
     };
-  }, [router, user]); 
+  }, [user]); 
 
 
 
