@@ -71,9 +71,10 @@ const addItemToCategory = async (e) => {
    <Typography component="span" variant="span" fontSize="15px" color={theme.main.lightGray}>{itemData?.name?.length > 10 ? itemData?.name?.substring(0, 10) + "..." : itemData?.name}</Typography>
    </Stack>
 
+
  <MuiPopup isOpen={isPopupOpen} onClose={closePopup} >
   <form onSubmit={addItemToCategory}>
-        <Stack spacing={1}>
+        <Stack spacing={2}>
           <Stack direction="row" justifyContent="space-between">
             <Typography component="h2" variant="span">Add to category</Typography>
             <CloseIcon onClick={closePopup} />
@@ -90,9 +91,8 @@ const addItemToCategory = async (e) => {
               options={categoryOptions}
               getOptionLabel={(option) => option.name}
               isOptionEqualToValue={isOptionEqualToValue}
-              getOptionKey={(option) => option.key}
-              sx={{marginBottom: "10px"}}/>
-             <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Add</Button>
+              getOptionKey={(option) => option.key}/>
+             <Button type="submit"  sx={{ marginTop: "20px", color: theme.palette.mode === "dark" ? "white" : null, width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Add</Button>
         </Stack>
       </form>
   </MuiPopup>

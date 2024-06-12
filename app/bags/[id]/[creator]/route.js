@@ -9,6 +9,10 @@ const {
 } = require("../../../../BL/totalCategoryKg");
 const { calculateWornItemsTotalWeight } = require("../../../../BL/totalWorn");
 
+
+
+
+
 export const GET = async (req, { params }) => {
   try {
     await connectToDB();
@@ -66,6 +70,8 @@ export const PUT = async (req, { params }) => {
     return new NextResponse("Failed to update bag", { status: 500 });
   }
 };
+
+
 
 export const DELETE = async (req, { params }) => {
   try {

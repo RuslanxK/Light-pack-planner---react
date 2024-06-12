@@ -17,7 +17,8 @@ const itemSchema = new Schema({
     worn: {type: Boolean, default: false},
     productImageKey: { type: String, default: null },
     order: {type: Number, default: null},
-    price: {type: Number, default: 0.00}
+    price: {type: Number, default: 0.00},
+    selected: {type: Boolean, default: false}
    
 
 }, { timestamps: true })

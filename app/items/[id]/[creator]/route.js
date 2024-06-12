@@ -14,9 +14,9 @@ export const PUT = async (req, { params }) => {
       return new NextResponse('Item not found', { status: 404 });
     }
 
-    const { tripId, bagId, categoryId, name, priority, description, qty, weight, link, worn, price } = await req.json();
+    const { tripId, bagId, categoryId, name, priority, description, qty, weight, link, worn, price, selected } = await req.json();
 
-    Object.assign(Item, { tripId, bagId, categoryId, name, priority, description, qty, weight, link, worn, price });
+    Object.assign(Item, { tripId, bagId, categoryId, name, priority, description, qty, weight, link, worn, price, selected});
 
     await Item.save();
     return new NextResponse(JSON.stringify(Item), { status: 200 });

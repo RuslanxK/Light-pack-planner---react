@@ -50,7 +50,7 @@ const ShareCategory = (props) => {
 
        
           {itemsOfCategory.sort((a, b) => a.order - b.order).map((item, index) => (
-                 <Stack width="100%" key={item._id} ><SharedItem key={item._id} itemData={item} /></Stack>
+                 <Stack width="100%" key={item._id} ><SharedItem key={item._id} itemData={item} weightOption={props.weightOption} /></Stack>
                 ))}
     
 

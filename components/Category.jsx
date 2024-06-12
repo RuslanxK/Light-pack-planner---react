@@ -8,12 +8,13 @@ import PlusOneIcon from '@mui/icons-material/PlusOne';
 import Item from './Item'
 import axios from "axios";
 import React from "react";
-import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
 import MuiPopup from "./custom/MuiPopup";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from '@mui/icons-material/Edit';
 import Divider from '@mui/material/Divider';
 import {useDrag, useDrop } from "react-dnd";
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import FolderDeleteOutlinedIcon from '@mui/icons-material/FolderDeleteOutlined';
 
 
 const Category = (props) => {
@@ -27,18 +28,21 @@ const Category = (props) => {
   const [isShowingEdit, setIsShowingEdit] = useState(false)
   const [isDragging, setIsDragging] = useState(false);
   const [itemsData, setItemsData] = useState(props.items || []);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+
 
 
   const itemsOfCategory = itemsData?.filter((item) => item.categoryId === props.categoryData._id);
 
-
-
+  const itemsSelected = itemsOfCategory?.some((item) => item.selected === true);
 
   const type = "Item";
 
   useEffect(() => {
     setItemsData(props.items || []);
-  }, [props.items]);
+  }, [props.items, selectedItems]);
+
 
 
   const DraggableItem = ({ item, index, moveItems, setIsDragging }) => {
@@ -77,6 +81,7 @@ const Category = (props) => {
     
   
     drag(drop(ref));
+
    
       
     return (
@@ -84,11 +89,29 @@ const Category = (props) => {
        width="100%"
        ref={ref}>
         <Stack>
-        <Item key={item._id} itemData={item} session={props.session} drag={drag}  />
+        <Item key={item._id} itemData={item} session={props.session} drag={drag} />
         </Stack>
       </Stack>
     );
   }
+
+
+
+
+  const removeItems = async () => {
+    
+    const itemsToDelete = itemsOfCategory.filter(item => item.selected === true);
+  
+    try {
+      itemsToDelete.forEach(async item => {
+        await axios.delete(`/items/${item._id}/${props.session.user.id}`);
+      });
+      router.refresh();
+    } catch (error) {
+      console.error('Failed to delete items:', error);
+    }
+  };
+
 
 
 
@@ -103,10 +126,10 @@ const Category = (props) => {
       order: index,
     }));
 
-   
-
+  
     setItemsData(reorderedItems);
     saveItemsOrder(reorderedItems);
+    
   };
 
 
@@ -178,7 +201,7 @@ const saveItemsOrder = async (updatedItems) => {
 
 
   return (
-    <Stack width={theme.category.width}  display={theme.flexBox} mb={0.5} justifyContent={theme.center} borderBottom="1px solid gray" >
+    <Stack width={theme.category.width}  display={theme.flexBox} mb={0.5} justifyContent={theme.center} borderBottom="1px solid gray" onClick={() => console.log(selectedItems)}>
  
       <Stack display={theme.flexBox} direction="row" justifyContent={theme.between} alignItems={theme.center} pt={0.8} pb={0.3}>
 
@@ -192,7 +215,8 @@ const saveItemsOrder = async (updatedItems) => {
       
   
       <Stack display={theme.flexBox} direction="row"  mr={1}>
-     <Tooltip title="Delete"><IconButton onClick={openPopup}><DeleteSweepOutlinedIcon sx={{ fontSize: "18px", '&:hover':{color: "red"}}} /> </IconButton> </Tooltip>
+    { itemsSelected ? <Tooltip title="Delete items"><IconButton onClick={removeItems}><DeleteOutlinedIcon sx={{ fontSize: "18px", '&:hover':{color: "red"}}} /> </IconButton> </Tooltip> : null }
+     <Tooltip title="Delete category"><IconButton onClick={openPopup}><FolderDeleteOutlinedIcon sx={{ fontSize: "18px", '&:hover':{color: "red"}}} /> </IconButton> </Tooltip>
       <IconButton onClick={() => setShowItems(!showItems)}>{showItems ? <ExpandLessOutlinedIcon sx={{fontSize: "18px"}} /> : <ExpandMoreOutlinedIcon sx={{fontSize: "18px"}} />}</IconButton>
        </Stack>
 
@@ -205,7 +229,7 @@ const saveItemsOrder = async (updatedItems) => {
 
        
           {itemsOfCategory.sort((a, b) => a.order - b.order).map((item, index) => (
-                 <Stack width="100%" key={item._id} sx={{ backgroundColor: isDragging ?  theme.palette.mode === "dark" ? "#171717" : "rgba(0, 172, 28, 0.1);" : null, boxShadow: isDragging ? "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" : null , borderRadius: "7px", marginBottom: isDragging ? "10px" : null}}><DraggableItem  item={item} index={index} moveItems={moveItems} isDragging={isDragging} setIsDragging={setIsDragging}  /></Stack>
+                 <Stack width="100%" key={item._id} sx={{ backgroundColor: isDragging ? "rgba(0, 172, 28, 0.2);" : null, boxShadow: isDragging ? "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" : null , borderRadius: "7px", marginBottom: isDragging ? "10px" : null}}><DraggableItem  item={item} index={index} moveItems={moveItems} isDragging={isDragging} setIsDragging={setIsDragging}  /></Stack>
                 ))}
     
 
@@ -227,7 +251,7 @@ const saveItemsOrder = async (updatedItems) => {
 </Stack>
 
 <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
-<Button sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeCategory} disableElevation>Delete</Button>
+<Button sx={{color: theme.palette.mode === "dark" ? "white" : null, marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeCategory} disableElevation>Delete</Button>
 </Stack>
 
 </MuiPopup> : null }

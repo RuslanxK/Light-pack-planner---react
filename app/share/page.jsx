@@ -1,6 +1,7 @@
 import React from 'react'
 import Share from '../../components/Share'
-
+import { getServerSession } from 'next-auth';
+import { options } from '../api/auth/[...nextauth]/options'
 
 
 
@@ -32,13 +33,16 @@ const page = async ({searchParams}) => {
 
   const id = searchParams.id
 
+
+  const session = await getServerSession(options)
+
   const bag = await getBag(id)
   const userId = bag.bag.creator
   const user = await getUser(userId)
 
   
   return (
-    <Share bagData={bag} user={user} />
+    <Share bagData={bag} user={user} session={session} />
   )
 }
 

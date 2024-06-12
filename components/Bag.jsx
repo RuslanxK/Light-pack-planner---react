@@ -88,7 +88,7 @@ const Bag = ({bagData, trips, session}) => {
               isOptionEqualToValue={isOptionEqualToValue}
               sx={{marginBottom: "20px"}}/>
               
-            <Button type='submit' sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Duplicate</Button>
+            <Button type='submit'sx={{marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green, color: theme.palette.mode === "dark" ? "white" : null }} variant="contained" disableElevation>Duplicate</Button>
     
         </Stack>
        </form>

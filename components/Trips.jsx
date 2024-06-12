@@ -209,7 +209,6 @@ const Trips = ({trips, bags, session}) => {
               label="Description"
               name="about"
               onChange={handleChange}
-              required
               sx={{ width: "100%", marginBottom: "20px" }}
               inputProps={{ maxLength: 300 }}
             />
@@ -235,7 +234,7 @@ const Trips = ({trips, bags, session}) => {
               />
             </LocalizationProvider>
 
-            <Button type="submit" sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Create</Button>
+            <Button type="submit" sx={{marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green, color: theme.palette.mode === "dark" ? "white" : null }} variant="contained" disableElevation>Create</Button>
           </Stack>
       </form>
   </MuiPopup> : null }

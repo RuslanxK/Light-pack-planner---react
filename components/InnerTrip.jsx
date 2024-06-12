@@ -214,9 +214,9 @@ const countryNameArr = countriesArr?.map((x) => x.common)
              <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
              <TextField label="Bag name" name="name" required onChange={handleBagChange} sx={{width: "48.5%", marginBottom: "20px"}}  inputProps={{ maxLength: 26 }}/>
              <TextField label={`Weight goal - ${session?.user?.weightOption}`} type="number" required name="goal" onChange={handleBagChange} sx={{width: "48.5%", marginBottom: "20px"}} inputProps={{ min: 1 }} />
-            <TextField multiline label="Description" name="description" required onChange={handleBagChange} sx={{width: "100%"}} inputProps={{ maxLength: 200 }} /> 
+            <TextField multiline label="Description" name="description" onChange={handleBagChange} sx={{width: "100%"}} inputProps={{ maxLength: 200 }} /> 
 
-            <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Add</Button>
+            <Button type="submit"  sx={{marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green, color: theme.palette.mode === "dark" ? "white" : null }} variant="contained" disableElevation>Add</Button>
           </Stack>
       </form>
 
@@ -244,7 +244,6 @@ const countryNameArr = countriesArr?.map((x) => x.common)
             <TextField
               label={`Distance - ${session?.user?.distance}`}
               type="number"
-              required
               value={editedTrip.distance}
               name="distance"
               onChange={handleChange}
@@ -257,7 +256,6 @@ const countryNameArr = countriesArr?.map((x) => x.common)
               name="about"
               value={editedTrip.about}
               onChange={handleChange}
-              required
               sx={{ width: "100%", marginBottom: "20px" }}
               inputProps={{ maxLength: 300 }} />
 
@@ -281,7 +279,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
                 minDate={editedTrip.startDate || null} />
             </LocalizationProvider>
 
-            <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Update</Button>
+            <Button type="submit"  sx={{marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green, color: theme.palette.mode === "dark" ? "white" : null }} variant="contained" disableElevation>Update</Button>
           </Stack>
       </form>
 
@@ -299,7 +297,7 @@ const countryNameArr = countriesArr?.map((x) => x.common)
 </Stack>
 
 <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
-<Button sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeTrip} disableElevation>Delete</Button>
+<Button sx={{marginTop: "20px", width: "100%", fontWeight: "500", color: theme.palette.mode === "dark" ? "white" : null, backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeTrip} disableElevation>Delete</Button>
 </Stack>
 
     </MuiPopup> : null }

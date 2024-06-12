@@ -80,7 +80,7 @@ const Articles = ({articles, session}) => {
   return (
     <Container sx={{display: theme.flexBox}} maxWidth={false} disableGutters>
     
-<Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} minHeight="100vh">
+<Stack display={theme.flexBox} justifyContent={theme.start} width={theme.trips.width} minHeight="100vh" pb={5}>
 
 <Stack alignItems="flex-start" m={2}><IconButton onClick={() => router.push('/')}><ArrowBackIcon /></IconButton></Stack>
 

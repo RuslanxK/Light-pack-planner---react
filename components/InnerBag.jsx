@@ -45,6 +45,7 @@ const InnerBag = ({bagData, items, session}) => {
   }, [bagData]);
 
 
+
   const DraggableCategory = ({ category, index, moveCategory, setIsDragging }) => {
 
     const ref = useRef(null);
@@ -238,8 +239,8 @@ const InnerBag = ({bagData, items, session}) => {
         <Tooltip title="Delete"><IconButton onClick={openRemovePopup}><DeleteOutlineOutlinedIcon sx={{ cursor: "pointer", "&:hover": { color: "red" }}}  /></IconButton></Tooltip>
         </Stack>
         <Stack display="flex" direction="row">
-        <Button disableElevation onClick={() => router.push(`/share?id=${bagData.bag._id}`)}>Share Bag <ShareIcon sx={{fontSize: "18px", marginLeft: "5px"}}/> </Button>
-        <Badge color="secondary" badgeContent={100} sx={{marginLeft: "10px", marginRight: "10px"}}>
+        <Button disableElevation  onClick={() => window.open(`/share?id=${bagData.bag._id}`, '_blank')}>Share Bag <ShareIcon sx={{fontSize: "18px", marginLeft: "5px"}}/> </Button>
+        <Badge color="secondary" badgeContent={bagData.bag.likes || "0" } sx={{marginLeft: "10px", marginRight: "10px"}}>
         <IconButton><ThumbUpIcon /></IconButton>
         </Badge>
        
@@ -299,7 +300,7 @@ const InnerBag = ({bagData, items, session}) => {
 
     <DndProvider backend={HTML5Backend} options={HTML5toTouch}>
     {categoriesData.sort((a, b) => a.order - b.order).map((category, index) => (
-                 <Stack key={category._id} sx={{ backgroundColor: isDragging ?  theme.palette.mode === "dark" ? "#171717" : "rgba(0, 172, 28, 0.1);" : null, boxShadow: isDragging ? "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" : null , borderRadius: "7px", marginBottom: isDragging ? "10px" : null}}><DraggableCategory  category={category} index={index} moveCategory={moveCategory} isDragging={isDragging} setIsDragging={setIsDragging}  /></Stack>
+                 <Stack key={category._id} sx={{ backgroundColor: isDragging ? "rgba(0, 172, 28, 0.2);" : null, boxShadow: isDragging ? "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" : null , borderRadius: "7px", marginBottom: isDragging ? "10px" : null}}><DraggableCategory  category={category} index={index} moveCategory={moveCategory} isDragging={isDragging} setIsDragging={setIsDragging}  /></Stack>
                 ))}
     </DndProvider>
     </div>
@@ -348,8 +349,8 @@ const InnerBag = ({bagData, items, session}) => {
              <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
              <TextField label="Bag name" name="name" required onChange={handleChange} sx={{width: "48.5%", marginBottom: "20px"}} value={editedBag.name || ""} inputProps={{ maxLength: 26 }}/>
              <TextField label={`Weight goal - ${session?.user?.weightOption}`} type="number" required name="goal" onChange={handleChange} sx={{width: "48.5%", marginBottom: "20px"}} value={editedBag.goal || ""} inputProps={{ min: 1 }} />
-            <TextField multiline label="Description" name="description" required onChange={handleChange} sx={{width: "100%"}} value={editedBag.description || "" } inputProps={{ maxLength: 200 }} /> 
-            <Button type="submit"  sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Update</Button>
+            <TextField multiline label="Description" name="description" onChange={handleChange} sx={{width: "100%"}} value={editedBag.description || "" } inputProps={{ maxLength: 200 }} /> 
+            <Button type="submit"  sx={{color: theme.palette.mode === "dark" ? "white" : null, marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Update</Button>
           </Stack>
       </form>
   </MuiPopup> : null }
@@ -363,8 +364,9 @@ const InnerBag = ({bagData, items, session}) => {
    Deleting this bag will permanently remove it from the system, and any associated data will be lost.</Typography>
 </Stack>
 
+
 <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
-<Button sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeBag} disableElevation>Delete</Button>
+<Button sx={{marginTop: "20px", width: "100%", fontWeight: "500", color: theme.palette.mode === "dark" ? "white" : null, backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeBag} disableElevation>Delete</Button>
 </Stack>
 </MuiPopup> : null }
     </Box>

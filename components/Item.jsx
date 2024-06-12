@@ -1,12 +1,12 @@
 "use client"
 
-import { Stack, TextField, Select, MenuItem, IconButton, Typography, Button, Tooltip} from '@mui/material'
+import { Stack, TextField, Select, MenuItem, IconButton, Typography, Button, Tooltip, Checkbox} from '@mui/material'
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import NordicWalkingIcon from '@mui/icons-material/NordicWalking';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useTheme } from '@emotion/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import MuiPopup from './custom/MuiPopup';
@@ -26,11 +26,12 @@ const Item = (props) => {
   const [itemHover, setItemHover] = useState(false)
   const [loading, setLoading] = useState(false)
   const [showEditIcon, setShowEditIcon] = useState(false)
-  const [itemData, setItem] = useState({ userId: props.itemData.creator, _id: props.itemData._id, tripId: props.itemData.tripId, bagId: props.itemData.bagId, categoryId: props.itemData.categoryId, name: props.itemData.name,
-    priority: props.itemData.priority, description: props.itemData.description, qty: +props.itemData.qty, weight: +props.itemData.weight || 0.1, link: props.itemData.link, worn: props.itemData.worn, productImageKey: props.itemData.productImageKey, image: null, price: props.itemData.price});
+  const [itemData, setItem] = useState({ userId: props.itemData.creator, _id: props.itemData._id, tripId: props.itemData.tripId, bagId: props.itemData.bagId, categoryId: props.itemData.categoryId, name: props.itemData.name, selected: props.itemData.selected,
+    priority: props.itemData.priority, description: props.itemData.description || '',  qty: +props.itemData.qty || 1, weight: +props.itemData.weight || 0.1, link: props.itemData.link, worn: props.itemData.worn, productImageKey: props.itemData.productImageKey, image: null, price: props.itemData.price || 0,});
 
     const theme = useTheme()
     const router = useRouter();
+
 
 
     const openRemovePopupOpen = () => {
@@ -44,24 +45,53 @@ const Item = (props) => {
      
    };
 
+
+
+
+   const updateChecked = async (e) => {
+
+       
+    const obj = {...itemData, selected: e.target.checked}
+
+    try {
+      await axios.put(`/items/${itemData._id}/${props?.session?.user?.id}`, obj)
+      router.refresh()
+  
+     }
+      catch (error) {
+           console.log(error)
+      }
+         
+   }
+
+
+
     const saveItemData =  async () => {
 
       try {
-
        await axios.put(`/items/${itemData._id}/${props?.session?.user?.id}`, itemData)
-       router.refresh()
-
       }
        catch (error) {
             console.log(error)
        }
     };
 
-    
 
+   
+
+  
     const handleChange = async (event) => {
       let { name, value } = event.target;
       setItem({ ...itemData, [name]: value });
+    
+      if (name === 'qty' || name === 'weight') {
+        try {
+          await axios.put(`/items/${itemData._id}/${props?.session?.user?.id}`, { ...itemData, [name]: value });
+          router.refresh();
+        } catch (error) {
+          console.log(error);
+        }
+      }
     };
   
 
@@ -182,14 +212,15 @@ const Item = (props) => {
     <div className="scroll-div" sx={{ overflowX: "scroll"}}>
         
       <Stack width="100%" mb={0.5}e flexDirection="row" justifyContent={theme.between} alignItems={theme.center} onMouseOver={() => setItemHover(true)}  onMouseLeave={() => setItemHover(false)}>
-      <IconButton ref={props.drag} sx={{marginTop: "6px", marginRight: "3px", cursor: "move"}}>
+      <IconButton ref={props.drag} sx={{marginTop: "5px", cursor: "move"}}>
           <DragIndicatorIcon sx={{fontSize: "14px"}}/>
         </IconButton> 
+        <Checkbox size="small" name='selected' sx={{marginTop: "5px", transform: "scale(0.8)"}} onChange={updateChecked} checked={itemData.selected} /> 
       <TextField size='small' variant='standard' placeholder='name' name='name' sx={{ marginTop: "16px", width: '50%', marginRight: "15px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.name} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{style: {fontSize: 12}}} onChange={handleChange} onBlur={saveItemData}/>
       <TextField size='small' variant='standard' placeholder='note' name='description' sx={{ marginTop: "16px", width: '100%', marginRight: "15px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.description} InputLabelProps={{ style : {fontSize: 12}}} inputProps={{style: {fontSize: 12}}} InputProps={{disableUnderline: true}} onChange={handleChange} onBlur={saveItemData} />
       <TextField size='small' variant='standard' type='number' name='price' label="$ price" step="any" sx={{width: '10%', marginRight: "15px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.price} onChange={handleChange} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{ min: 1, max: 99, style: {fontSize: 12} }} onBlur={saveItemData}/>
-      <TextField size='small' variant='standard' type='number' name='qty' label="qty" sx={{width: '10%', marginRight: "15px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.qty} onChange={handleChange} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{ min: 1, max: 99, style: {fontSize: 12} }} onBlur={saveItemData}/>
-      <TextField size='small' variant='standard' type='number' name='weight' label='weight' sx={{width: '12%', marginRight: "10px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.weight} onChange={handleChange} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{ min: 0.1, max: 99, style: {fontSize: 12} }} onBlur={saveItemData} />
+      <TextField size='small' variant='standard' type='number' name='qty' label="qty" sx={{width: '10%', marginRight: "15px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.qty} onChange={handleChange} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{ min: 1, max: 99, style: {fontSize: 12} }} />
+      <TextField size='small' variant='standard' type='number' name='weight' label='weight' sx={{width: '12%', marginRight: "10px", borderBottom: theme.palette.mode === "dark" ? `1px solid ${theme.main.darkColor}` : "1px solid #C0C0C0"}} value={itemData.weight} onChange={handleChange} InputLabelProps={{ style : {fontSize: 12}}} InputProps={{disableUnderline: true}} inputProps={{ min: 0.1, max: 99, style: {fontSize: 12} }} />
        <Typography fontSize="12px" variant='span' component="span">{props?.session?.user?.weightOption}</Typography>
       <Select size='small' variant='outlined' name='priority' sx={{width: '10%', fontSize: "12px",  marginRight: "10px", marginLeft: "15px", backgroundColor: getBackgroundColor(itemData.priority)}} value={itemData.priority} onChange={handleChange} onBlur={saveItemData}>  
        <MenuItem sx={{fontSize: "12px"}} value="low">Low priority</MenuItem>
@@ -220,12 +251,7 @@ const Item = (props) => {
                 <LinkIcon sx={{ fontSize: "15px", color: itemData.link ? "blue" : null, '&:hover': { color: "blue" } }} />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton onClick={openRemovePopupOpen}>
-                <DeleteOutlineOutlinedIcon sx={{ fontSize: "15px", '&:hover': { color: "red" } }} />
-              </IconButton>
-            </Tooltip>
-            
+         
           </Stack>
 
           </Stack>
@@ -242,7 +268,7 @@ const Item = (props) => {
       </Stack>
 
 <CloseIcon onClick={closePopup} sx={{cursor: "pointer"}}/>
-<Button sx={{padding: "13px", marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeItem} disableElevation>Delete</Button>
+<Button sx={{color: theme.palette.mode === "dark" ? "white" : null, marginTop: "20px", width: "100%", fontWeight: "500", backgroundColor: theme.red, '&:hover': {backgroundColor: theme.redHover}}} variant="contained" onClick={removeItem} disableElevation>Delete</Button>
 </Stack>
 
 </MuiPopup> : null }
@@ -252,7 +278,7 @@ const Item = (props) => {
 {popupOpen ? <MuiPopup isOpen={popupOpen} onClose={closePopup}>
 
    <form onSubmit={saveLink}>
-        <Stack>
+        <Stack spacing={2}>
           <Stack flex={1} direction="row" justifyContent="space-between">
             <Typography variant="span" component="h2" marginBottom="10px">
               Add a link for this item
@@ -267,7 +293,7 @@ const Item = (props) => {
             onChange={handleChange}
             sx={{ marginBottom: "10px" }} />
           
-          <Button type="submit" sx={{ width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Save</Button>
+          <Button type="submit" sx={{ color: theme.palette.mode === "dark" ? "white" : null, width: "100%", fontWeight: "500", backgroundColor: theme.green}} variant="contained" disableElevation>Save</Button>
 
         </Stack>
       </form>
@@ -332,7 +358,7 @@ const Item = (props) => {
 <Button
   type="submit"
   disabled={itemData.image ? false : true }
-  sx={{ width: "100%", fontWeight: "500", backgroundColor: theme.green }}
+  sx={{ color: theme.palette.mode === "dark" ? "white" : null, width: "100%", fontWeight: "500", backgroundColor: theme.green }}
   variant="contained"
   disableElevation
 >
